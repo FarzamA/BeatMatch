@@ -94,11 +94,9 @@ router.post("/login", (req, res) => {
 });
 
 router.post('/follow/:username', (req, res) => {
-  // console.log(req.body, 'request body');
   // Find the user based on their username
   User.findOne({ username: req.params.username })
     .then(user => {
-
       // Check if the follow request by other user already exists 
       if (user.followers.filter(follower => follower.username === req.body.username).length > 0) {
         res.status(400).json({ alreadyFollow: 'You already follow this user'})

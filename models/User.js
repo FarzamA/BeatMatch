@@ -15,6 +15,7 @@ const UserSchema = new Schema({
       required: true
     },
     followers: [
+      // keep in mind each follow has it's own _id
       {
         user_id: {
           type: mongoose.ObjectId,
@@ -27,6 +28,7 @@ const UserSchema = new Schema({
       }
     ],
     following: [
+      // keep in mind each follow has it's own _id
       {
         user_id: {
           type: mongoose.ObjectId,
