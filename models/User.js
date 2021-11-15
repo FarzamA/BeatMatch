@@ -14,10 +14,32 @@ const UserSchema = new Schema({
       type: String,
       required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    followers: [
+      // keep in mind each follow has it's own _id
+      {
+        user_id: {
+          type: mongoose.ObjectId,
+          ref: 'User'
+        },
+        username: {
+          type: String,
+          required: true
+        }
+      }
+    ],
+    following: [
+      // keep in mind each follow has it's own _id
+      {
+        user_id: {
+          type: mongoose.ObjectId,
+          ref: 'User'
+        },
+        username: {
+          type: String,
+          required: true
+        }
+      }
+    ]
   }, {
     timestamps: true
 });
