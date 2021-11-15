@@ -14,10 +14,22 @@ const UserSchema = new Schema({
       type: String,
       required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    followers: [
+      {
+        user: {
+          type: ObjectId,
+          ref: 'User'
+        }
+      }
+    ],
+    following: [
+      {
+        user: {
+          type: ObjectId,
+          ref: 'User'
+        }
+      }
+    ]
   }, {
     timestamps: true
 });
