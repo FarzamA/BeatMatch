@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadPhonesAlt } from '@fortawesome/free-solid-svg-icons';
+import { faHeadphonesAlt } from '@fortawesome/free-solid-svg-icons';
 
 const UserDetailsBox = (props) => {
 
@@ -11,7 +11,7 @@ const UserDetailsBox = (props) => {
     if (user.photoUrl) {
         profilePhoto = (<img className="user-photo" src={user.photoUrl} />);
     } else {
-        profilePhoto = (<FontAwesomeIcon className="user-photo" icon={faHeadPhonesAlt} />);
+        profilePhoto = (<FontAwesomeIcon className="user-photo" icon={faHeadphonesAlt} />);
     }
 
     let followButton;
