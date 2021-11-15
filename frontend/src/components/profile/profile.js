@@ -22,6 +22,8 @@ class Profile extends React.Component {
 
         const { currentUser, user, playlists, followUser, unfollowUser } = this.props;
 
+        if (!user) return (<div className="placeholder"></div>)
+
         return (
             <div className="user-profile">
                 <PlaylistIndex
