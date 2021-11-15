@@ -112,7 +112,6 @@ router.post('/follow/:username', (req, res) => {
         // Find the current user by username not id because id isn't included in the body
         User.findOne({ username: req.body.username })
           .then(user => {
-            // Push the users to following/follow and save the users 
             const follower = {
               user_id: user._id,
               username: user.username
@@ -124,8 +123,34 @@ router.post('/follow/:username', (req, res) => {
 
             user_1.save();
             user.save();
+            res.json({ success: 'success' });
           })
           .catch(err => console.log(err));
+      }
+    })
+});
+
+router.delete('/follow/:username', (req, res) => {
+  User.findOne({ username: req.params.username })
+    .then(user => {
+      const idx = user.followers.findIndex((follower) => follower.username === req.body.username)
+      console.log(idx);
+      if (idx >= 0) {
+        user.followers.splice(idx, 1);
+
+        User.findOne({ username: req.body.username })
+        .then(user => {
+          const idx2 = user.following.findIndex((follow) => follow.username === req.params.username);
+          user.following.splice(idx2, 1);
+          user.save();
+        })
+
+          
+        console.log(user.followers, 'followers');
+        user.save();
+        res.json({ success: 'success' });
+      } else {
+        res.status(400).json({ alreadyUnFollow: "You don't follow this user"})
       }
     })
 })
