@@ -103,28 +103,30 @@ router.post('/follow/:username', (req, res) => {
       } else {
         // Create variables to push into arrays later
         const user_1 = user;
+
         const followed = {
           user_id: user._id,
           username: user.username
-        }
+        };
 
         // Find the current user by username not id because id isn't included in the body
         User.findOne({ username: req.body.username })
           .then(user => {
             // Push the users to following/follow and save the users 
-            console.log(user, 'follower'); 
-            console.log(user_1);
             const follower = {
               user_id: user._id,
               username: user.username
-            }
+            };
+
             user_1.followers.push(follower);
+
             user.following.push(followed);
+
             user_1.save();
             user.save();
           })
           .catch(err => console.log(err));
-        }
+      }
     })
 })
 
