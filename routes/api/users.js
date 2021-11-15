@@ -59,7 +59,7 @@ router.post("/register", (req, res) => {
   });
 });
 
-router.post("/login/", (req, res) => {
+router.post("/login", (req, res) => {
     const { errors, isValid } = validateLoginInput(req.body);
   
     if (!isValid) {
@@ -92,5 +92,31 @@ router.post("/login/", (req, res) => {
       });
     });
 });
+
+router.post('/follow/:user_id', (req, res) => {
+  // Find the user based on their id
+  User.findById(req.params.user_id)
+    .then(user => {
+      // Check if the follow request by other user already exists 
+      if (user.followers.filter(follower => follower.user.toString() === req.user._id).length > 0) {
+        res.status(400).json({ alreadyFollow: 'You already follow this user'})
+      }
+
+      // The requested user will push and save to followers of other user to whom request has made
+      user.followers.push(req.user._id);
+      const followed = user._id;
+      user.save();
+
+      // Find the current user by email not doing id because versatility 
+      User.findOne({ email: req.user.email})
+        .then(user => {
+          // Push the user to following and save the user 
+          user.following.push(followed);
+          user.save().then(user => res.json(user))
+        })
+        .catch(err => console.log("Error cant follow again you have already followed the user"))
+    })
+})
+
 
 module.exports = router;
