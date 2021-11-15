@@ -134,7 +134,6 @@ router.delete('/follow/:username', (req, res) => {
   User.findOne({ username: req.params.username })
     .then(user => {
       const idx = user.followers.findIndex((follower) => follower.username === req.body.username)
-      console.log(idx);
       if (idx >= 0) {
         user.followers.splice(idx, 1);
 
