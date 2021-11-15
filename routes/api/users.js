@@ -93,28 +93,45 @@ router.post("/login", (req, res) => {
     });
 });
 
-router.post('/follow/:user_id', (req, res) => {
-  // Find the user based on their id
-  User.findById(req.params.user_id)
+router.post('/follow/:username', (req, res) => {
+  // console.log(req.body, 'request body');
+  // Find the user based on their username
+  User.findOne({ username: req.params.username })
     .then(user => {
+      // console.log(user);
+      // console.log(req.params, 'request params')
       // Check if the follow request by other user already exists 
-      if (user.followers.filter(follower => follower.user.toString() === req.user._id).length > 0) {
+      if (user.followers.filter(follower => follower.username === req.body.username).length > 0) {
         res.status(400).json({ alreadyFollow: 'You already follow this user'})
-      }
+      } else {
 
-      // The requested user will push and save to followers of other user to whom request has made
-      user.followers.push(req.user._id);
-      const followed = user._id;
-      user.save();
+        // The requested user will push and save to followers of other user to whom request has made
+        // console.log(req.body, 'request'); //undefined WHY?
+        // user.followers.push(req.body.user);
+        const user_1 = user;
+        const followed = {
+          user_id: user._id,
+          username: user.username
+        }
+        // user.save();
 
-      // Find the current user by email not doing id because versatility 
-      User.findOne({ email: req.user.email})
-        .then(user => {
-          // Push the user to following and save the user 
-          user.following.push(followed);
-          user.save().then(user => res.json(user))
-        })
-        .catch(err => console.log("Error cant follow again you have already followed the user"))
+        // Find the current user by email not doing id because versatility 
+        User.findOne({ username: req.body.username })
+          .then(user => {
+            // Push the user to following and save the user 
+            console.log(user, 'follower'); // test1
+            console.log(user_1);
+            const follower = {
+              user_id: user._id,
+              username: user.username
+            }
+            user_1.followers.push(follower);
+            user.following.push(followed);
+            user_1.save();
+            user.save().then(user => res.json(user))
+          })
+          .catch(err => console.log(err));
+        }
     })
 })
 
