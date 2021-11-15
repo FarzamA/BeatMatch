@@ -20,16 +20,19 @@ class Profile extends React.Component {
     
     render() {
 
-        const { user, playlists, followUser } = this.props;
+        const { currentUser, user, playlists, followUser, unfollowUser } = this.props;
 
         return (
             <div className="user-profile">
                 <PlaylistIndex
+                    currentUser={currentUser}
                     playlists={playlists}
                     user={user}
                 />
                 <UserDetailsBox
+                    currentUser={currentUser}
                     followUser={followUser}
+                    unfollowUser={unfollowUser}
                     user={user}
                 />
             </div>

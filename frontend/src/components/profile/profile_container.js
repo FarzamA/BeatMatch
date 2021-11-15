@@ -15,7 +15,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   // placeholders until I know what these look like on the backend
   fetchUser: (userId) => console.log("Tried to fetch user " + userId),
-  followUser: () => console.log("Tried to follow user")
+  followUser: () => console.log("Tried to follow user"),
+  unfollowUser: () => console.log("Tried to unfollow user")
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
