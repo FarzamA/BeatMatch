@@ -98,28 +98,23 @@ router.post('/follow/:username', (req, res) => {
   // Find the user based on their username
   User.findOne({ username: req.params.username })
     .then(user => {
-      // console.log(user);
-      // console.log(req.params, 'request params')
+
       // Check if the follow request by other user already exists 
       if (user.followers.filter(follower => follower.username === req.body.username).length > 0) {
         res.status(400).json({ alreadyFollow: 'You already follow this user'})
       } else {
-
-        // The requested user will push and save to followers of other user to whom request has made
-        // console.log(req.body, 'request'); //undefined WHY?
-        // user.followers.push(req.body.user);
+        // Create variables to push into arrays later
         const user_1 = user;
         const followed = {
           user_id: user._id,
           username: user.username
         }
-        // user.save();
 
-        // Find the current user by email not doing id because versatility 
+        // Find the current user by username not id because id isn't included in the body
         User.findOne({ username: req.body.username })
           .then(user => {
-            // Push the user to following and save the user 
-            console.log(user, 'follower'); // test1
+            // Push the users to following/follow and save the users 
+            console.log(user, 'follower'); 
             console.log(user_1);
             const follower = {
               user_id: user._id,
@@ -128,7 +123,7 @@ router.post('/follow/:username', (req, res) => {
             user_1.followers.push(follower);
             user.following.push(followed);
             user_1.save();
-            user.save().then(user => res.json(user))
+            user.save();
           })
           .catch(err => console.log(err));
         }
