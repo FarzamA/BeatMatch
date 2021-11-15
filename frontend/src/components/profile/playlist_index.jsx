@@ -10,7 +10,7 @@ const PlaylistIndex = (props) => {
     const visiblePlaylists = playlists.filter(playlist => playlist.isPublic)
 
     return (
-        <ul>
+        <ul className="playlist-index">
             {visiblePlaylists.map(playlist =>
                 <PlaylistIndexItem playlist={playlist} />)}
         </ul>
