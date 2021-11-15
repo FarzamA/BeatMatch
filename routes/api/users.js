@@ -153,7 +153,12 @@ router.delete('/follow/:username', (req, res) => {
         res.status(400).json({ alreadyUnFollow: "You don't follow this user"})
       }
     })
+});
+
+router.post('/profile/:username', (req, res) => {
+  User.findByIdAndUpdate(req.params.user._id)
 })
+
 
 
 module.exports = router;

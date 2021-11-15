@@ -14,6 +14,16 @@ const UserSchema = new Schema({
       type: String,
       required: true
     },
+    profile_pic: {
+        filename: {
+          required: true,
+          type: String,
+        },
+        fileId: {
+            required: true,
+            type: String,
+        }
+    },
     followers: [
       // keep in mind each follow has it's own _id
       {
