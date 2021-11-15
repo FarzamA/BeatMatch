@@ -12,7 +12,7 @@ class Profile extends React.Component {
     render() {
         return (
             <div>
-                <b>Email:</b> {this.props.currentUser.email}
+                <b>{this.props.currentUser.username}'s</b> Profile
             </div>
         );
     }
