@@ -14,20 +14,10 @@ const PlaylistSchema = new Schema({
         type: String,
         required: false
     },
-    //holds song id's
+    // Holds song id's
     songs: [],
-    // answers: [
-    //     {
-    //         question_id: {
-    //             type: mongoose.ObjectId, 
-    //             ref: 'Question'
-    //         },
-    //         answer: {
-    //             type: String,
-    //             required: true
-    //         }
-    //     }
-    // ],
+    // Holds answer Id's
+    answers: [],
     spotify_playlist_id: {
         type: String,
         required: true

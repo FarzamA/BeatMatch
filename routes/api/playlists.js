@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
         user_id: req.body.user_id,
         name: req.body.name,
         songs: [...req.body.songs],
-        // answers: [{ question_id: req.body.question_id, answer: req.body.answer }],
+        answers: [...req.body.answers],
         spotify_playlist_id: req.body.spotify_playlist_id
     })
 

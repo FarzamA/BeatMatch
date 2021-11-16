@@ -6,6 +6,7 @@ const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
 const playlists = require("./routes/api/playlists");
 const songs = require('./routes/api/songs');
+const answers = require('./routes/api/answers');
 const bodyParser = require('body-parser');
 
 mongoose
@@ -26,6 +27,7 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 app.use("/api/users", users);
 app.use('/api/songs', songs);
+app.use('/api/answers', answers);
 app.use('/api/playlists', playlists);
 
 const port = process.env.PORT || 5000;

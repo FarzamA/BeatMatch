@@ -8,7 +8,7 @@ router.get('/:id', (req, res) => {
     Song.findById(req.params.id)
         .then(song => res.json(song))
         .catch(err => 
-            res.status(404).json({ noQuestionFound: 'No song found'}));
+            res.status(404).json({ noSongFound: 'No song found'}));
 });
 
 
@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
     Song.find()
         .then(songs => res.json(songs))
         .catch(err => 
-            res.status(404).json({ noQuestionFound: 'No songs found'}));
+            res.status(404).json({ noSongsFound: 'No songs found'}));
 });
 
 router.post('/', (req, res) => {
