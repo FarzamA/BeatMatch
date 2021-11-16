@@ -1,8 +1,12 @@
 import { connect } from 'react-redux';
-import { fetchUser } from '../../actions/user_actions';
+import { fetchUser, followUser } from '../../actions/user_actions';
 import Profile from './profile';
 
 const mapStateToProps = (state, ownProps) => {
+
+  // NOTE: "user" refers to the user whose PROFILE you're visiting
+  //        "currentUser" referes to the LOGGED IN user
+
   return {
     currentUser: state.session.user,
     // the shape of these entities will change depending on how we set up state
@@ -19,7 +23,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   // placeholders until I know what these look like on the backend
   fetchUser: (username) => dispatch(fetchUser(username)),
-  followUser: () => console.log("Tried to follow user"),
+  followUser: (username, followData) => dispatch(followUser(username, followData)),
   unfollowUser: () => console.log("Tried to unfollow user")
 });
 
