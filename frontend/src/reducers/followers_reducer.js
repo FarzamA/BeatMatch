@@ -11,11 +11,12 @@ const followersReducer = (state = _nullState, action) => {
             return followers ? followers : _nullState;
         case RECEIVE_USER_FOLLOW:
             newState = Object.assign({}, state);
-            newState[action.userFollow.id] = action.userFollow;
+            newState[action.userFollow.user_id] = action.userFollow;
             return newState;
         case REMOVE_USER_FOLLOW:
             newState = Object.assign({}, state);
-            delete newState[action.userFollow.id];
+            debugger;
+            delete newState[action.userFollow.user_id];
             return newState;
         default:
             return state;
