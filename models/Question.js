@@ -9,7 +9,8 @@ const QuestionSchema = new Schema({
     targetCategory: {
         type: String, 
         required: true
-    }
+    },
+    answerOptions: []
 }, {
     timestamps: true
 });

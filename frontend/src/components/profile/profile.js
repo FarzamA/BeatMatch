@@ -9,12 +9,20 @@ class Profile extends React.Component {
 
     componentDidMount() {
         window.scrollTo(0, 0);
-        this.props.fetchUser(this.props.match.params.username);
+        if (this.props.homeProfile) {
+            this.props.fetchUser(this.props.currentUser.username);
+        } else {
+            this.props.fetchUser(this.props.match.params.username);
+        }
     }
 
     componentDidUpdate() {
         if (!this.props.user) {
-            this.props.fetchUser(this.props.match.params.username);
+            if (this.props.homeProfile) {
+                this.props.fetchUser(this.props.currentUser.username);
+            } else {
+                this.props.fetchUser(this.props.match.params.username);
+            }
         }
     }
     
@@ -33,7 +41,6 @@ class Profile extends React.Component {
 
         return (
             <div className="user-profile">
-                <div>YOU MADE IT TO THE USER PROFILE</div>
                 <PlaylistIndex
                     currentUser={currentUser}
                     following={following}

@@ -1,10 +1,11 @@
 import React from 'react';
 import PlaylistIndexItem from './playlist_index_item';
 import { Link } from 'react-router-dom';
+import { receiveCurrentUser } from '../../actions/session_actions';
 
 const PlaylistIndex = (props) => {
 
-    const { playlists } = props
+    const { playlists, user, currentUser } = props
     // this needs to be refactored so that it checks whether the current user
     // is in the Followed Users of the current profile view
     // righ now, it defaults to ONLY showing public playlists
@@ -17,10 +18,16 @@ const PlaylistIndex = (props) => {
                     <PlaylistIndexItem playlist={playlist} />)}
             </ul>
         )
+    } else if (user.username === currentUser.username) {
+        playlistsDisplay = (
+            <div className="playlist-index">
+                <p className="missing-playlist-list">Looks like you need some playlists. Follow this <Link to="/">Link</Link> to make one.</p>
+            </div>
+        )
     } else {
         playlistsDisplay = (
-            <div>
-                <p>Looks like you need some playlists. Follow this <Link to="/">Link</Link> to make one.</p>
+            <div className="playlist-index">
+                <p className="missing-playlist-list">Looks like this user doesn't have any playlists.</p>
             </div>
         )
     }

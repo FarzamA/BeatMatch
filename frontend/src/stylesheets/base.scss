@@ -1,5 +1,7 @@
+@import "./reset.css";
 @import "./variables.scss";
 @import "./session.scss";
+@import "./user_profile.scss";
 
 body {
     background-color: $body-bg-color;
@@ -10,4 +12,9 @@ body {
 
 .placeholder {
     height: 100vh;
+    background-color: $body-bg-color;
+}
+
+.header {
+    font-size: 30px;
 }
