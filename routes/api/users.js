@@ -7,6 +7,7 @@ const passport = require('passport');
 const router = express.Router();
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const upload = require('../../models/Upload');
 
 // router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
@@ -16,6 +17,14 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
         username: req.user.username,
         email: req.user.email
     });
+});
+
+router.get('/:username', (req, res) => {
+    User.findOne({ username: req.params.username })
+      .then(user => res.json(user))
+      .catch(err => 
+        res.status(404).json({ noUserFound: 'No use was found with that id' })
+        );
 });
 
 router.post("/register", (req, res) => {
@@ -131,7 +140,7 @@ router.post('/follow/:username', (req, res) => {
 
             user_1.save();
             user.save();
-            res.json({ success: 'success' });
+            res.json({...follower});
           })
           .catch(err => console.log(err));
       }
@@ -151,16 +160,34 @@ router.delete('/follow/:username', (req, res) => {
           user.following.splice(idx2, 1);
           user.save();
         })
-
-          
-        console.log(user.followers, 'followers');
         user.save();
-        res.json({ success: 'success' });
+        res.json({
+          username: req.body.username,
+          user_id: req.body.user_id
+        });
       } else {
         res.status(400).json({ alreadyUnFollow: "You don't follow this user"})
       }
     })
-})
+});
+
+
+// to deal with profile pictures
+router.patch('/profile/:username', upload.single("file"), async (req, res) => {
+  if (req.file === undefined) return res.send("you must select a file.");
+  const imageUrl = `http://localhost:5000/api/image/${req.file.filename}`;
+  // return res.send(imgUrl);
+  User.findOne({ username: req.params.username }).then(user => {
+    user.profilePicUrl = imageUrl;
+    user.save();
+    res.json({ 
+      success: 'success',
+      // remember %20 if there are any spaces for tests
+      picUrl: user.profilePicUrl
+    });
+  })
+});
+
 
 
 module.exports = router;

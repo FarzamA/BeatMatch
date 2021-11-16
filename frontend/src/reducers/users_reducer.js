@@ -8,7 +8,7 @@ const usersReducer = (state = _nullState, action) => {
     switch(action.type) {
         case RECEIVE_USER:
             let userWithoutFollowers = _.omit(action.user, ['followers', 'followed']);
-            return userWithoutFollowers;
+            return { [userWithoutFollowers.username]: userWithoutFollowers };
         default:
             return state;
     }
