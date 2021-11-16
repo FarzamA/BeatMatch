@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
     // (e.g. is it already an Array, or do we need to convert it from an
     //   Object to an Array?)
     // user: state.entities.users[ownProps.match.params.username],
-    user: state.entities.users,
+    user: state.entities.users[ownProps.match.params.username],
     playlists: state.entities.playlists,
     followers: Object.values(state.entities.followers),
     following: Object.values(state.entities.following)

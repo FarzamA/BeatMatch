@@ -19,8 +19,8 @@ export const removeUserFollow = userFollow => ({
     userFollow
 });
 
-export const fetchUser = (userId) => (dispatch) => (
-    UserAPIUtil.fetchUser(userId)
+export const fetchUser = (username) => (dispatch) => (
+    UserAPIUtil.fetchUser(username)
         .then(res => dispatch(receiveUser(res.data)))
         .catch(err => console.log(err))
 );

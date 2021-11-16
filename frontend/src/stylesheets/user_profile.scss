@@ -1,10 +1,12 @@
 .user-profile {
     display: flex;
+    justify-content: space-around;
 
     .playlist-index {
         display: flex;
         flex-wrap: wrap;
         width: 900;
+        padding: 5% 0 5% 0;
 
         .playlist-index-item {
             display: flex;
@@ -25,8 +27,8 @@
             .user-photo {
                 border-radius: 50%;
                 color: lightgrey;
-                width: 130px;
-                height: 130px;
+                width: 100px;
+                height: 100px;
                 object-fit: cover;
             }
         }
