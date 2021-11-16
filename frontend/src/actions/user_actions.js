@@ -19,8 +19,8 @@ export const removeUserFollow = userFollow => ({
     userFollow
 });
 
-export const fetchUser = (userId) => (dispatch) => (
-    UserAPIUtil.fetchUser(userId)
+export const fetchUser = (username) => (dispatch) => (
+    UserAPIUtil.fetchUser(username)
         .then(res => dispatch(receiveUser(res.data)))
         .catch(err => console.log(err))
 );
@@ -31,8 +31,9 @@ export const followUser = (username, followData) => dispatch => (
         .catch(err => console.log(err))
 );
 
-export const unfollowUser = (username, followData) => dispatch => (
-    UserAPIUtil.unfollowUser(username, followData)
+export const unfollowUser = (username, followData) => dispatch => {
+
+    return UserAPIUtil.unfollowUser(username, followData)
         .then(res => dispatch(removeUserFollow(res.data)))
         .catch(err => console.log(err))
-);
+};
