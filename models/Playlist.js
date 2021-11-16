@@ -14,48 +14,20 @@ const PlaylistSchema = new Schema({
         type: String,
         required: false
     },
-    songs: {
-        // songName: {
-        //     type: String,
-        //     required: false
-        // }
-    }
-        // {
-        //     songUri: {
-        //         type: String,
-        //         required: false
-        //     },
-            // songName: {
-            //     type: Array,
-            //     required: false
-            // }
-        //     // An array just in case there are multiple artists
-        //     // artists: [
-        //     //     {
-        //     //         artistUrl: {
-        //     //             type: String,
-        //     //             required: true
-        //     //         },
-        //     //         artistName: {
-        //     //             type: String,
-        //     //             required: true
-        //     //         }
-        //     //     }
-        //     // ]
-        // }
-    ,
-    answers: [
-        {
-            question_id: {
-                type: mongoose.ObjectId, 
-                ref: 'Question'
-            },
-            answer: {
-                type: String,
-                required: true
-            }
-        }
-    ],
+    //holds song id's
+    songs: [],
+    // answers: [
+    //     {
+    //         question_id: {
+    //             type: mongoose.ObjectId, 
+    //             ref: 'Question'
+    //         },
+    //         answer: {
+    //             type: String,
+    //             required: true
+    //         }
+    //     }
+    // ],
     spotify_playlist_id: {
         type: String,
         required: true
