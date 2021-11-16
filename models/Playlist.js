@@ -6,12 +6,37 @@ const PlaylistSchema = new Schema({
         type: mongoose.ObjectId, 
         ref: 'users'
     },
+    name: {
+        type: String, 
+        required: true
+    },
+    imageUrl: {
+        type: String,
+        required: true
+    },
     songs: [
         {
             songUrl: {
                 type: String,
                 required: true
-            }
+            },
+            songName: {
+                type: String,
+                required: true
+            },
+            // An array just in case there are multiple artists
+            artists: [
+                {
+                    artistUrl: {
+                        type: String,
+                        required: true
+                    },
+                    artistName: {
+                        type: String,
+                        required: true
+                    }
+                }
+            ]
         }
     ],
     answers: [
@@ -26,4 +51,8 @@ const PlaylistSchema = new Schema({
             }
         }
     ]
-})
+},{
+    timestamps: true
+});
+
+module.exports = Playlist = mongoose.model('Playlist', PlaylistSchema);
