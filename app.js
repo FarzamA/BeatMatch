@@ -7,7 +7,6 @@ const users = require("./routes/api/users");
 const playlists = require("./routes/api/playlists");
 const songs = require('./routes/api/songs');
 const answers = require('./routes/api/answers');
-const bodyParser = require('body-parser');
 
 require("./config/passport")(passport);
 
@@ -77,7 +76,7 @@ app.get("/api/image/:filename", (req, res) => {
 
 app.use(passport.initialize());
 // Routes
-app.use("/api/spotify/songs", require("./routes/api/songs"));
+app.use("/api/spotify/songs", require("./routes/api/spotify/songs"));
 app.use("/api/users", users);
 app.use('/api/songs', songs);
 app.use('/api/answers', answers);
