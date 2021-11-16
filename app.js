@@ -1,11 +1,14 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const express = require("express");
-const passport = require('passport');
-const app = express();
-const db = require('./config/keys').mongoURI;
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const db = require("./config/keys").mongoURI;
 const users = require("./routes/api/users");
+require("./config/passport")(passport);
+
+const app = express();
 const questions = require("./routes/api/questions");
-const bodyParser = require('body-parser');
+
 
 let gfs;
 // connection();
@@ -13,7 +16,7 @@ let gfs;
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() => console.log("Connected to MongoDB successfully"))
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
 const conn = mongoose.connection;
 conn.once("open", function () {
@@ -28,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
-    res.send('hello world!')
+  res.send("hello world!");
 });
 
 
@@ -68,8 +71,8 @@ app.get("/api/image/:filename", (req, res) => {
 
 
 app.use(passport.initialize());
-require('./config/passport')(passport);
-
+// Routes
+app.use("/api/songs", require("./routes/api/songs"));
 app.use("/api/users", users);
 app.use('/api/questions', questions);
 
