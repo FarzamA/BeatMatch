@@ -21,3 +21,10 @@ router.get('/:id', (req, res) => {
             res.status(404).json({ noPlaylistFound: 'No playlist found with that id' }))
 });
 
+router.post('/', (req, res) => {
+    const newPlaylist = new Playlist({
+
+    })
+
+    newPlaylist.save().then(playlist => res.json(playlist);)
+})
