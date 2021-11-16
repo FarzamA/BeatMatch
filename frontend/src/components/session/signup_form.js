@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -42,50 +42,63 @@ class SignupForm extends React.Component {
     this.props.signup(user, this.props.history); 
   }
 
-  renderErrors() {
-    return(
-      <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
-          <li key={`error-${i}`}>
-            {this.state.errors[error]}
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
   render() {
     return (
       <div className="signup-form-container">
+        <div className="session-form-home-button">
+          <Link to="/">Beat Match</Link>
+        </div>
         <form onSubmit={this.handleSubmit}>
-          <div className="signup-form">
-            <br/>
+          <div className="session-form">
+            <div className="session-form-heading">Sign Up</div>
+            <div className="session-input-container">
+              <label className="form-label">Email</label>
               <input type="text"
                 value={this.state.email}
                 onChange={this.update('email')}
                 placeholder="Email"
+                className="session-form-input"
               />
-            <br/>
+              <label className="form-error">{this.state.errors.email}</label>
+            </div>
+            
+            <div className="session-input-container">
+              <label className="form-label">Username</label>
               <input type="text"
                 value={this.state.username}
                 onChange={this.update('username')}
                 placeholder="Username"
+                className="session-form-input"
               />
-            <br/>
+              <label className="form-error">{this.state.errors.username}</label>
+            </div>
+            
+            <div className="session-input-container">
+              <label className="form-label">Password</label>
               <input type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
                 placeholder="Password"
+                className="session-form-input"
               />
-            <br/>
+              <label className="form-error">{this.state.errors.password}</label>
+            </div>
+            
+            <div className="session-input-container">
+              <label className="form-label">Confirm Password</label>
               <input type="password"
                 value={this.state.password2}
                 onChange={this.update('password2')}
                 placeholder="Confirm Password"
+                className="session-form-input"
               />
-            <br/>
-            <input type="submit" value="Submit" />
-            {this.renderErrors()}
+              <label className="form-error">{this.state.errors.password2}</label>
+            </div>
+            
+            <input className="session-submit-button" type="submit" value="Sign Up" />
+             <div className="alt-session-route">
+              {this.props.navLink}
+            </div>
           </div>
         </form>
       </div>

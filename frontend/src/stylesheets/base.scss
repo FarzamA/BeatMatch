@@ -1,0 +1,13 @@
+@import "./variables.scss";
+@import "./session.scss";
+
+body {
+    background-color: $body-bg-color;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+.placeholder {
+    height: 100vh;
+}

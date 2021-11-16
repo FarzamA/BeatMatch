@@ -102,6 +102,14 @@ router.post("/login", (req, res) => {
     });
 });
 
+router.get('/:username', (req, res) => {
+  User.findOne({ username: req.params.username })
+    .then(user => res.json(user))
+    .catch(err =>
+      res.status(404).json({ noUserFound: 'No use was found with that id' })
+    );
+});
+
 router.post('/follow/:username', (req, res) => {
   // Find the user based on their username
   User.findOne({ username: req.params.username })

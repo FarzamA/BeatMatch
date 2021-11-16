@@ -1,0 +1,34 @@
+.user-profile {
+    display: flex;
+
+    .playlist-index {
+        display: flex;
+        flex-wrap: wrap;
+        width: 900;
+
+        .playlist-index-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 33.333%;
+        }
+
+    }
+
+    .user-details-box {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+
+        .user-profile-photo-box {
+
+            .user-photo {
+                border-radius: 50%;
+                color: lightgrey;
+                width: 130px;
+                height: 130px;
+                object-fit: cover;
+            }
+        }
+    }
+}
