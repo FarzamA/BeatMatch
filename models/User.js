@@ -16,11 +16,11 @@ const UserSchema = new Schema({
     },
     profile_pic: {
         filename: {
-          required: true,
+          required: false,
           type: String,
         },
         fileId: {
-            required: true,
+            required: false,
             type: String,
         }
     },

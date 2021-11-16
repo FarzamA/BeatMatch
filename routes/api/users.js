@@ -7,6 +7,7 @@ const passport = require('passport');
 const router = express.Router();
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const upload = require('../../middleware/upload');
 
 // router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
@@ -16,6 +17,14 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
         username: req.user.username,
         email: req.user.email
     });
+});
+
+router.get('/:username', (req, res) => {
+    User.findOne({ username: req.params.username })
+      .then(user => res.json(user))
+      .catch(err => 
+        res.status(404).json({ noUserFound: 'No use was found with that id' })
+        );
 });
 
 router.post("/register", (req, res) => {
@@ -155,8 +164,12 @@ router.delete('/follow/:username', (req, res) => {
     })
 });
 
-router.post('/profile/:username', (req, res) => {
-  User.findByIdAndUpdate(req.params.user._id)
+router.post('/profile/:username', upload.single("file"), async (req, res) => {
+  if (req.file === undefined) return res.send("you must select a file.");
+  console.log(req.file)
+  const imgUrl = `http://localhost:5000/file/${req.file.filename}`;
+  return res.send(imgUrl);
+  // User.findByIdAndUpdate(req.params.user._id)
 })
 
 
