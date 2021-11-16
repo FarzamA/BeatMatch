@@ -5,8 +5,6 @@ const app = express();
 const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
 const bodyParser = require('body-parser');
-// const upload = require("./routes/upload");
-// const Grid = require("gridfs-stream");
 
 let gfs;
 // connection();
