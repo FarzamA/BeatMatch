@@ -4,22 +4,33 @@ class QuestionsForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            questions: this.props.questions
+            questions: this.props.questions,
+            answers: new Array(this.props.questions.length)
         };
+
+        this.handleInput = this.handleInput.bind(this);
     }
 
     componentDidMount(){
         this.props.fetchQuestions();
+        this.setState({ questions: this.props.questions });
     }
 
-    handleSubmit(){
-        e.preventDefault();
+    handleInput(answerIndex){
 
-        console.log()
+        return (e) => {
+            console.log(answerIndex);
+            console.log(e.target.value);
+        }
+        
+    }
+
+    handleSubmit(e){
+        e.preventDefault();
     }
     
     render(){
-        console.log(this.props.questions)
+        console.log(this.state);
         if(!this.props.questions){
             return null;
         }
@@ -32,13 +43,12 @@ class QuestionsForm extends React.Component {
                                 {question.answerOptions.map((answerOption, j) => {
                                     return (
                                         <label key={`answer-${j}`}>{answerOption}
-                                            <input type="radio" value={answerOption} />
+                                            <input name={question.question} type="radio" value={answerOption} onChange={this.handleInput(j)} />
                                         </label>
                                     );
                                 })}
                             </label>
                         </div>
-                        
                     );
                 })}
                 <input type="submit" value="Create Playlist"/>
