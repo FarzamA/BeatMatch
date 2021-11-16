@@ -24,7 +24,6 @@ router.get('/', (req, res) => {
 
 // allow for users to submit their own questions in the future?
 router.post('/', (req, res) => {
-    console.log(req.body.answerOptions);
     const newQuestion = new Question({
         question: req.body.question,
         targetCategory: req.body.targetCategory, 
