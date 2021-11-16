@@ -21,8 +21,9 @@ mongoose
 
 const conn = mongoose.connection;
 conn.once("open", function () {
-    gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection("photos");
+    gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+      bucketName: 'photos'
+    })
 });
 
 // allows for postman tests
@@ -49,24 +50,23 @@ app.get("/file/:filename", (req, res) => {
 });
 
 app.get("/image/:filename", (req, res) => {
-  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
-    if (!file || file.length === 0) {
-      return res.status(404).json({
-        err: 'No file exists'
-      });
+  gfs.find({ filename: req.params.filename }).toArray((err, files) => {
+    if (!files[0] || files.length === 0) {
+        return res.status(200).json({
+            success: false,
+            message: 'No files available',
+        });
     }
 
-    // Check if image 
-    // if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
-      // Read the output to browser 
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
-    // } else {
-      // res.status(404).json({
-      //   err: 'Not an image'
-      // })
-    // }
-  })
+    if (files[0].contentType === 'image/jpeg' || files[0].contentType === 'image/png' || files[0].contentType === 'image/svg+xml') {
+        // render image to browser
+        gfs.openDownloadStreamByName(req.params.filename).pipe(res);
+    } else {
+        res.status(404).json({
+            err: 'Not an image',
+        });
+    }
+  });
 });
 
 
