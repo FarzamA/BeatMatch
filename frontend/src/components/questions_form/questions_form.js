@@ -8,7 +8,7 @@ class QuestionsForm extends React.Component {
             answers: new Array(this.props.questions.length)
         };
 
-        this.handleInput = this.handleInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount(){
@@ -17,20 +17,20 @@ class QuestionsForm extends React.Component {
     }
 
     handleInput(answerIndex){
-
         return (e) => {
-            console.log(answerIndex);
-            console.log(e.target.value);
+            let answersArray = [...this.state.answers];
+            answersArray[answerIndex] = e.target.value;
+
+            this.setState({ answers: answersArray });
         }
-        
     }
 
     handleSubmit(e){
         e.preventDefault();
+        console.log(this.state);
     }
     
     render(){
-        console.log(this.state);
         if(!this.props.questions){
             return null;
         }
@@ -43,7 +43,7 @@ class QuestionsForm extends React.Component {
                                 {question.answerOptions.map((answerOption, j) => {
                                     return (
                                         <label key={`answer-${j}`}>{answerOption}
-                                            <input name={question.question} type="radio" value={answerOption} onChange={this.handleInput(j)} />
+                                            <input name={question.question} type="radio" value={answerOption} onChange={this.handleInput(i)} />
                                         </label>
                                     );
                                 })}
