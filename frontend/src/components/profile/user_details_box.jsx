@@ -25,9 +25,6 @@ class UserDetailsBox extends React.Component {
             username: currentUser.username
         }
 
-        console.log(followData);
-        console.log(followers.find(user => user.username === currentUser.username))
-
         if (followers.find(user => user.username === currentUser.username)) {
             unfollowUser(user.username, followData);
         } else {
@@ -42,8 +39,6 @@ class UserDetailsBox extends React.Component {
                 followers,
                 following } = this.props;
         
-        console.log(followers);
-    
         let profilePhoto;
         // this shows either a user photo or a pair of headphones
         if (user.profilePicUrl) {
