@@ -6,6 +6,7 @@ import MainPage from './main/main_page';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import ProfileContainer from './profile/profile_container';
+import QuestionsFormContainer from './questions_form/questions_form_container';
 import '../stylesheets/base.scss';
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
           <AuthRoute exact path="/signup" component={SignupFormContainer} />
           <Route path="/users/:username" component={ProfileContainer} />
           <ProtectedRoute exact path="/profile" component={ProfileContainer} />
+          <ProtectedRoute exact path="/questions" component={QuestionsFormContainer} />
       </Switch>
     </div>
   );
