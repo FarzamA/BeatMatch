@@ -6,13 +6,10 @@ const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
 const bodyParser = require('body-parser');
 // const upload = require("./routes/upload");
-const Grid = require("gridfs-stream");
+// const Grid = require("gridfs-stream");
 
 let gfs;
 // connection();
-
-
-
 
 mongoose
   .connect(db, { useNewUrlParser: true })
