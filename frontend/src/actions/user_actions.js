@@ -21,17 +21,18 @@ export const removeUserFollow = userFollow => ({
 
 export const fetchUser = (userId) => (dispatch) => (
     UserAPIUtil.fetchUser(userId)
-        .then(user => dispatch(receiveUser(user)))
+        .then(res => dispatch(receiveUser(res.data)))
         .catch(err => console.log(err))
 );
 
 export const followUser = (username, followData) => dispatch => (
     UserAPIUtil.followUser(username, followData)
-        .then(userFollow => dispatch(receiveUserFollow(userFollow)))
+        .then(res => dispatch(receiveUserFollow(res.data)))
         .catch(err => console.log(err))
 );
 
 export const unfollowUser = (username, followData) => dispatch => (
     UserAPIUtil.unfollowUser(username, followData)
-        .then(userfollow => dispatch(removeUserFollow(userFollow)))
+        .then(res => dispatch(removeUserFollow(res.data)))
+        .catch(err => console.log(err))
 );

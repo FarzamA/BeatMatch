@@ -4,7 +4,13 @@ import { faHeadphonesAlt } from '@fortawesome/free-solid-svg-icons';
 
 const UserDetailsBox = (props) => {
 
-    const { currentUser, user, followUser, unfollowUser } = props;
+    const {
+        currentUser,
+        user,
+        followUser,
+        unfollowUser,
+        followers,
+        following } = props;
 
     let profilePhoto;
     // this shows either a user photo or a pair of headphones
@@ -15,24 +21,25 @@ const UserDetailsBox = (props) => {
     }
 
     let followButton;
-    if (user.followers.find(user => user.id === currentUser.id)) {
+    if (followers.find(user => user.id === currentUser.id)) {
         followButton = (<button onClick={unfollowUser}>Unfollow</button>)
     } else {
         followButton = (<button onClick={followUser}>Follow</button>)
     }
 
-    const followersText = user.followers.length === 1 ? "Follower" : "Followers";
+    const followersText = followers.length === 1 ? "Follower" : "Followers";
 
     return (
         <div className="user-details-box">
             <div className="user-profile-photo-box">
                 {profilePhoto}
+                {user.username}
                 <div className="followers-options">
                     {/* text should change depending on whether you're following */}
                     {followButton}
                     {/* should pluralize */}
-                    <p>{user.followers.length} {followersText}</p>
-                    <p>{user.followed.length} Followed</p>
+                    <p>{followers.length} {followersText}</p>
+                    <p>{following.length} Followed</p>
                 </div>
             </div>
             <ul className="user-details-ul">
