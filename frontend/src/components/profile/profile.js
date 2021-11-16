@@ -33,7 +33,6 @@ class Profile extends React.Component {
 
         return (
             <div className="user-profile">
-                <div>YOU MADE IT TO THE USER PROFILE</div>
                 <PlaylistIndex
                     currentUser={currentUser}
                     following={following}
