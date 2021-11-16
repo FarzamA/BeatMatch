@@ -4,6 +4,7 @@ const passport = require('passport');
 const app = express();
 const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
+const questions = require("./routes/api/questions");
 const bodyParser = require('body-parser');
 
 let gfs;
@@ -68,7 +69,9 @@ app.get("/api/image/:filename", (req, res) => {
 
 app.use(passport.initialize());
 require('./config/passport')(passport);
+
 app.use("/api/users", users);
+app.use('/api/questions', questions);
 
 const port = process.env.PORT || 5000;
 
