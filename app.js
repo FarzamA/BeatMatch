@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
 
 
 // to display single file object
-app.get("/file/:filename", (req, res) => {
+app.get("/api/file/:filename", (req, res) => {
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     if (!file || file.length === 0) {
       return res.status(404).json({
@@ -49,7 +49,8 @@ app.get("/file/:filename", (req, res) => {
   })
 });
 
-app.get("/image/:filename", (req, res) => {
+// to render the image 
+app.get("/api/image/:filename", (req, res) => {
   gfs.find({ filename: req.params.filename }).toArray((err, files) => {
     if (!files[0] || files.length === 0) {
         return res.status(200).json({
