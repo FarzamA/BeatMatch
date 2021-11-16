@@ -162,7 +162,7 @@ router.delete('/follow/:username', (req, res) => {
 
 
 // to deal with profile pictures
-router.post('/profile/:username', upload.single("file"), async (req, res) => {
+router.patch('/profile/:username', upload.single("file"), async (req, res) => {
   if (req.file === undefined) return res.send("you must select a file.");
   const imageUrl = `http://localhost:5000/api/image/${req.file.filename}`;
   // return res.send(imgUrl);
