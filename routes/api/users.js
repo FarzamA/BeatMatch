@@ -140,7 +140,7 @@ router.post('/follow/:username', (req, res) => {
 
             user_1.save();
             user.save();
-            res.json({ success: 'success' });
+            res.json({...follower});
           })
           .catch(err => console.log(err));
       }
@@ -161,7 +161,10 @@ router.delete('/follow/:username', (req, res) => {
           user.save();
         })
         user.save();
-        res.json({ success: 'success' });
+        res.json({
+          username: req.body.username,
+          user_id: req.body.user_id
+        });
       } else {
         res.status(400).json({ alreadyUnFollow: "You don't follow this user"})
       }
