@@ -4,6 +4,8 @@ const passport = require('passport');
 const app = express();
 const db = require('./config/keys').mongoURI;
 const users = require("./routes/api/users");
+const playlists = require("./routes/api/playlists");
+const songs = require('./routes/api/songs');
 const bodyParser = require('body-parser');
 
 mongoose
@@ -23,6 +25,8 @@ app.get("/", (req, res) => {
 app.use(passport.initialize());
 require('./config/passport')(passport);
 app.use("/api/users", users);
+app.use('/api/songs', songs);
+app.use('/api/playlists', playlists);
 
 const port = process.env.PORT || 5000;
 
