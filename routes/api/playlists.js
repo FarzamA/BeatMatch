@@ -23,8 +23,9 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
     const newPlaylist = new Playlist({
-
+        
     })
 
-    newPlaylist.save().then(playlist => res.json(playlist);)
+    newPlaylist.save().then(playlist => res.json(playlist))
+
 })
