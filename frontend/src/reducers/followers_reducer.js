@@ -8,15 +8,20 @@ const followersReducer = (state = _nullState, action) => {
     switch(action.type) {
         case RECEIVE_USER:
             let followers = action.user.followers;
-            return followers ? followers : _nullState;
+            if (followers) {
+                newState = {};
+                followers.forEach(follower => {
+                    newState[follower.username] = follower;
+                });
+            }
+            return newState
         case RECEIVE_USER_FOLLOW:
             newState = Object.assign({}, state);
-            newState[action.userFollow.user_id] = action.userFollow;
+            newState[action.userFollow.username] = action.userFollow;
             return newState;
         case REMOVE_USER_FOLLOW:
             newState = Object.assign({}, state);
-            debugger;
-            delete newState[action.userFollow.user_id];
+            delete newState[action.userFollow.username];
             return newState;
         default:
             return state;

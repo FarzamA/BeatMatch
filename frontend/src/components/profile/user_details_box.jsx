@@ -46,8 +46,8 @@ class UserDetailsBox extends React.Component {
     
         let profilePhoto;
         // this shows either a user photo or a pair of headphones
-        if (user.photoUrl) {
-            profilePhoto = (<img className="user-photo" src={user.photoUrl} />);
+        if (user.profilePicUrl) {
+            profilePhoto = (<img className="user-photo" src={user.profilePicUrl} />);
         } else {
             profilePhoto = (<FontAwesomeIcon className="user-photo" icon={faHeadphonesAlt} />);
         }
@@ -66,14 +66,14 @@ class UserDetailsBox extends React.Component {
             <div className="user-details-box">
                 <div className="user-profile-photo-box">
                     {profilePhoto}
-                    {user.username}
+                    <p className="header">{user.username}</p>
                     <div className="followers-options">
                         {/* text should change depending on whether you're following */}
-                        {followButton}
                         {/* should pluralize */}
                         <p>{followers.length} {followersText}</p>
-                        <p>{following.length} Followed</p>
+                        <p>{following.length} Following</p>
                     </div>
+                    {followButton}
                 </div>
                 <ul className="user-details-ul">
                     <li className="user-detail-item"></li>
