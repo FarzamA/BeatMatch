@@ -143,7 +143,6 @@ router.delete('/follow/:username', (req, res) => {
   User.findOne({ username: req.params.username })
     .then(user => {
       const idx = user.followers.findIndex((follower) => follower.username === req.body.username)
-      console.log(idx);
       if (idx >= 0) {
         user.followers.splice(idx, 1);
 
@@ -153,9 +152,6 @@ router.delete('/follow/:username', (req, res) => {
           user.following.splice(idx2, 1);
           user.save();
         })
-
-          
-        console.log(user.followers, 'followers');
         user.save();
         res.json({ success: 'success' });
       } else {
@@ -164,13 +160,22 @@ router.delete('/follow/:username', (req, res) => {
     })
 });
 
+
+// to deal with profile pictures
 router.post('/profile/:username', upload.single("file"), async (req, res) => {
   if (req.file === undefined) return res.send("you must select a file.");
-  console.log(req.file)
-  const imgUrl = `http://localhost:5000/file/${req.file.filename}`;
-  return res.send(imgUrl);
-  // User.findByIdAndUpdate(req.params.user._id)
-})
+  const imageUrl = `http://localhost:5000/api/image/${req.file.filename}`;
+  // return res.send(imgUrl);
+  User.findOne({ username: req.params.username }).then(user => {
+    user.profilePicUrl = imageUrl;
+    user.save();
+    res.json({ 
+      success: 'success',
+      // remember %20 if there are any spaces for tests
+      picUrl: user.profilePicUrl
+    });
+  })
+});
 
 
 
