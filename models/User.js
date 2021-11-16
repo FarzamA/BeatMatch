@@ -15,13 +15,9 @@ const UserSchema = new Schema({
       required: true
     },
     profile_pic: {
-        filename: {
+        imgUrl: {
           required: false,
           type: String,
-        },
-        fileId: {
-            required: false,
-            type: String,
         }
     },
     followers: [
