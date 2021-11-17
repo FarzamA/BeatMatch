@@ -21,6 +21,7 @@ const getToken = async () => {
     },
   });
   const token = response.data.access_token;
+  console.log(token)
   return token;
 };
 

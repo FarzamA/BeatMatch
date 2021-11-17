@@ -77,6 +77,7 @@ app.get("/api/image/:filename", (req, res) => {
 app.use(passport.initialize());
 // Routes
 app.use("/api/spotify/songs", require("./routes/api/spotify/songs"));
+app.use("/api/spotify/login", require("./routes/api/spotify/login"))
 app.use("/api/users", users);
 app.use('/api/songs', songs);
 app.use('/api/answers', answers);
