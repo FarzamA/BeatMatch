@@ -188,6 +188,24 @@ router.patch('/profile/:username', upload.single("file"), async (req, res) => {
   })
 });
 
+//search usernames
+
+router.get('/search/:query', (req, res) => {
+
+  let queryRegExp = new RegExp(`\^${req.params.query}\.\*`);
+
+  User.find(
+    // currently not using, since indexing isn't compatible with regex partial results
+    // { $text: { $search: queryRegExp } }
+    { "username": queryRegExp }
+  )
+    .then(users => {
+      let usernames = users.map(user => user.username);
+      return res.json(usernames);
+    })
+    .catch(err => res.json(err))
+})
+
 
 
 module.exports = router;
