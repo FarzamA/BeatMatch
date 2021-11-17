@@ -43,47 +43,67 @@ router.post('/:user_id', (req, res) =>{
         follower_id: req.body.user_id,
         following_id: req.params.user_id
     });
-    newFollow.save().then(follow => res.json(follow));
+    let resFollow;
+    newFollow.save().then(follow => resFollow = follow).catch(err => console.log(err));
 
     // Increment following count of current user
     User.findById(req.body.user_id)
         .then(user => {
             user.following += 1;
+            const currentUser = user;
             user.save();
             // res.json({ currentUserFollowingCount: user.following });
-        });
 
-    // Increment follow count of followed user 
-    User.findById(req.params.user_id)
-        .then(user => {
-            user.followers += 1;
-            user.save();
-            // res.json({ followedUserFollowerCont: user.followers })
-        });
+            // Increment follow count of followed user 
+            User.findById(req.params.user_id)
+            .then(user => {
+                user.followers += 1;
+                user.save();
+                res.json({
+                    followedUserFollowerCount: user.followers,
+                    currentUserFollowingCount: currentUser.following,
+                    follow: resFollow
+                })
+            })
+            .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+
+    
 
 });
 
 // Remove a follow
 router.delete('/:id', (req, res) => { 
-    Follow.remove({ _id: req.params.id }, function(err, follow) {
+    Follow.deleteOne({ _id: req.params.id }, function(err, follow) {
         // Decrement following count of current user
         User.findById(follow.follower_id)
             .then(user => {
                 user.following -= 1;
+                const currentUser = user;
                 user.save();
                 // res.json({ currentUserFollowingCount: user.following });
-            });
-    
-        // Decrement follow count of followed user 
-        User.findById(follow.following_id)
-            .then(user => {
-                user.followers -= 1;
-                user.save();
-                // res.json({ followedUserFollowerCont: user.followers })
-            });
 
-        res.json(follow);
-    });
+                
+                // Decrement follow count of followed user 
+                User.findById(follow.following_id)
+                .then(user => {
+                    user.followers -= 1;
+                    user.save();
+                    res.json({ 
+                        followedUserFollowerCont: user.followers,
+                        currentUserFollowingCount: currentUser.following,
+                        follow: follow
+                    });
+                })
+                .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
+    
+
+        // res.json(follow);
+    })
+    .catch(err => console.log(err));
 
 
 });
