@@ -10,6 +10,7 @@ import UserProfileContainer from './profile/user_profile_container';
 import HomeProfileContainer from './profile/home_profile_container';
 import '../stylesheets/base.scss';
 
+
 const App = () => {
   const location = useLocation();
 

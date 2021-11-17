@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
-const keys = require('../../config/keys');
+const keys = require('../../config/keys_dev');
 const passport = require('passport');
 const router = express.Router();
 const validateRegisterInput = require('../../validation/register');
@@ -68,7 +68,7 @@ router.post("/register", (req, res) => {
   });
 });
 
-router.post("/login", (req, res) => {
+router.post("/login/", (req, res) => {
     const { errors, isValid } = validateLoginInput(req.body);
   
     if (!isValid) {
@@ -187,6 +187,24 @@ router.patch('/profile/:username', upload.single("file"), async (req, res) => {
     });
   })
 });
+
+//search usernames
+
+router.get('/search/:query', (req, res) => {
+
+  let queryRegExp = new RegExp(`\^${req.params.query}\.\*`);
+
+  User.find(
+    // currently not using, since indexing isn't compatible with regex partial results
+    // { $text: { $search: queryRegExp } }
+    { "username": queryRegExp }
+  )
+    .then(users => {
+      let usernames = users.map(user => user.username);
+      return res.json(usernames);
+    })
+    .catch(err => res.json(err))
+})
 
 
 

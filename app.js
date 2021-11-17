@@ -1,28 +1,48 @@
+
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const db = require("./config/keys").mongoURI;
 const users = require("./routes/api/users");
+const playlists = require("./routes/api/playlists");
+const songs = require('./routes/api/songs');
+const follows = require('./routes/api/follows');
+const answers = require('./routes/api/answers');
+const seedDb = require('./seeds');
+
 require("./config/passport")(passport);
 
 const app = express();
+
+const path = require('path');
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  })
+}
+
 const questions = require("./routes/api/questions");
 
 
 let gfs;
-// connection();
+
 
 mongoose
   .connect(db, { useNewUrlParser: true })
-  .then(() => console.log("Connected to MongoDB successfully"))
+  .then(() =>{
+      seedDb();
+      console.log("Connected to MongoDB successfully")
+    })
   .catch((err) => console.log(err));
 
 const conn = mongoose.connection;
 conn.once("open", function () {
     gfs = new mongoose.mongo.GridFSBucket(conn.db, {
       bucketName: 'photos'
-    })
+    });
 });
 
 // allows for postman tests
@@ -30,9 +50,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // tells app to only respond to json
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.send("hello world!");
-});
+// app.get("/", (req, res) => {
+//   res.send("hello world!");
+// });
 
 
 // to display single file object
@@ -72,9 +92,13 @@ app.get("/api/image/:filename", (req, res) => {
 
 app.use(passport.initialize());
 // Routes
-app.use("/api/songs", require("./routes/api/songs"));
+app.use("/api/spotify/songs", require("./routes/api/spotify/songs"));
 app.use("/api/users", users);
+app.use('/api/songs', songs);
+app.use('/api/answers', answers);
+app.use('/api/playlists', playlists);
 app.use('/api/questions', questions);
+app.use('/api/follows', follows);
 
 const port = process.env.PORT || 5000;
 

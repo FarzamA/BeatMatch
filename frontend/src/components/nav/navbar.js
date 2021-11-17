@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SearchBarContainer from '../search/search_bar_container';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -16,25 +17,35 @@ class NavBar extends React.Component {
   getLinks() {
       if (this.props.loggedIn) {
         return (
-            <div>
+            <div className="auth-links">
                 <Link to={'/profile'}>Profile</Link>
-                <button onClick={this.logoutUser}>Logout</button>
+                <div onClick={this.logoutUser}>Logout</div>
             </div>
         );
       } else {
         return (
-            <div>
-                <Link to={'/signup'}>Signup</Link>
-                <Link to={'/login'}>Login</Link>
+            <div className="auth-links">
+              <Link to={'/signup'}><div>Signup</div></Link>
+              <Link to={'/login'}><div>Login</div></Link>
             </div>
         );
       }
   }
 
   render() {
+
+    const { loggedIn, location } = this.props;
+
+      let centralComponent;
+
+      if (location.pathname !== "/") {
+        centralComponent = (<SearchBarContainer/>);
+      }
+
       return (
-        <div>
-            <h1>BeatMatch</h1>
+        <div className="navbar">
+            <img className="logo" src="https://beatmatch-seeds.s3.amazonaws.com/BeatMatchLogo.png"/>
+            {centralComponent}
             { this.getLinks() }
         </div>
       );
