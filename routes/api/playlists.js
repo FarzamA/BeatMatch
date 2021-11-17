@@ -33,7 +33,14 @@ router.post('/', (req, res) => {
     })
 
     newPlaylist.save().then(playlist => res.json(playlist))
-
 });
 
+router.delete('/:id', (req, res) => { 
+    Playlist.findById(req.params.id)
+        .then(playlist => {
+            db.playlists.remove({_id: req.params.id})
+            return res.json(playlist)
+        });
+
+})
 module.exports = router;
