@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const db = require("../../config/keys").mongoURI;
 // const passport = require('passport');
 
 const Playlist = require('../../models/Playlist');
@@ -36,11 +37,9 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => { 
-    Playlist.findById(req.params.id)
-        .then(playlist => {
-            db.playlists.remove({_id: req.params.id})
-            return res.json(playlist)
-        });
-
+    Playlist.remove({ _id: req.params.id }, function(err,playlist) {
+        // console.log("Deleting Playlist " + req.params.id);
+        res.json(playlist);
+    });
 })
 module.exports = router;
