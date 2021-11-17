@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 class SearchBar extends React.Component {
@@ -46,14 +46,23 @@ class SearchBar extends React.Component {
             if (results.length > 0) {
 
                 resultsDisplay = (
-                    <ul>
+                    <ul className="search-results">
                         {results.map(result => (
-                            <li><Link to={`/users/${result}`}>{result}</Link></li>
+                            <Link to={`/users/${result}`}>
+                                <li>
+                                    <FontAwesomeIcon icon={faUserAlt}/>
+                                    {result}
+                                </li>
+                            </Link>
                         ))}
                     </ul>
                 )
             } else {
-                resultsDisplay = (<ul><li>No results found</li></ul>)
+                resultsDisplay = (
+                    <ul className="search-results">
+                        <li>No results found</li>
+                    </ul>
+                )
             }
 
         }
