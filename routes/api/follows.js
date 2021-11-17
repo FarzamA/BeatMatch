@@ -9,19 +9,20 @@ const User = require('../../models/User');
 router.get('/following/:user_id', (req, res) => {
     Follow.find({ follower_id: req.params.user_id })
         .then(following => {
-            // let followedUsers = {...following};
-            // following.forEach(follow => {
-            //     User.findOne({ _id: follow.following_id })
-            //         .then(user => {     
-            //             // console.log(user);
-            //             followedUsers.push(user);
-            //             // console.log(followedUsers, 'followedUsers');
-            //         })
-            // });
+            let followedUsers = {};
+            following.forEach(follow => {
+                User.findOne({ _id: follow.following_id })
+                    .then(user => {     
+                        // console.log(user);
+                        followedUsers[user._id] = user;
+                        // console.log(followedUsers, 'followedUsers');
+                    })
+            });
 
             // returns hash of followed user
-            res.json({...following});
+            res.json(followedUsers);
         })
+        .then()
         .catch(err => 
             res.status(404).json({ noFollowingFound: 'This user does not follow anyone' }))
 });
