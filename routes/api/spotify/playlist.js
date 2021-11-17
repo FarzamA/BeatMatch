@@ -40,11 +40,11 @@ router.get("/", async (req, res) => {
   let state = generateRandomString(16);
   const scope = "user-read-private user-read-email playlist-modify playlist-modify-public";
   const params = {
-    client_id: clientId,
     response_type: "code",
+    client_id: clientId,
+    scope: scope,
     redirect_uri: redirectUri,
     state,
-    scope,
   };
   const url =
     "https://accounts.spotify.com/authorize?" + queryString.stringify(params);
@@ -77,27 +77,43 @@ const getAccessToken = async (code) => {
   return token;
 };
 
+const createPlaylist = async (token) => {
+  const response = await axios({
+    url: "https://api.spotify.com/v1/me",
+    method: "post",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    params: {
+      name: "My First Playlist",
+      description: "Playlist Description",
+      public: true,
+    },
+  });
+  return response.data;
+};
+
 const getProfile = async (token) => {
-    const response = await axios ({
-        url: "https://api.spotify.com/v1/me",
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-    return response.data
-}
+  const response = await axios({
+    url: "https://api.spotify.com/v1/me",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
+};
 router.get("/callback", async (req, res) => {
   const code = req.query.code || null;
   //   const storedState = state;
   let state = req.query.state || null;
   //   console.log(storedState);
-  console.log(req.cookies)
+  console.log(req.cookies);
   console.log(state);
   console.log("in callback");
 
   try {
     const spotifyToken = await getAccessToken(code);
-    const myprofile = await getProfile(spotifyToken)
+    const myprofile = await getProfile(spotifyToken);
     res.send({ myprofile });
   } catch (err) {
     console.log(err);
