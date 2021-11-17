@@ -1,7 +1,9 @@
 @import "./reset.css";
 @import "./variables.scss";
+@import "./main_page.scss";
 @import "./session.scss";
 @import "./user_profile.scss";
+@import "./questions.scss";
 
 body {
     background-color: $body-bg-color;
