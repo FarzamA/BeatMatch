@@ -33,7 +33,14 @@ const getSongs = async (token, genre, minKey, minValue, maxKey, maxValue) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  return response.data;
+
+  songs = []
+  response.data.tracks.map( track => {
+    songs.push(track.uri)
+  })
+  console.log(songs)
+  console.log(response.data.tracks[0].uri)
+  return songs
 };
 
 router.post("/", async (req, res) => {
