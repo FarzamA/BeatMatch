@@ -7,7 +7,9 @@ const db = require("./config/keys").mongoURI;
 const users = require("./routes/api/users");
 const playlists = require("./routes/api/playlists");
 const songs = require('./routes/api/songs');
+const follows = require('./routes/api/follows');
 const answers = require('./routes/api/answers');
+const seedDb = require('./seeds');
 
 require("./config/passport")(passport);
 
@@ -30,14 +32,17 @@ let gfs;
 
 mongoose
   .connect(db, { useNewUrlParser: true })
-  .then(() => console.log("Connected to MongoDB successfully"))
+  .then(() =>{
+      seedDb();
+      console.log("Connected to MongoDB successfully")
+    })
   .catch((err) => console.log(err));
 
 const conn = mongoose.connection;
 conn.once("open", function () {
     gfs = new mongoose.mongo.GridFSBucket(conn.db, {
       bucketName: 'photos'
-    })
+    });
 });
 
 // allows for postman tests
@@ -93,6 +98,7 @@ app.use('/api/songs', songs);
 app.use('/api/answers', answers);
 app.use('/api/playlists', playlists);
 app.use('/api/questions', questions);
+app.use('/api/follows', follows);
 
 const port = process.env.PORT || 5000;
 

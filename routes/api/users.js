@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
-const keys = require('../../config/keys');
+const keys = require('../../config/keys_dev');
 const passport = require('passport');
 const router = express.Router();
 const validateRegisterInput = require('../../validation/register');
@@ -68,7 +68,7 @@ router.post("/register", (req, res) => {
   });
 });
 
-router.post("/login", (req, res) => {
+router.post("/login/", (req, res) => {
     const { errors, isValid } = validateLoginInput(req.body);
   
     if (!isValid) {
@@ -110,66 +110,66 @@ router.get('/:username', (req, res) => {
     );
 });
 
-router.post('/follow/:username', (req, res) => {
-  // Find the user based on their username
-  User.findOne({ username: req.params.username })
-    .then(user => {
-      // Check if the follow request by other user already exists 
-      if (user.followers.filter(follower => follower.username === req.body.username).length > 0) {
-        res.status(400).json({ alreadyFollow: 'You already follow this user'})
-      } else {
-        // Create variables to push into arrays later
-        const user_1 = user;
+// router.post('/follow/:username', (req, res) => {
+//   // Find the user based on their username
+//   User.findOne({ username: req.params.username })
+//     .then(user => {
+//       // Check if the follow request by other user already exists 
+//       if (user.followers.filter(follower => follower.username === req.body.username).length > 0) {
+//         res.status(400).json({ alreadyFollow: 'You already follow this user'})
+//       } else {
+//         // Create variables to push into arrays later
+//         const user_1 = user;
 
-        const followed = {
-          user_id: user._id,
-          username: user.username
-        };
+//         const followed = {
+//           user_id: user._id,
+//           username: user.username
+//         };
 
-        // Find the current user by username not id because id isn't included in the body
-        User.findOne({ username: req.body.username })
-          .then(user => {
-            const follower = {
-              user_id: user._id,
-              username: user.username
-            };
+//         // Find the current user by username not id because id isn't included in the body
+//         User.findOne({ username: req.body.username })
+//           .then(user => {
+//             const follower = {
+//               user_id: user._id,
+//               username: user.username
+//             };
 
-            user_1.followers.push(follower);
+//             user_1.followers.push(follower);
 
-            user.following.push(followed);
+//             user.following.push(followed);
 
-            user_1.save();
-            user.save();
-            res.json({...follower});
-          })
-          .catch(err => console.log(err));
-      }
-    })
-});
+//             user_1.save();
+//             user.save();
+//             res.json({...follower});
+//           })
+//           .catch(err => console.log(err));
+//       }
+//     })
+// });
 
-router.delete('/follow/:username', (req, res) => {
-  User.findOne({ username: req.params.username })
-    .then(user => {
-      const idx = user.followers.findIndex((follower) => follower.username === req.body.username)
-      if (idx >= 0) {
-        user.followers.splice(idx, 1);
+// router.delete('/follow/:username', (req, res) => {
+//   User.findOne({ username: req.params.username })
+//     .then(user => {
+//       const idx = user.followers.findIndex((follower) => follower.username === req.body.username)
+//       if (idx >= 0) {
+//         user.followers.splice(idx, 1);
 
-        User.findOne({ username: req.body.username })
-        .then(user => {
-          const idx2 = user.following.findIndex((follow) => follow.username === req.params.username);
-          user.following.splice(idx2, 1);
-          user.save();
-        })
-        user.save();
-        res.json({
-          username: req.body.username,
-          user_id: req.body.user_id
-        });
-      } else {
-        res.status(400).json({ alreadyUnFollow: "You don't follow this user"})
-      }
-    })
-});
+//         User.findOne({ username: req.body.username })
+//         .then(user => {
+//           const idx2 = user.following.findIndex((follow) => follow.username === req.params.username);
+//           user.following.splice(idx2, 1);
+//           user.save();
+//         })
+//         user.save();
+//         res.json({
+//           username: req.body.username,
+//           user_id: req.body.user_id
+//         });
+//       } else {
+//         res.status(400).json({ alreadyUnFollow: "You don't follow this user"})
+//       }
+//     })
+// });
 
 
 // to deal with profile pictures
@@ -187,6 +187,24 @@ router.patch('/profile/:username', upload.single("file"), async (req, res) => {
     });
   })
 });
+
+//search usernames
+
+router.get('/search/:query', (req, res) => {
+
+  let queryRegExp = new RegExp(`\^${req.params.query}\.\*`);
+
+  User.find(
+    // currently not using, since indexing isn't compatible with regex partial results
+    // { $text: { $search: queryRegExp } }
+    { "username": queryRegExp }
+  )
+    .then(users => {
+      let usernames = users.map(user => user.username);
+      return res.json(usernames);
+    })
+    .catch(err => res.json(err))
+})
 
 
 
