@@ -7,10 +7,18 @@ const FollowSchema = new Schema({
         type: mongoose.ObjectId, 
         ref: 'User'
     },
+    follower_name: {
+        type: String,
+        required: true
+    },
     // The person being followed
     following_id: {
         type: mongoose.ObjectId, 
         ref: 'User'  
+    },
+    following_name: {
+        type: String,
+        required: true
     }
 },{
     timestamps: true
