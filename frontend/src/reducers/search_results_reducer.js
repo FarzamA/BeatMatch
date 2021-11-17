@@ -4,7 +4,6 @@ const _nullState = [];
 
 const searchResultsReducer = (state = _nullState, action) => {
     Object.freeze(state);
-    let newState;
 
     switch(action.type) {
         case RECEIVE_SEARCH_RESULTS:

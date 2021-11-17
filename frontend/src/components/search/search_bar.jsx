@@ -9,7 +9,8 @@ class SearchBar extends React.Component {
         super(props);
 
         this.state = {
-            query: ""
+            query: "",
+            resultsReceived: false
         };
 
         this.bindFuncs();
@@ -22,7 +23,11 @@ class SearchBar extends React.Component {
 
     search() {
         if (this.state.query !== "") {
-            this.props.fetchSearchResults(this.state.query);
+            this.props.fetchSearchResults(this.state.query)
+                .then(() => this.setState({resultsReceived: true}));
+        } else {
+            this.props.clearSearchResults();
+            this.setState({resultsReceived: false});
         }
     }
 
@@ -36,7 +41,7 @@ class SearchBar extends React.Component {
         const { results } = this.props;
 
         let resultsDisplay;
-        if (this.state.query !== "") {
+        if (this.state.resultsReceived) {
 
             if (results.length > 0) {
 
