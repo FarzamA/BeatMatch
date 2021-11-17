@@ -4,11 +4,16 @@ class QuestionsForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            pageNum: 1,
             questions: this.props.questions,
-            answers: new Array(this.props.questions.length)
+            answers: new Array(this.props.questions.length),
+            targetCategories: this.props.targetCategories
         };
 
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.prevPage = this.prevPage.bind(this);
+        this.nextPage = this.nextPage.bind(this);
+        this.handleInput = this.handleInput.bind(this);
+        this.generatePlaylist = this.generatePlaylist.bind(this);
     }
 
     componentDidMount(){
@@ -16,43 +21,62 @@ class QuestionsForm extends React.Component {
         this.setState({ questions: this.props.questions });
     }
 
-    handleInput(answerIndex){
-        return (e) => {
-            let answersArray = [...this.state.answers];
-            answersArray[answerIndex] = e.target.value;
-
-            this.setState({ answers: answersArray });
+    handleInput(answerIndex, categoryValue){
+        return () => {
+            let answerTargetCategoryMap = this.state.targetCategories;
+            answerTargetCategoryMap[this.props.questions[answerIndex].targetCategory] = categoryValue;
+            this.setState({ 
+                targetCategories: answerTargetCategoryMap,
+                pageNum: this.state.pageNum != 6 ? this.state.pageNum + 1 : this.state.pageNum
+            });
         }
     }
 
-    handleSubmit(e){
-        e.preventDefault();
-        console.log(this.state);
+    generatePlaylist(){
+        console.log(this.state.targetCategories);
+    }
+
+    prevPage(){
+        const { pageNum } = this.state;
+        this.setState({ pageNum: pageNum - 1});
+    }
+
+    nextPage(){
+        const { pageNum } = this.state;
+        this.setState({ pageNum: pageNum + 1});
     }
     
     render(){
-        if(!this.props.questions){
+        if(!this.props.questions || this.props.questions.length == 0){
             return null;
         }
+        const { pageNum } = this.state;
+        const { questions } = this.props;
+        const question = questions[pageNum - 1];
+        const disablePrev = pageNum === 1 ? 'disabled' : '';
+        const disableNext = pageNum === 6 ? 'disabled' : '';
+        const submitButton = pageNum === 6 ? <button onClick={this.generatePlaylist}>Create Playlist</button> : <></>;
         return (
-            <form onSubmit={this.handleSubmit}>
-                {this.props.questions.map((question, i) => {
-                    return (
-                        <div key={`question-${i}`}>
-                            <label>{question.question}<br/>
-                                {question.answerOptions.map((answerOption, j) => {
-                                    return (
-                                        <label key={`answer-${j}`}>{answerOption}
-                                            <input name={question.question} type="radio" value={answerOption} onChange={this.handleInput(i)} />
-                                        </label>
-                                    );
-                                })}
-                            </label>
-                        </div>
-                    );
-                })}
-                <input type="submit" value="Create Playlist"/>
-            </form>
+            <div>
+                
+                <div>
+                    <div>
+                        <label>{question.question}<br/>
+                            {question.answerOptions.map((answerOption, i) => {
+                                return (
+                                    <label key={`answer-${i}`}>{answerOption}
+                                        <input name={question.question} type="radio" value={answerOption} checked={false} onChange={this.handleInput(pageNum - 1, i)} />
+                                    </label>
+                                );
+                            })}
+                        </label>
+                    </div>
+                </div>
+                <button disabled={disablePrev} onClick={this.prevPage}>Prev</button>
+                <button disabled={disableNext} onClick={this.nextPage}>Next</button>
+                {submitButton}
+                <div>{pageNum}</div>
+            </div>
         );
     }
 }
