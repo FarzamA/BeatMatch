@@ -25,9 +25,15 @@ router.post('/:user_id', (req, res) =>{
     const newFollow = new Follow({
         follower_id: req.body.user_id,
         following_id: req.params.user_id
-    })
-
+    });
     newFollow.save().then(follow => res.json(follow));
 });
 
 // Remove a follow
+router.delete('/:id', (req, res) => { 
+    Follow.remove({ _id: req.params.id }, function(err, follow) {
+        res.json(follow);
+    });
+});
+
+module.exports = router;
