@@ -5,13 +5,12 @@ class QuestionsForm extends React.Component {
         super(props);
         this.state = {
             pageNum: 1,
+            prevAnswer: 0,
             questions: this.props.questions,
             answers: new Array(this.props.questions.length),
             targetCategories: this.props.targetCategories
         };
 
-        this.prevPage = this.prevPage.bind(this);
-        this.nextPage = this.nextPage.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.generatePlaylist = this.generatePlaylist.bind(this);
     }
@@ -21,29 +20,50 @@ class QuestionsForm extends React.Component {
         this.setState({ questions: this.props.questions });
     }
 
-    handleInput(answerIndex, categoryValue){
-        return () => {
-            let answerTargetCategoryMap = this.state.targetCategories;
-            answerTargetCategoryMap[this.props.questions[answerIndex].targetCategory] = categoryValue;
-            this.setState({ 
-                targetCategories: answerTargetCategoryMap,
-                pageNum: this.state.pageNum != 6 ? this.state.pageNum + 1 : this.state.pageNum
-            });
+    componentWillUnmount(){
+        const body = document.querySelector('body')
+        body.classList.remove('first-negative-answer');
+        body.classList.remove('first-positive-answer');
+        body.classList.remove('positive-answer');
+        body.classList.remove('negative-answer');
+    }
+
+    handleInput(answerIndex, answerValue){
+        const body = document.querySelector('body');
+        if(this.state.pageNum === 1){
+            if(answerValue === 0){
+                body.classList.add('first-negative-answer');
+            }else {
+                body.classList.add('first-positive-answer');
+            }
+        }else{
+            if(this.state.prevAnswer != answerValue){
+                if(answerValue === 0){
+                    body.classList.remove('first-negative-answer');
+                    body.classList.remove('first-positive-answer');
+                    body.classList.remove('positive-answer');
+                    body.classList.add('negative-answer');
+                }else {
+                    body.classList.remove('first-negative-answer');
+                    body.classList.remove('first-positive-answer');
+                    body.classList.remove('negative-answer');
+                    body.classList.add('positive-answer');
+                }
+            }
         }
+        
+        const prevAnswer = answerValue;
+        let answerTargetCategoryMap = this.state.targetCategories;
+        answerTargetCategoryMap[this.props.questions[answerIndex].targetCategory] = answerValue;
+        this.setState({ 
+            targetCategories: answerTargetCategoryMap,
+            pageNum: this.state.pageNum != this.props.questions.length ? this.state.pageNum + 1 : this.state.pageNum,
+            prevAnswer: prevAnswer
+        });
     }
 
     generatePlaylist(){
         console.log(this.state.targetCategories);
-    }
-
-    prevPage(){
-        const { pageNum } = this.state;
-        this.setState({ pageNum: pageNum - 1});
-    }
-
-    nextPage(){
-        const { pageNum } = this.state;
-        this.setState({ pageNum: pageNum + 1});
     }
     
     render(){
@@ -53,29 +73,40 @@ class QuestionsForm extends React.Component {
         const { pageNum } = this.state;
         const { questions } = this.props;
         const question = questions[pageNum - 1];
-        const disablePrev = pageNum === 1 ? 'disabled' : '';
-        const disableNext = pageNum === 6 ? 'disabled' : '';
-        const submitButton = pageNum === 6 ? <button onClick={this.generatePlaylist}>Create Playlist</button> : <></>;
+        const submitButton = <button onClick={this.generatePlaylist}>Create Playlist</button>;
         return (
             <div>
-                
-                <div>
-                    <div>
-                        <label>{question.question}<br/>
+                <div className="question-container">
+                    <div className="question-content">
+                        <div className="question-text">{question.question}</div>
+                        <div className="answers-container">
                             {question.answerOptions.map((answerOption, i) => {
                                 return (
-                                    <label key={`answer-${i}`}>{answerOption}
-                                        <input name={question.question} type="radio" value={answerOption} checked={false} onChange={this.handleInput(pageNum - 1, i)} />
-                                    </label>
+                                    <div className="answer-option-container" key={`answer-${i}`}>
+                                        <div 
+                                            className="answer-option" 
+                                            onClick={() => this.handleInput(pageNum - 1, answerOption.answerValue)}
+                                        >
+                                            {answerOption.answerText}
+                                        </div>
+                                    </div>
                                 );
                             })}
-                        </label>
+                        </div>
+                        {
+                            (pageNum === this.props.questions.length) ? submitButton : (
+                                <div className="page-num-indicator">
+                                    {questions.map((question, i) => {
+                                        const largeDot = pageNum === i + 1 ? 'large-dot' : '';
+                                        return (
+                                            <div className={`question-number-dot ${largeDot}`}></div>
+                                        );
+                                    })}
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
-                <button disabled={disablePrev} onClick={this.prevPage}>Prev</button>
-                <button disabled={disableNext} onClick={this.nextPage}>Next</button>
-                {submitButton}
-                <div>{pageNum}</div>
             </div>
         );
     }
