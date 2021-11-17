@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
     const newQuestion = new Question({
         question: req.body.question,
         targetCategory: req.body.targetCategory, 
-        answerOptions: req.body.answerOptions
+        answerOptions: { answerText: req.body.answerText, answerValue: req.body.answerValue }
     })
 
     newQuestion.save().then(question => res.json(question))
