@@ -56,16 +56,12 @@
 
             .session-form-input {
                 width: 100%;
-                height: 20px;
+                height: 40px;
                 background-color: $body-bg-color;
                 color: white;
                 border: 1px solid $session-form-border-color;
                 border-radius: 30px;
                 padding: 10px 20px;
-            }
-
-            .session-form-input:autofill {
-                background-color: $body-bg-color;
             }
         }
 
