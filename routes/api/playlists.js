@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const db = require("../../config/keys").mongoURI;
 // const passport = require('passport');
 
 const Playlist = require('../../models/Playlist');
@@ -32,11 +33,11 @@ router.post('/', (req, res) => {
     })
 
     newPlaylist.save().then(playlist => res.json(playlist))
-
 });
 
-router.delete('/:id', (req, res) => {
-    Playlist.findById(req.params.id)
+router.delete('/:id', (req, res) => { 
+    Playlist.deleteOne({ _id: req.params.id }).then( playlist => 
+        res.json(playlist)).catch( error => 
+            console.log(error));
 })
-
 module.exports = router;
