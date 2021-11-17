@@ -17,6 +17,7 @@ async function seedDB() {
 
         const collection = client.db('myFirstDatabase').collection('questions');
 
+        // client.db('myFirstDatabase').collection('users').drop();
         collection.drop();
 
         let questionData = [

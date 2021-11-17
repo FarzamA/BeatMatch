@@ -18,7 +18,11 @@ const PlaylistSchema = new Schema({
     songs: [],
     // Holds answer Id's
     answers: [],
-    spotify_playlist_id: {
+    // spotify_playlist_id: {
+    //     type: String,
+    //     required: true
+    // },
+    spotify_embed_link: {
         type: String,
         required: true
     }
