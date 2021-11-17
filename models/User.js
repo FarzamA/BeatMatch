@@ -15,36 +15,46 @@ const UserSchema = new Schema({
       required: true
     },
     profilePicUrl: {
-      required: true,
+      required: false,
       type: String
       // default: 'https://fixedin-seeds.s3.amazonaws.com/defaultUser.png'
     },
-    followers: [
-      // keep in mind each follow has it's own _id
-      {
-        user_id: {
-          type: mongoose.ObjectId,
-          ref: 'User'
-        },
-        username: {
-          type: String,
-          required: true
-        }
-      }
-    ],
-    following: [
-      // keep in mind each follow has it's own _id
-      {
-        user_id: {
-          type: mongoose.ObjectId,
-          ref: 'User'
-        },
-        username: {
-          type: String,
-          required: true
-        }
-      }
-    ]
+    followers: {
+      type: Number,
+      required: true,
+      default: 0
+    },
+    following: {
+      type: Number,
+      required: true,
+      default: 0
+    }
+    // followers: [
+    //   // keep in mind each follow has it's own _id
+    //   {
+    //     user_id: {
+    //       type: mongoose.ObjectId,
+    //       ref: 'User'
+    //     },
+    //     username: {
+    //       type: String,
+    //       required: true
+    //     }
+    //   }
+    // ],
+    // following: [
+    //   // keep in mind each follow has it's own _id
+    //   {
+    //     user_id: {
+    //       type: mongoose.ObjectId,
+    //       ref: 'User'
+    //     },
+    //     username: {
+    //       type: String,
+    //       required: true
+    //     }
+    //   }
+    // ]
   }, {
     timestamps: true
 });

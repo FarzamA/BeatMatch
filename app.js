@@ -2,8 +2,13 @@ const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-const db = require("./config/keys_dev").mongoURI;
+const db = require("./config/keys").mongoURI;
 const users = require("./routes/api/users");
+const playlists = require("./routes/api/playlists");
+const songs = require('./routes/api/songs');
+const follows = require('./routes/api/follows');
+const answers = require('./routes/api/answers');
+
 require("./config/passport")(passport);
 
 const app = express();
@@ -11,7 +16,7 @@ const questions = require("./routes/api/questions");
 
 
 let gfs;
-// connection();
+
 
 mongoose
   .connect(db, { useNewUrlParser: true })
@@ -72,9 +77,13 @@ app.get("/api/image/:filename", (req, res) => {
 
 app.use(passport.initialize());
 // Routes
-app.use("/api/songs", require("./routes/api/songs"));
+app.use("/api/spotify/songs", require("./routes/api/spotify/songs"));
 app.use("/api/users", users);
+app.use('/api/songs', songs);
+app.use('/api/answers', answers);
+app.use('/api/playlists', playlists);
 app.use('/api/questions', questions);
+app.use('/api/follows', follows);
 
 const port = process.env.PORT || 5000;
 
