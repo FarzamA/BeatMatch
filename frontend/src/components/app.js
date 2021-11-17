@@ -1,3 +1,9 @@
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  })
+}
 import React from 'react';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import { Switch, Route, useLocation } from 'react-router-dom';
@@ -10,12 +16,6 @@ import HomeProfileContainer from './profile/home_profile_container';
 import '../stylesheets/base.scss';
 const path = require('path');
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('frontend/build'));
-  app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-  })
-}
 
 const App = () => {
   const location = useLocation();
