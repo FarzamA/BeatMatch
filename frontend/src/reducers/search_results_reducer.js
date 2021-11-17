@@ -12,7 +12,7 @@ const searchResultsReducer = (state = _nullState, action) => {
         case CLEAR_SEARCH_RESULTS:
             return _nullState;
         default:
-            _nullState;
+            return _nullState;
     }
 };
 

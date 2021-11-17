@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import SearchBar from "./search_bar";
+import { fetchSearchResults } from '../../actions/search_actions';
 
 const mSTP = (state) => ({
-    search: state.entities.searchResults
+    results: state.entities.searchResults
 });
 
 const mDTP = (dispatch) => ({
