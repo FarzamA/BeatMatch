@@ -23,7 +23,6 @@ router.get('/:id', (req, res) => {
 
 // Create a new playlist
 router.post('/', (req, res) => {
-    console.log(req.body, 'request');
     const newPlaylist = new Playlist({
         user_id: req.body.user_id,
         name: req.body.name,
@@ -35,5 +34,9 @@ router.post('/', (req, res) => {
     newPlaylist.save().then(playlist => res.json(playlist))
 
 });
+
+router.delete('/:id', (req, res) => {
+    Playlist.findById(req.params.id)
+})
 
 module.exports = router;

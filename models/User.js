@@ -15,7 +15,7 @@ const UserSchema = new Schema({
       required: true
     },
     profilePicUrl: {
-      required: true,
+      required: false,
       type: String
       // default: 'https://fixedin-seeds.s3.amazonaws.com/defaultUser.png'
     },
