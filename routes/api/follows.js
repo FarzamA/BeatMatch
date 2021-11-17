@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const db = require("../../config/keys").mongoURI;
 
 const Follow = require('../../models/Follow');
 const User = require('../../models/User');
@@ -9,20 +10,21 @@ const User = require('../../models/User');
 router.get('/following/:user_id', (req, res) => {
     Follow.find({ follower_id: req.params.user_id })
         .then(following => {
-            let followedUsers = {};
-            following.forEach(follow => {
-                User.findOne({ _id: follow.following_id })
-                    .then(user => {     
-                        // console.log(user);
-                        followedUsers[user._id] = user;
-                        // console.log(followedUsers, 'followedUsers');
-                    })
-            });
+            // let followedUsers = {};
+            // // following.forEach(follow => {
+            // //     db.user.find({ _id: follow.following_id})
+            // //         .then(result => res.json(result))
+            //     async User.findOne({ _id: follow.following_id })
+            //         .then(user => {     
+            //             // console.log(user);
+            //             followedUsers[user._id] = user;
+            //             // console.log(followedUsers, 'followedUsers');
+            //         })
+            // });
 
             // returns hash of followed user
-            res.json(followedUsers);
+            res.json({...following});
         })
-        .then()
         .catch(err => 
             res.status(404).json({ noFollowingFound: 'This user does not follow anyone' }))
 });
@@ -45,16 +47,9 @@ router.get('/followers/:user_id', (req, res) => {
 
 // Create a follow and increment following count for req.body user(current user)
 router.post('/:user_id', (req, res) =>{
-    Follow.findOne({ follower_id: req.body.user_id, following_id: req.params.user_id})
+    Follow.findOne({ follower_id: req.body.user_id, following_id: req.params.user_id })
         .then(follow => res.status(400).json({ alreadyFollow: 'You already follow this user', follow: follow }))
         .catch(err => {
-            const newFollow = new Follow({
-                follower_id: req.body.user_id,
-                following_id: req.params.user_id
-            });
-            let resFollow;
-            newFollow.save().then(follow => resFollow = follow).catch(err => console.log(err));
-        
             // Increment following count of current user
             User.findById(req.body.user_id)
                 .then(user => {
@@ -68,11 +63,19 @@ router.post('/:user_id', (req, res) =>{
                     .then(user => {
                         user.followers += 1;
                         user.save();
-                        res.json({
-                            followedUserFollowerCount: user.followers,
-                            currentUserFollowingCount: currentUser.following,
-                            follow: resFollow
-                        })
+                        // res.json({
+                        //     followedUserFollowerCount: user.followers,
+                        //     currentUserFollowingCount: currentUser.following,
+                        //     follow: resFollow
+                        // })
+                        const newFollow = new Follow({
+                            follower_id: currentUser._id,
+                            follower_name: currentUser.name,
+                            following_id: user._id,
+                            following_name: user.name
+                        });
+                        // let resFollow;
+                        newFollow.save().then(follow => res.json({ follow: follow })).catch(err => console.log(err));
                     })
                     .catch(err => console.log(err));
                 })
