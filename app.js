@@ -6,6 +6,7 @@ const db = require("./config/keys").mongoURI;
 const users = require("./routes/api/users");
 const playlists = require("./routes/api/playlists");
 const songs = require('./routes/api/songs');
+const follows = require('./routes/api/follows');
 const answers = require('./routes/api/answers');
 
 require("./config/passport")(passport);
@@ -83,6 +84,7 @@ app.use('/api/songs', songs);
 app.use('/api/answers', answers);
 app.use('/api/playlists', playlists);
 app.use('/api/questions', questions);
+app.use('/api/follows', follows);
 
 const port = process.env.PORT || 5000;
 
