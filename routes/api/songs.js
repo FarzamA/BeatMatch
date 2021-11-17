@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 
 const router = express.Router();
-const { clientId, clientSecret } = require("../../config/keys");
+const { clientId, clientSecret } = require("../../config/keys_dev");
 
 const getToken = async () => {
   const response = await axios({
