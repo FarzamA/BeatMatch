@@ -23,7 +23,6 @@ router.get('/:id', (req, res) => {
 
 // Create a new playlist
 router.post('/', (req, res) => {
-    console.log(req.body, 'request');
     const newPlaylist = new Playlist({
         user_id: req.body.user_id,
         name: req.body.name,
