@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -8,10 +9,21 @@ const playlists = require("./routes/api/playlists");
 const songs = require('./routes/api/songs');
 const follows = require('./routes/api/follows');
 const answers = require('./routes/api/answers');
+const seedDb = require('./seeds');
 
 require("./config/passport")(passport);
 
 const app = express();
+
+const path = require('path');
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  })
+}
+
 const questions = require("./routes/api/questions");
 
 
@@ -20,14 +32,17 @@ let gfs;
 
 mongoose
   .connect(db, { useNewUrlParser: true })
-  .then(() => console.log("Connected to MongoDB successfully"))
+  .then(() =>{
+      seedDb();
+      console.log("Connected to MongoDB successfully")
+    })
   .catch((err) => console.log(err));
 
 const conn = mongoose.connection;
 conn.once("open", function () {
     gfs = new mongoose.mongo.GridFSBucket(conn.db, {
       bucketName: 'photos'
-    })
+    });
 });
 
 // allows for postman tests
@@ -35,9 +50,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // tells app to only respond to json
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
-  res.send("hello world!");
-});
+// app.get("/", (req, res) => {
+//   res.send("hello world!");
+// });
 
 
 // to display single file object

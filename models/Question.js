@@ -10,7 +10,18 @@ const QuestionSchema = new Schema({
         type: String, 
         required: true
     },
-    answerOptions: []
+    answerOptions: [
+        {
+            answerText: {
+                type: String,
+                required: true
+            },
+            answerValue: {
+                type: Number,
+                required: true
+            }
+        }
+    ]
 }, {
     timestamps: true
 });

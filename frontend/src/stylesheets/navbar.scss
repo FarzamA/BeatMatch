@@ -1,0 +1,103 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 20% 0 20%;
+    border-bottom: 1px solid $session-form-border-color;
+
+    .logo {
+        height: 100%;
+        border-left: 1px solid $session-form-border-color;
+        border-right: 1px solid $session-form-border-color;
+    }
+
+
+    .searchbar-container {
+        position: relative;
+
+        .searchbar {
+            position: inherit;
+            background-color: white;
+            border-radius: 10px;
+            padding: 5px 10px;
+            z-index: 20;
+            width: auto;
+            width: 300px;
+            display: flex;
+            justify-content: space-between;
+    
+            input {
+                border: none;
+                width: 100%;
+    
+                &:focus {
+                    outline: none;
+                }
+            }
+    
+            svg {
+                color: black;
+            }
+        }
+
+        .search-results {
+            position: absolute;
+            background-color: white;
+            top: calc(100% - 15px);
+            color: black;
+            width: 100%;
+            border-radius: 10px;
+            padding: 20px 0 10px 0;
+            z-index: 2;
+
+            li {
+                padding: 5px 5px;
+                display: flex;
+
+                > svg {
+                    margin: 0 6px 0 0;
+                }
+
+                &:hover {
+                    background-color: lightgray;
+                }
+            }
+
+            a:last-of-type {
+                li {
+                    border-bottom: none;
+                }
+            }
+        }
+
+    }
+
+
+    .auth-links {
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        > * {
+            text-align: center;
+            vertical-align: middle;
+            border-left: 1px solid $session-form-border-color;
+            padding: 0 10px;
+            height: 100%;
+            width: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+
+        > *:last-child{
+            border-right: 1px solid $session-form-border-color;
+        }
+    }
+}
