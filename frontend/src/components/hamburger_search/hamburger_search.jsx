@@ -6,8 +6,8 @@ const HamburgerSearch = () => {
 
     return (
         <div className="hamburger-search-container">
-            <SearchContainer/>
-            <BurgerContainer/>
+                <SearchContainer/>
+                <BurgerContainer/>
         </div>
     )
 

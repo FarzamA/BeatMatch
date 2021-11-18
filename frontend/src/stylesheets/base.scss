@@ -26,3 +26,13 @@ body::-webkit-scrollbar {
 .header {
     font-size: 30px;
 }
+
+.app-logo-link {
+    position: absolute;
+    top: 20px;
+    left: 110px;
+    
+    .app-logo {
+        width: 80px;
+    }
+}
