@@ -61,7 +61,7 @@ class SearchBar extends React.Component {
                 if (this.liCount >= next) {
                     next = document.getElementById(`results-${next}`);
                 } else {
-                    next = document.getElementById("user-search");
+                    next = document.getElementById("results-1");
                 }
                 next.focus();
             }
