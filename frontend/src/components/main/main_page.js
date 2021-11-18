@@ -32,7 +32,7 @@ class MainPage extends React.Component {
   componentDidMount(){
     document.addEventListener('scroll', this.checkScrollPosition);
     const navbar = document.querySelector('.navbar');
-    navbar.style.backgroundColor = 'white';
+    // navbar.style.backgroundColor = 'white';
   }
 
   componentWillUnmount(){
