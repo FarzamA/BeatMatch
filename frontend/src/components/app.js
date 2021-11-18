@@ -18,7 +18,7 @@ const App = () => {
   return (
     <div>
       <header>
-        {location.pathname === '/login' || location.pathname === '/signup' ? null : <NavBarContainer />}
+        {/* {location.pathname === '/login' || location.pathname === '/signup' ? null : <NavBarContainer />} */}
         {location.pathname === '/login' || location.pathname === '/signup' ? null : <HamburgerSearch/>}
       </header>
       <Switch>

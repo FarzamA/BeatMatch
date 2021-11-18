@@ -1,6 +1,7 @@
 .hamburger-search-container {
     position: fixed;
-    right: 200px;
+    top: 40px;
+    right: 140px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -193,5 +194,5 @@
 }
 
 .search-icon {
-    transition: 0.2s;
+    transition: 0.15s;
 }
