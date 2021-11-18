@@ -14,6 +14,10 @@ const PlaylistSchema = new Schema({
         type: String,
         required: false
     },
+    genre: {
+        type: String,
+        required: true
+    },
     // Holds song id's
     songs: [],
     // Holds answer Id's

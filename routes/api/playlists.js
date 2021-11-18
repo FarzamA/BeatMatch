@@ -14,6 +14,21 @@ router.get('/user/:user_id', (req, res) => {
             res.status(404).json({ noPlaylistsFound: 'No playlists found from that user' }))
 });
 
+router.get('/playlist', (req, res) => {
+    // Send all of your answers to request.body
+    Playlist.find({
+        answers: req.body.answers,
+        genre: req.body.genre
+    }).then(playlists => {
+        if (playlists !== []){
+            return res.json(playlists[Math.floor((Math.random() * playlists.length-1))])
+        } else{
+            return res.json({noPlaylistFound: 'No PLAYLIST found from that user'})
+        }
+    })
+    .catch(err => 
+            res.status(404).json({ noPlaylistFound: 'No playlist found from that user' }))
+})
 // Get a single playlist based on id
 router.get('/:id', (req, res) => {
     Playlist.findById(req.params.id)
