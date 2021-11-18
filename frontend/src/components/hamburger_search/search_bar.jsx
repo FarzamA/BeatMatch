@@ -61,7 +61,7 @@ class SearchBar extends React.Component {
                 if (this.liCount >= next) {
                     next = document.getElementById(`results-${next}`);
                 } else {
-                    next = document.getElementById("results-1");
+                    next = document.getElementById("user-search");
                 }
                 next.focus();
             }
@@ -76,7 +76,8 @@ class SearchBar extends React.Component {
                 if (next > 0) {
                     next = document.getElementById(`results-${next}`);
                 } else {
-                    next = document.getElementById(`results-${this.liCount}`);
+                    // next = document.getElementById(`results-${this.liCount}`);
+                    next = document.getElementById("user-search");
                 }
                 next.focus();
             }
