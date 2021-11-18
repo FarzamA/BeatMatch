@@ -10,7 +10,7 @@ class PlaylistIndex extends React.Component{
     }
 
     componentDidMount(){
-        this.props.fetchPlaylistByUser(this.props.user._id)
+        // this.props.fetchPlaylistByUser(this.props.user._id)
     }
     render(){
         const { playlists, user, currentUser } = this.props
@@ -18,7 +18,6 @@ class PlaylistIndex extends React.Component{
         // is in the Followed Users of the current profile view
         // righ now, it defaults to ONLY showing public playlists
         let visiblePlaylists, playlistsDisplay;
-        debugger
     
         
         if (Object.keys(playlists).length !== 0) {
@@ -29,7 +28,6 @@ class PlaylistIndex extends React.Component{
             }else {
                 mapPlaylists = playlists
             }
-            debugger
             playlistsDisplay = (
                 <ul className="playlist-index">
                     {mapPlaylists.map(playlist =>
