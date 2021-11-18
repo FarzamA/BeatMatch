@@ -191,6 +191,21 @@ router.patch('/profile/:username', upload.single("file"), async (req, res) => {
   })
 });
 
+// patch user details 
+router.patch('/:username', (req, res) => {
+  User.findOne({ username: req.body.username }).then(user => {
+    if (user) {
+      res.status(400).json({ alreadyTaken: 'Username already in use' })
+    } else {
+      User.findOneAndUpdate({ username: req.params.username }, { username: req.body.username }).then(user => {
+        // user.username = req.body.username;
+        // user.save();
+        res.json({ success: 'success', user: user })
+      })
+    }
+  }).catch(err => console.log(err))
+})
+
 //search usernames
 
 router.get('/search/:query', (req, res) => {
