@@ -35,7 +35,7 @@ class Profile extends React.Component {
             followUser,
             unfollowUser,
             followers,
-            following } = this.props;
+            following,fetchPlaylistByUser } = this.props;
 
         if (!user) return (<div className="placeholder"></div>)
 
@@ -46,6 +46,7 @@ class Profile extends React.Component {
                     following={following}
                     playlists={playlists}
                     user={user}
+                    fetchPlaylistByUser={fetchPlaylistByUser}
                 />
                 <UserDetailsBox
                     {...this.props}

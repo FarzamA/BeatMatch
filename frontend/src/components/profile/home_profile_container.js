@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import {fetchPlaylist, fetchPlaylistByUser} from '../../actions/playlist_actions'
 import { fetchUser, followUser, unfollowUser } from '../../actions/user_actions';
 import Profile from './profile';
 
@@ -12,7 +13,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchUser: (username) => dispatch(fetchUser(username))
+    fetchUser: (username) => dispatch(fetchUser(username)),
+    fetchPlaylistByUser: (userId) => dispatch(fetchPlaylistByUser(userId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
