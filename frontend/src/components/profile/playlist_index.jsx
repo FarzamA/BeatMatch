@@ -17,9 +17,9 @@ class PlaylistIndex extends React.Component{
         let visiblePlaylists, playlistsDisplay;
     
         
-        if (Object.keys(playlists).length > 0) {
+        if (playlists.length > 0) {
             // visiblePlaylists = playlists.filter(playlist => playlist.isPublic)
-            let mapPlaylists
+            let mapPlaylists;
             if (playlists.length > 5){
                 mapPlaylists = playlists.slice(0,5)
             }else {

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { fetchQuestions } from '../../actions/question_actions';
-import { fetchPlaylist } from '../../actions/playlist_actions';
+import { fetchPlaylist} from '../../actions/playlist_actions';
+import { postPlaylist } from '../../util/playlist_api_util';
 import QuestionsForm from './questions_form';
 
 const mapStateToProps = state => {
@@ -17,6 +18,7 @@ const mapStateToProps = state => {
 
     return {
         questions,
+        currentUser: state.session.user,
         targetCategories: targetCategoriesObj,
         modalIsActive: (state.modals.searchModal.isActive || state.modals.burgerModal.isActive)
     };
@@ -24,7 +26,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     fetchQuestions: () => dispatch(fetchQuestions()),
-    fetchPlaylist: responses => dispatch(fetchPlaylist(responses))
+    fetchPlaylist: responses => dispatch(fetchPlaylist(responses)),
+    postPlaylist: playlist => postPlaylist(playlist)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionsForm);
