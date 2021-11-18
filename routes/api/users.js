@@ -21,7 +21,13 @@ router.get('/current', passport.authenticate('jwt', {session: false}), (req, res
 
 router.get('/:username', (req, res) => {
     User.findOne({ username: req.params.username })
-      .then(user => res.json(user))
+      .then(user => {
+        Playlist.find({ user_id: user._id })
+         .then(playlists => res.json({ playlists: playlists, user: user}))
+         .catch(err => {
+           res.status(404).json({ noPlaylistsFound: 'This user has no playlists' })
+         })
+      })
       .catch(err => 
         res.status(404).json({ noUserFound: 'No user was found with that id' })
         );
