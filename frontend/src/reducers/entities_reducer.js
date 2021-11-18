@@ -4,6 +4,7 @@ import followersReducer from './followers_reducer';
 import followingReducer from './following_reducer'
 import questionsReducer from './questions_reducer';
 import searchResultsReducer from './search_results_reducer';
+import playlistsReducer from './playlists_reducer';
 
 
 const entitiesReducer = combineReducers({
@@ -11,7 +12,8 @@ const entitiesReducer = combineReducers({
     followers: followersReducer,
     following: followingReducer,
     questions: questionsReducer,
-    searchResults: searchResultsReducer
+    searchResults: searchResultsReducer,
+    playlists: playlistsReducer
 });
 
 export default entitiesReducer;

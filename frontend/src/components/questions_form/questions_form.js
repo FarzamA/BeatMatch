@@ -161,7 +161,19 @@ class QuestionsForm extends React.Component {
     }
 
     generatePlaylist(){
-        console.log(this.state.targetCategories);
+        const answersArray = [];
+        const answerKeys = Object.keys(this.state.targetCategories);
+        const answerValues = Object.values(this.state.targetCategories);
+        for(let i = 0; i < answerKeys.length; i++){
+            let answer = '';
+            if(answerValues[i] === 0){
+                answer = `min_${answerKeys[i]}`;
+            } else{
+                answer = `max_${answerKeys[i]}`;
+            }
+            answersArray.push(answer);
+        }
+        console.log(answersArray);
     }
     
     render(){
