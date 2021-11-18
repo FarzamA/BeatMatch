@@ -123,7 +123,8 @@ router.post('/follow/:username', (req, res) => {
 
         const followed = {
           user_id: user._id,
-          username: user.username
+          username: user.username,
+          profilePicUrl: user.profilePicUrl
         };
 
         // Find the current user by username not id because id isn't included in the body
@@ -131,7 +132,8 @@ router.post('/follow/:username', (req, res) => {
           .then(user => {
             const follower = {
               user_id: user._id,
-              username: user.username
+              username: user.username,
+              profilePicUrl: user.profilePicUrl
             };
 
             user_1.followers.push(follower);
@@ -163,7 +165,8 @@ router.delete('/follow/:username', (req, res) => {
         user.save();
         res.json({
           username: req.body.username,
-          user_id: req.body.user_id
+          user_id: req.body.user_id,
+          // profilePicUrl: user.profilePicUrl
         });
       } else {
         res.status(400).json({ alreadyUnFollow: "You don't follow this user"})
