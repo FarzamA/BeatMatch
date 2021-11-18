@@ -17,7 +17,8 @@ const mapStateToProps = state => {
 
     return {
         questions,
-        targetCategories: targetCategoriesObj
+        targetCategories: targetCategoriesObj,
+        modalIsActive: (state.modals.searchModal.isActive || state.modals.burgerModal.isActive)
     };
 };
 
