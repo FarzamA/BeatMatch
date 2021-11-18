@@ -15,6 +15,7 @@ class Search extends React.Component {
 
         this.handleOutsideSearch = this.handleOutsideSearch.bind(this);
         this.transformSearch = this.transformSearch.bind(this);
+        this.closeSearch = this.closeSearch.bind(this);
     }
 
     componentDidMount() {
@@ -29,7 +30,7 @@ class Search extends React.Component {
         const domNode = ReactDOM.findDOMNode(this);
 
         if (!domNode || !domNode.contains(e.target)) {
-            this.setState({searchClicked: false});
+            this.closeSearch();
         }
     }
 
@@ -37,8 +38,11 @@ class Search extends React.Component {
         this.setState({searchClicked: !this.state.searchClicked}, this.focusSearch);
     }
 
+    closeSearch() {
+        this.setState({searchClicked: false});
+    }
+
     focusSearch() {
-        // this doesn't work lol
         const search = document.getElementById("user-search");
         search.focus();
     }
@@ -58,6 +62,7 @@ class Search extends React.Component {
                 <SearchBarContainer
                     searchClicked={searchClicked}
                     clearSearch={this.clearSearch}
+                    closeSearch={this.closeSearch}
                 />
             </div>
         )

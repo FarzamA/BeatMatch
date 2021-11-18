@@ -9,6 +9,7 @@ import QuestionsFormContainer from './questions_form/questions_form_container';
 import UserProfileContainer from './profile/user_profile_container';
 import HomeProfileContainer from './profile/home_profile_container';
 import '../stylesheets/base.scss';
+import HamburgerSearch from './hamburger_search/hamburger_search';
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
     <div>
       <header>
         {location.pathname === '/login' || location.pathname === '/signup' ? null : <NavBarContainer />}
+        {location.pathname === '/login' || location.pathname === '/signup' ? null : <HamburgerSearch/>}
       </header>
       <Switch>
           <Route exact path="/" component={MainPage} />

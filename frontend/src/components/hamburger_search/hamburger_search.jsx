@@ -5,7 +5,7 @@ import Search from './search';
 const HamburgerSearch = () => {
 
     return (
-        <div className="hamburger-container">
+        <div className="hamburger-search-container">
             <Search/>
             <BurgerContainer/>
         </div>

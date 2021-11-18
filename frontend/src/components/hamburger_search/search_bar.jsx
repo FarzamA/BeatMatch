@@ -80,6 +80,8 @@ class SearchBar extends React.Component {
                 }
                 next.focus();
             }
+        } else if (e.key === "Escape") {
+            this.props.closeSearch();
         }
     }
 

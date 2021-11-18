@@ -1,5 +1,6 @@
-.hamburger-container {
-    position: relative;
+.hamburger-search-container {
+    position: fixed;
+    right: 200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -8,7 +9,6 @@
 
 .search-icon {
     position: relative;
-    // top: 10px;
     font-size: 27px;
     color: #333;
 
@@ -20,8 +20,6 @@
 
 .burger-bar1, .burger-bar2, .burger-bar3 {
     position: relative;
-    // top: 10px;
-    // right: 10px;
     width: 35px;
     height: 5px;
     background-color: #333;
@@ -57,7 +55,7 @@
     background-color: $session-form-border-color;
     color: white;
     z-index: 10;
-    width: 350px;
+    width: 295px;
     transition: 0.4s;
     border-radius: 10px;
     padding: 55px 20px 55px 20px;
@@ -175,6 +173,7 @@
                 li {
                     background-color: lightgray;
                 }
+                outline: none;
             }
 
             a:last-of-type {
