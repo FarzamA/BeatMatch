@@ -84,6 +84,7 @@
         &:hover {
             cursor: pointer;
             background-color: #e0e0e0;
+            transform: translateY(-3px);
         }
     }
 }
@@ -137,5 +138,57 @@
     100% {
         background-color: var(--bg-color);
         color: var(--text-color);
+    }
+}
+
+.choosen-answer {
+    animation: appear 1.5s;
+}
+
+@keyframes appear {
+    0% {
+        font-size: 24px;
+    }
+
+    100% {
+        font-size: 36px;
+        transform: translateY(-30px);
+    }
+}
+
+.other-answer {
+    animation: disappear 1.5s;
+}
+
+@keyframes disappear {
+    0% {
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.button-grow {
+    animation: growbutton 0.5s;
+}
+
+@keyframes growbutton {
+    0% {
+        width: 0px;
+        height: 0px;
+        color: rgba(255, 255, 255, 0);
+    }
+    85% {
+        width: 300px;
+        height: 55px;
+        color: rgba(255, 255, 255, 0);
+    }
+    100% {
+        width: 250px;
+        color: $body-bg-color;
     }
 }
