@@ -9,27 +9,22 @@ class PlaylistIndex extends React.Component{
 
     }
 
-    componentDidMount(){
-        this.props.fetchPlaylistByUser(this.props.user._id)
-    }
     render(){
         const { playlists, user, currentUser } = this.props
         // this needs to be refactored so that it checks whether the current user
         // is in the Followed Users of the current profile view
         // righ now, it defaults to ONLY showing public playlists
         let visiblePlaylists, playlistsDisplay;
-        debugger
     
         
-        if (Object.keys(playlists).length !== 0) {
+        if (playlists.length > 0) {
             // visiblePlaylists = playlists.filter(playlist => playlist.isPublic)
-            let mapPlaylists
+            let mapPlaylists;
             if (playlists.length > 5){
                 mapPlaylists = playlists.slice(0,5)
             }else {
                 mapPlaylists = playlists
             }
-            debugger
             playlistsDisplay = (
                 <ul className="playlist-index">
                     {mapPlaylists.map(playlist =>

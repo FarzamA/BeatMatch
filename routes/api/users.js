@@ -23,9 +23,7 @@ router.get('/:username', (req, res) => {
     User.findOne({ username: req.params.username })
       .then(user => {
         Playlist.find({ user_id: user._id })
-         .then(playlists => {
-           user.playlists = playlists
-           res.json(user)})
+         .then(playlists => {res.json({ playlists, user })})
          .catch(err => {
            res.status(404).json({ noPlaylistsFound: 'This user has no playlists' })
          })

@@ -210,10 +210,13 @@ class QuestionsForm extends React.Component {
             answers: answersArray,
             genre: selectedGenre
         }
-        this.props.fetchPlaylist(responseObj);
-        this.props.history.push({
+        this.props.fetchPlaylist(responseObj)
+            .then(playlist => {
+                playlist.user_id = this.props.currentUser.id;
+                this.props.postPlaylist(playlist);
+            }).then(() => this.props.history.push({
             pathname: '/profile'
-        });
+        }));
     }
     
     render(){

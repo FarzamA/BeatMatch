@@ -14,7 +14,6 @@ export const fetchPlaylist = (payload) => (dispatch) => {
 };
 
 export const fetchPlaylistByUser = (userId) => (dispatch) => {
-    debugger;
     return PlaylistAPIUtil.fetchPlaylistByUser(userId)
         .then(res => dispatch(receivePlaylist(res.data)))
         .catch(err => console.log(err))
