@@ -34,6 +34,7 @@ class QuestionsForm extends React.Component {
     }
 
     handleInput(e, answerIndex, answerValue){
+        if (this.props.modalIsActive) return null;
         const body = document.querySelector('body');
         const answers = document.querySelectorAll('.answer-option-container');
         const dots = document.querySelectorAll('.question-number-dot');
@@ -90,6 +91,7 @@ class QuestionsForm extends React.Component {
     }
 
     handleMouseEnter(){
+        if (this.props.modalIsActive) return null;
         const body = document.querySelector('body');
         const dots = document.querySelectorAll('.question-number-dot');
         const randomIndex = Math.floor(Math.random() * this.state.bgColors.length);
@@ -126,6 +128,7 @@ class QuestionsForm extends React.Component {
     }
 
     handleMouseLeave(){
+        if (this.props.modalIsActive) return null;
         const body = document.querySelector('body');
         const dots = document.querySelectorAll('.question-number-dot');
         const bgColor = '#131316';

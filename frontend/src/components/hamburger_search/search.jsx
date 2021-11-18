@@ -16,6 +16,7 @@ class Search extends React.Component {
         this.handleOutsideSearch = this.handleOutsideSearch.bind(this);
         this.transformSearch = this.transformSearch.bind(this);
         this.closeSearch = this.closeSearch.bind(this);
+        this.activateSearch = this.activateSearch.bind(this);
     }
 
     componentDidMount() {
@@ -31,15 +32,26 @@ class Search extends React.Component {
 
         if (!domNode || !domNode.contains(e.target)) {
             this.closeSearch();
+            this.props.deactivateSearchModal();
         }
     }
 
     transformSearch() {
-        this.setState({searchClicked: !this.state.searchClicked}, this.focusSearch);
+        if (this.state.searchClicked) {
+            console.log("search:transformsearch")
+            this.setState({searchClicked: false}, this.props.deactivateSearchModal)
+        } else {
+            this.setState({searchClicked: true}, this.activateSearch)
+        }
+    }
+
+    activateSearch() {
+        this.focusSearch();
+        this.props.activateSearchModal();
     }
 
     closeSearch() {
-        this.setState({searchClicked: false});
+        this.setState({searchClicked: false}, this.props.deactivateSearchModal);
     }
 
     focusSearch() {

@@ -27,12 +27,16 @@ class Burger extends React.Component {
         const domNode = ReactDOM.findDOMNode(this);
 
         if (!domNode || !domNode.contains(e.target)) {
-            this.setState({burgerClicked: false});
+            this.setState({burgerClicked: false}, this.props.deactivateBurgerModal);
         }
     }
 
     transformBurger() {
-        this.setState({burgerClicked: !this.state.burgerClicked});
+        if (this.state.burgerClicked) {
+            this.setState({burgerClicked: false}, this.props.deactivateBurgerModal)
+        } else {
+            this.setState({burgerClicked: true}, this.props.activateBurgerModal)
+        }
     }
 
     render() {

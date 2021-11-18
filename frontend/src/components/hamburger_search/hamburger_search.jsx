@@ -1,12 +1,12 @@
 import React from 'react';
 import BurgerContainer from './burger_container';
-import Search from './search';
+import SearchContainer from './search_container';
 
 const HamburgerSearch = () => {
 
     return (
         <div className="hamburger-search-container">
-            <Search/>
+            <SearchContainer/>
             <BurgerContainer/>
         </div>
     )
