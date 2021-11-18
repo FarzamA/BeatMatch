@@ -20,10 +20,19 @@ router.post('/playlist', (req, res) => {
         answers: req.body.answers,
         genre: req.body.genre
     }).then(playlists => {
+        // while (playlists === []) {
+        //     // req.body.answers.pop();
+        //     Playlist.find({
+        //         answers: req.body.answers,
+        //         genre: req.body.genre
+        //     })
+        // }
         if (playlists !== []){
             return res.json(playlists[Math.floor((Math.random() * playlists.length-1))])
         } else{
-            return res.json({noPlaylistFound: 'No PLAYLIST found from that user'})
+            Playlist.findOne({ answers: req.body.answers, genre: req.body.genre})
+                .then(playlist => res.json({playlist}))
+            // return res.json({noPlaylistFound: 'No PLAYLIST found from that user'})
         }
     })
     .catch(err => 
