@@ -23,7 +23,7 @@ router.get('/:username', (req, res) => {
     User.findOne({ username: req.params.username })
       .then(user => res.json(user))
       .catch(err => 
-        res.status(404).json({ noUserFound: 'No use was found with that id' })
+        res.status(404).json({ noUserFound: 'No user was found with that id' })
         );
 });
 
