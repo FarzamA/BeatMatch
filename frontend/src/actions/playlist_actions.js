@@ -8,7 +8,6 @@ export const receivePlaylist = playlist => ({
 });
 
 export const fetchPlaylist = (payload) => (dispatch) => {
-    debugger;
     return PlaylistAPIUtil.fetchPlaylist(payload)
         .then(res => dispatch(receivePlaylist(res.data)))
         .catch(err => console.log(err))
