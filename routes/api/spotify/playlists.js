@@ -130,23 +130,23 @@ router.get("/callback", async (req, res) => {
   // console.log("in callback");
   try {
     const genres = [
-      "metal",
-      "disney",
-      "hip-hop",
+      // "metal",
+      // "disney",
+      // "hip-hop",
       "k-pop",
-      "new-release",
-      "pop",
-      "r-n-b",
-      "latino",
-      "world-music",
-      "edm",
-      "jazz",
-      "country",
-      "anime",
-      "rock",
-      "indie",
-      "study",
-      "work-out",
+      // "new-release",
+      // "pop",
+      // "r-n-b",
+      // "latino",
+      // "world-music",
+      // "edm",
+      // "jazz",
+      // "country",
+      // "anime",
+      // "rock",
+      // "indie",
+      // "study",
+      // "work-out",
     ];
     let spotifyToken = await getAccessToken(code);
     Promise.all(
@@ -154,8 +154,8 @@ router.get("/callback", async (req, res) => {
         const testAnswers = {
           // min_acousticness: 0.5,
           max_acousticnes: 0.5,
-          min_danceability: 0.5,
-          // max_danceability: 0.5,
+          // min_danceability: 0.5,
+          max_danceability: 0.5,
           // min_duration: 0.5,
           max_duration: 0.5,
           // min_energy: 0.5,
@@ -187,6 +187,7 @@ router.get("/callback", async (req, res) => {
         });
         await newPlaylist.save();
         console.log(genre);
+        console.log(newPlaylist)
       })
     ).catch((err) => {
       // console.log(err);
