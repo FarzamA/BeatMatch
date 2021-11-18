@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
         name: req.body.name,
         songs: [...req.body.songs],
         answers: [...req.body.answers],
-        spotify_playlist_id: req.body.spotify_playlist_id
+        spotify_embed_link: req.body.spotify_embed_link
     })
 
     newPlaylist.save().then(playlist => res.json(playlist))
