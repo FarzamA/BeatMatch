@@ -211,6 +211,9 @@ class QuestionsForm extends React.Component {
             genre: selectedGenre
         }
         this.props.fetchPlaylist(responseObj);
+        this.props.history.push({
+            pathname: '/profile'
+        });
     }
     
     render(){
