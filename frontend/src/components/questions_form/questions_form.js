@@ -33,12 +33,21 @@ class QuestionsForm extends React.Component {
         body.style.backgroundColor = '#131316';
     }
 
-    handleInput(answerIndex, answerValue){
+    handleInput(e, answerIndex, answerValue){
         const body = document.querySelector('body');
+        const answers = document.querySelectorAll('.answer-option-container');
         const dots = document.querySelectorAll('.question-number-dot');
         const randomIndex = Math.floor(Math.random() * this.state.bgColors.length);
         const bgColor = this.state.bgColors[randomIndex];
         const textColor = this.state.textColors[randomIndex];
+
+        answers.forEach(answer => {
+            if(e.target.innerText == answer.innerText){
+                answer.classList.add('choosen-answer');
+            }else{
+                answer.classList.add('other-answer');
+            }
+        });
 
         // css variables
         body.style.setProperty('--prev-bg-color', this.state.prevBgColor);
@@ -65,12 +74,19 @@ class QuestionsForm extends React.Component {
         const prevTextColor = textColor;
         let answerTargetCategoryMap = this.state.targetCategories;
         answerTargetCategoryMap[this.props.questions[answerIndex].targetCategory] = answerValue;
-        this.setState({ 
-            targetCategories: answerTargetCategoryMap,
-            pageNum: this.state.pageNum != this.props.questions.length ? this.state.pageNum + 1 : this.state.pageNum,
-            prevBgColor: prevBgColor,
-            prevTextColor: prevTextColor
-        });
+
+        setTimeout(() => {
+            answers.forEach(answer => {
+                answer.classList.remove('choosen-answer');
+                answer.classList.remove('other-answer');
+            });
+            this.setState({ 
+                targetCategories: answerTargetCategoryMap,
+                pageNum: this.state.pageNum <= this.props.questions.length ? this.state.pageNum + 1 : this.state.pageNum,
+                prevBgColor: prevBgColor,
+                prevTextColor: prevTextColor
+            });
+        }, 1500);
     }
 
     handleMouseEnter(){
@@ -145,7 +161,19 @@ class QuestionsForm extends React.Component {
     }
 
     generatePlaylist(){
-        console.log(this.state.targetCategories);
+        const answersArray = [];
+        const answerKeys = Object.keys(this.state.targetCategories);
+        const answerValues = Object.values(this.state.targetCategories);
+        for(let i = 0; i < answerKeys.length; i++){
+            let answer = '';
+            if(answerValues[i] === 0){
+                answer = `min_${answerKeys[i]}`;
+            } else{
+                answer = `max_${answerKeys[i]}`;
+            }
+            answersArray.push(answer);
+        }
+        console.log(answersArray);
     }
     
     render(){
@@ -155,14 +183,14 @@ class QuestionsForm extends React.Component {
         const { pageNum } = this.state;
         const { questions } = this.props;
         const question = questions[pageNum - 1];
-        const submitButton = <button className="questions-submit-button" onClick={this.generatePlaylist}>Create Playlist</button>;
-        const questionsContent = (
+        const submitButton = <button className="questions-submit-button button-grow" onClick={this.generatePlaylist}>Create Playlist</button>;
+        const questionsContent = pageNum <= this.props.questions.length ? (
                     <div className="question-content">
                         <div className="question-text">{question.question}</div>
                         <div className="answers-container">
                             {question.answerOptions.map((answerOption, i) => {
                                 return (
-                                    <div className="answer-option-container" onClick={() => this.handleInput(pageNum - 1, answerOption.answerValue)} key={`answer-${i}`}>
+                                    <div className="answer-option-container" onClick={(e) => this.handleInput(e, pageNum - 1, answerOption.answerValue)} key={`answer-${i}`}>
                                         <div 
                                             className="answer-option" 
                                             onMouseEnter={this.handleMouseEnter}
@@ -178,16 +206,16 @@ class QuestionsForm extends React.Component {
                             {questions.map((question, i) => {
                                 const largeDot = pageNum === i + 1 ? 'large-dot' : '';
                                 return (
-                                    <div className={`question-number-dot ${largeDot}`}></div>
+                                    <div key={`page-${i}`} className={`question-number-dot ${largeDot}`}></div>
                                 );
                             })}
                         </div>
                     </div>
-                );
+                ) : <></>;
         return (
             <div>
                 <div className="question-container">
-                    {pageNum === this.props.questions.length ? submitButton : questionsContent}
+                    {pageNum > this.props.questions.length ? submitButton : questionsContent}
                 </div>
             </div>
         );

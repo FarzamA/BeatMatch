@@ -1,4 +1,4 @@
-import { /*RECEIVE_QUESTION,*/ RECEIVE_QUESTIONS } from '../actions/question_actions';
+import { RECEIVE_QUESTIONS } from '../actions/question_actions';
 
 const _nullState = {};
 

@@ -14,7 +14,7 @@ router.get('/user/:user_id', (req, res) => {
             res.status(404).json({ noPlaylistsFound: 'No playlists found from that user' }))
 });
 
-router.get('/playlist', (req, res) => {
+router.post('/playlist', (req, res) => {
     // Send all of your answers to request.body
     Playlist.find({
         answers: req.body.answers,
