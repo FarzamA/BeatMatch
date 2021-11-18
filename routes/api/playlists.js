@@ -20,10 +20,12 @@ router.post('/playlist', (req, res) => {
         answers: req.body.answers,
         genre: req.body.genre
     }).then(playlists => {
-        if (playlists !== []){
+        if (playlists.length > 0){
             return res.json(playlists[Math.floor((Math.random() * playlists.length-1))])
         } else{
-            return res.json({noPlaylistFound: 'No PLAYLIST found from that user'})
+            Playlist.find({ genre: req.body.genre })
+                .then(playlists => res.json(playlists[Math.floor((Math.random() * playlists.length-1))]))
+                .catch(err => console.log(err))
         }
     })
     .catch(err => 

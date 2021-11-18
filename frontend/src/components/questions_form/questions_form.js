@@ -4,9 +4,10 @@ class QuestionsForm extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            pageNum: 1,
+            pageNum: 0,
             prevBgColor: '#131316',
             prevTextColor: 'white',
+            selectedGenre: '',
             bgColors: ['#ff60b8', '#1a71eb', '#fffa69', '#ed3747', '#ed3747', '#b81d45', '#b81d45', '#d6dd21', '#7dcdef', '#7dcdef', '#7dcdef', '#4cc141'],
             textColors: ['#b81d45', '#ff6783', '#ff6783', '#ff60b8', '#4cc141', '#d6dd21', '#672d91', '#0d4215', '#fffa69', '#ed3747', '#1a71eb', '#531754'],
             questions: this.props.questions,
@@ -18,6 +19,7 @@ class QuestionsForm extends React.Component {
         this.generatePlaylist = this.generatePlaylist.bind(this);
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
+        this.setGenre = this.setGenre.bind(this);
     }
 
     componentDidMount(){
@@ -31,6 +33,13 @@ class QuestionsForm extends React.Component {
         body.classList.remove('following-answer-1');
         body.classList.remove('following-answer-2');
         body.style.backgroundColor = '#131316';
+    }
+    
+    setGenre(genre){
+        this.setState({ 
+            pageNum: this.state.pageNum + 1,
+            selectedGenre: genre
+        });
     }
 
     handleInput(e, answerIndex, answerValue){
@@ -161,6 +170,8 @@ class QuestionsForm extends React.Component {
     }
 
     generatePlaylist(){
+        let responseObj = {};
+        const selectedGenre = this.state.selectedGenre;
         const answersArray = [];
         const answerKeys = Object.keys(this.state.targetCategories);
         const answerValues = Object.values(this.state.targetCategories);
@@ -173,7 +184,18 @@ class QuestionsForm extends React.Component {
             }
             answersArray.push(answer);
         }
-        console.log(answersArray);
+
+        answersArray.sort(function(i, j){
+            let el1 = i.substr(4);
+            let el2 = j.substr(4);
+            return el1 == el2 ? 0 : el1 < el2 ? -1 : 1;
+        });
+
+        responseObj = {
+            answers: answersArray,
+            genre: selectedGenre
+        }
+        this.props.fetchPlaylist(responseObj);
     }
     
     render(){
@@ -182,9 +204,35 @@ class QuestionsForm extends React.Component {
         }
         const { pageNum } = this.state;
         const { questions } = this.props;
+        const genres = [ "metal", "disney", "hip-hop", "k-pop", "new-release", "pop", "r-n-b", "latino", "world-music", "edm", "jazz", "country", "anime", "rock", "indie", "study", "work-out" ];
         const question = questions[pageNum - 1];
         const submitButton = <button className="questions-submit-button button-grow" onClick={this.generatePlaylist}>Create Playlist</button>;
-        const questionsContent = pageNum <= this.props.questions.length ? (
+        const selectGenreQuestion = (
+            <div className="question-content">
+                <div className="genre-question-text">Select a genre</div>
+                <div className="genre-answers-container">
+                    {genres.map((genre, i) => {
+                        return (
+                            <div className="genre-option-container" key={`genre-${i}`}>
+                                <div 
+                                    className="genre-option-button"
+                                    onClick={() => this.setGenre(genre)}
+                                    onMouseEnter={this.handleMouseEnter}
+                                    onMouseLeave={this.handleMouseLeave}
+                                >
+                                    {genre}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+        let questionsContent;
+        if(pageNum === 0){
+            questionsContent = selectGenreQuestion;
+        } else {
+            questionsContent = pageNum <= this.props.questions.length ? (
                     <div className="question-content">
                         <div className="question-text">{question.question}</div>
                         <div className="answers-container">
@@ -212,6 +260,7 @@ class QuestionsForm extends React.Component {
                         </div>
                     </div>
                 ) : <></>;
+        }
         return (
             <div>
                 <div className="question-container">
