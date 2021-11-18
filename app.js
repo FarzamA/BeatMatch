@@ -50,10 +50,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // tells app to only respond to json
 app.use(bodyParser.json());
 
-// app.get("/", (req, res) => {
-//   res.send("hello world!");
-// });
-
 
 // to display single file object
 app.get("/api/file/:filename", (req, res) => {

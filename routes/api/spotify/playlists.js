@@ -3,7 +3,7 @@ const axios = require("axios");
 const queryString = require("query-string");
 const router = express.Router();
 const { clientId, clientSecret, redirectUri } = require("../../../config/keys");
-const Playlist = require('../../../models/Playlist')
+const Playlist = require("../../../models/Playlist");
 const generateRandomString = (length) => {
   var text = "";
   var possible =
@@ -28,8 +28,6 @@ router.get("/", async (req, res) => {
   };
   const url =
     "https://accounts.spotify.com/authorize?" + queryString.stringify(params);
-  console.log(url);
-  console.log("in login");
   res.redirect(url);
 });
 
@@ -57,13 +55,13 @@ const getAccessToken = async (code) => {
   return token;
 };
 
-const createPlaylist = async (token) => {
+const createPlaylist = async (token, name) => {
   console.log("in playlist2");
   const response = await axios({
-    url: "https://api.spotify.com/v1/users/11151312496/playlists",
+    url: "https://api.spotify.com/v1/users/6g1bk9tzjh4vnoe0lf3a2rxrj/playlists",
     method: "post",
     data: {
-      name: "My First Playlist",
+      name,
       description: "Playlist Description",
       public: true,
     },
@@ -72,32 +70,50 @@ const createPlaylist = async (token) => {
     },
   });
   console.log("in playlist2");
-  return response.data;
+  const playlist = {
+    name,
+    id: response.data.id,
+  };
+  console.log(response.data)
+  return playlist;
 };
-const getSongs = async (token, genre, minKey, minValue, maxKey, maxValue) => {
-  const url = `https://api.spotify.com/v1/recommendations?seed_genres=${genre}&${minKey}=${minValue}&${maxKey}=${maxValue}`;
+const getSongs = async (token, genre, answers) => {
+  const keys = Object.keys(answers);
+  const values = Object.values(answers);
+  let query = "";
+  // make query portion of url
+  for (let i = 0; i < keys.length; i++) {
+    query += `&${keys[i]}=${values[0]}`;
+  }
+  const url = `https://api.spotify.com/v1/recommendations?seed_genres=${genre}${query}`;
   const response = await axios({
     url,
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+
   songs = "";
+  songNames = []
   response.data.tracks.map((track) => {
-    // songs.push(track.uri);
-    songs+=(track.uri + ",")
+    songs += track.uri + ",";
+    songNames.push(track.name)
   });
-  return songs;
+
+  const songs_object = {
+    uris: songs,
+    names: songNames
+  }
+  return songs_object;
 };
 
-
-const addSongs = async (token,songs) => {
+const addSongs = async (token, playlistId, songs) => {
   console.log("in songs");
   const response = await axios({
-    url: "https://api.spotify.com/v1/playlists/6BChGBgnr5ULuORQUuBhzm/tracks",
+    url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
     method: "post",
     params: {
-      uris: songs
+      uris: songs,
     },
     headers: {
       Accept: "application/json",
@@ -105,29 +121,47 @@ const addSongs = async (token,songs) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log("in playlist2");
+  console.log("in add songs");
   return response.data;
 };
-
 
 router.get("/callback", async (req, res) => {
   const code = req.query.code || null;
   let state = req.query.state || null;
   console.log("in callback");
   try {
+    const testAnswers = {
+      min_acousticness: 0.5,
+      // max_acousticnes: 0.5,
+      min_danceability: 0.5,
+      // max_danceability: 0.5,
+      // min_duration: 0.5,
+      // max_duration: 0.5,
+      // min_energy: 0.5,
+      // max_energy: 0.5,
+      // min_instrumentalness: 0.5,
+      // max_instrumentalness: 0.5,
+      // min_popularity: 0.5,
+      // max_popularity: 0.5,
+    };
     const spotifyToken = await getAccessToken(code);
-    // const newPlaylist = await createPlaylist(spotifyToken);
-    const songs = await getSongs(
-      spotifyToken,
-      "hip-hop",
-      "min_acousticness",
-      0.6,
-      "max_acousticness",
-      0.8
-    );
-      console.log(songs)
-      const addedSongs = await addSongs(spotifyToken,songs)
-    res.send({ addedSongs });
+    const songs = await getSongs(spotifyToken, "hip-hop", testAnswers);
+    let name = `${songs.names[0]} and Other Curated Favorites`
+    const playlist = await createPlaylist(spotifyToken, name);
+
+    console.log(songs);
+    const addedSongs = await addSongs(spotifyToken, playlist.id, songs.uris);
+
+    const newPlaylist = new Playlist({
+      user_id: "6195acd60fabb55cc4fd06c0",
+      name: playlist.name,
+      songs: songs.uris,
+      answers: Object.values(testAnswers),
+      spotify_embed_link: `https://open.spotify.com/embed/playlist/${playlist.id}`
+    })
+    await newPlaylist.save()
+    res.send({ newPlaylist });
+    // res.send({ req });
   } catch (err) {
     console.log(err);
     res.statusMessage = "Could not get songs";
