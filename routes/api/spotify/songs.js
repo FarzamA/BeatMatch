@@ -3,6 +3,7 @@ const axios = require("axios");
 
 const router = express.Router();
 const { clientId, clientSecret } = require("../../../config/keys");
+const { constants } = require("crypto");
 
 const getToken = async () => {
   const response = await axios({
@@ -21,12 +22,19 @@ const getToken = async () => {
     },
   });
   const token = response.data.access_token;
-  console.log(token)
+  console.log(token);
   return token;
 };
 
-const getSongs = async (token, genre, minKey, minValue, maxKey, maxValue) => {
-  const url = `https://api.spotify.com/v1/recommendations?seed_genres=${genre}&${minKey}=${minValue}&${maxKey}=${maxValue}`;
+const getSongs = async (token, genre, answers) => {
+  const keys = Object.keys(answers);
+  const values = Object.values(answers);
+  let query = "";
+  // make query portion of url
+  for (let i = 0; i < keys.length; i++) {
+    query += `&${keys[i]}=${values[0]}`;
+  }
+  const url = `https://api.spotify.com/v1/recommendations?seed_genres=${genre}${query}`;
   const response = await axios({
     url,
     headers: {
@@ -34,13 +42,11 @@ const getSongs = async (token, genre, minKey, minValue, maxKey, maxValue) => {
     },
   });
 
-  songs = []
-  response.data.tracks.map( track => {
-    songs.push(track.uri)
-  })
-  console.log(songs)
-  console.log(response.data.tracks[0].uri)
-  return songs
+  songs = [];
+  response.data.tracks.map((track) => {
+    songs.push(track.uri);
+  });
+  return songs;
 };
 
 router.post("/", async (req, res) => {
@@ -50,6 +56,7 @@ router.post("/", async (req, res) => {
   const { maxKey } = req.body;
   const { maxValue } = req.body;
   try {
+    console.log(req);
     const spotifyToken = await getToken();
     const song = await getSongs(
       spotifyToken,
