@@ -51,9 +51,9 @@ class Burger extends React.Component {
         return (
             <div>
                 <div className="hamburger" onClick={this.transformBurger}>
-                    <div className={`burger-bar1 ${burgerClicked}`}></div>
-                    <div className={`burger-bar2 ${burgerClicked}`}></div>
-                    <div className={`burger-bar3 ${burgerClicked}`}></div>
+                    <div className={`burger-bar1 burger ${burgerClicked}`}></div>
+                    <div className={`burger-bar2 burger ${burgerClicked}`}></div>
+                    <div className={`burger-bar3 burger ${burgerClicked}`}></div>
                 </div>
                 <BurgerLinks
                     loggedIn={loggedIn}

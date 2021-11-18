@@ -94,6 +94,8 @@ class QuestionsForm extends React.Component {
         if (this.props.modalIsActive) return null;
         const body = document.querySelector('body');
         const dots = document.querySelectorAll('.question-number-dot');
+        const burger = document.querySelectorAll('.burger');
+        const searchIcon = document.querySelector('.search-icon');
         const randomIndex = Math.floor(Math.random() * this.state.bgColors.length);
         const bgColor = this.state.bgColors[randomIndex];
         const textColor = this.state.textColors[randomIndex];
@@ -118,6 +120,10 @@ class QuestionsForm extends React.Component {
         dots.forEach(dot => {
             dot.style.backgroundColor = textColor;
         });
+        burger.forEach(burgerBar => {
+            burgerBar.style.backgroundColor = textColor;
+        });
+        searchIcon.style.color = textColor;
         
         const prevBgColor = bgColor;
         const prevTextColor = textColor;
@@ -131,6 +137,8 @@ class QuestionsForm extends React.Component {
         if (this.props.modalIsActive) return null;
         const body = document.querySelector('body');
         const dots = document.querySelectorAll('.question-number-dot');
+        const burger = document.querySelectorAll('.burger');
+        const searchIcon = document.querySelector('.search-icon');
         const bgColor = '#131316';
         const textColor = 'white';
 
@@ -154,6 +162,10 @@ class QuestionsForm extends React.Component {
         dots.forEach(dot => {
             dot.style.backgroundColor = textColor;
         });
+        burger.forEach(burgerBar => {
+            burgerBar.style.backgroundColor = textColor;
+        });
+        searchIcon.style.color = textColor;
         
         const prevBgColor = bgColor;
         const prevTextColor = textColor;
