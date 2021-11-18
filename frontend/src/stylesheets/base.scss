@@ -8,9 +8,13 @@
 
 body {
     background-color: $body-bg-color;
-    color: #ffffff;
+    color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 .placeholder {

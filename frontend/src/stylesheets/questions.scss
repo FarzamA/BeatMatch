@@ -1,27 +1,31 @@
 .question-container {
     width: 100vw;
     height: 90vh;
+    font-family: 'Didact Gothic', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     .question-content {
         height: 100%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
         .question-text {
-            font-size: 36px;
-            font-weight: $bold;
-            height: 20%;
+            font-size: 48px;
+            height: 15%;
             width: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;
         }
 
         .answers-container {
             font-size: 24px;
-            font-weight: $bold;
             height: 80%;
             width: 100%;
             display: flex;
@@ -41,6 +45,10 @@
                     align-items: center;
                     width: 50%;
                     height: 100%;
+
+                    &:hover{
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -49,6 +57,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 30px;
 
             .question-number-dot {
                 height: 6px;
@@ -64,72 +73,69 @@
             }
         }
     }
+
+    .questions-submit-button {
+        font-size: 18px;
+        width: 250px;
+        height: 40px;
+        border: none;
+        border-radius: 40px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #e0e0e0;
+        }
+    }
 }
 
-.first-positive-answer {
-    animation: firstturnplum 1s;
-    background-color: plum;
-    color: blueviolet;
+.first-answer {
+    animation: firstchangecolor 0.6s;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    
 }
 
-@keyframes firstturnplum {
+@keyframes firstchangecolor {
     0% {
         background-color: $body-bg-color;
         color: white;
     }
     100% {
-        background-color: plum;
-        color: blueviolet;
+        background-color: var(--bg-color);
+        color: var(--text-color);
     }
 }
 
-.first-negative-answer {
-    animation: firstturnpurple 1s;
-    background-color: blueviolet;
-    color: plum;
+.following-answer-1 {
+    animation: followingchangecolor1 0.6s;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
-@keyframes firstturnpurple {
+@keyframes followingchangecolor1 {
     0% {
-        background-color: $body-bg-color;
-        color: white;
+        background-color: var(--prev-bg-color);
+        color: var(--prev-text-color);
     }
     100% {
-        background-color: blueviolet;
-        color: plum;
+        background-color: var(--bg-color);
+        color: var(--text-color);
     }
 }
 
-.positive-answer {
-    animation: turnplum 1s;
-    background-color: plum;
-    color: blueviolet;
+.following-answer-2 {
+    animation: followingchangecolor2 0.6s;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
-@keyframes turnplum {
+@keyframes followingchangecolor2 {
     0% {
-        background-color: blueviolet;
-        color: plum;
+        background-color: var(--prev-bg-color);
+        color: var(--prev-text-color);
     }
     100% {
-        background-color: plum;
-        color: blueviolet;
-    }
-}
-
-.negative-answer {
-    animation: turnpurple 1s;
-    background-color: blueviolet;
-    color: plum;
-}
-
-@keyframes turnpurple {
-    0% {
-        background-color: plum;
-        color: blueviolet;
-    }
-    100% {
-        background-color: blueviolet;
-        color: plum;
+        background-color: var(--bg-color);
+        color: var(--text-color);
     }
 }

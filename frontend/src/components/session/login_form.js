@@ -12,6 +12,7 @@ class LoginForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,6 +35,16 @@ class LoginForm extends React.Component {
     let user = {
       email: this.state.email,
       password: this.state.password
+    };
+
+    this.props.login(user).then(() => this.props.history.push("/profile"));
+  }
+
+  handleDemo(e) {
+    e.preventDefault();
+    let user = {
+      email: 'flexmaster@gmail.com',
+      password: 'flexitup'
     };
 
     this.props.login(user).then(() => this.props.history.push("/profile"));
@@ -71,6 +82,7 @@ class LoginForm extends React.Component {
             </div>
             
             <input className="session-submit-button" type="submit" value="Login" />
+            <button onClick={this.handleDemo}>Demo User</button>
             <div className="alt-session-route">
               {this.props.navLink}
             </div>
