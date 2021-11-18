@@ -39,6 +39,10 @@ const UserSchema = new Schema({
         username: {
           type: String,
           required: true
+        },
+        profilePicUrl: {
+          required: false, 
+          type: String
         }
       }
     ],
@@ -52,6 +56,10 @@ const UserSchema = new Schema({
         username: {
           type: String,
           required: true
+        },
+        profilePicUrl: {
+          required: false, 
+          type: String
         }
       }
     ]
