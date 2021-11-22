@@ -1,6 +1,8 @@
 # Beat Match
 Find the beat that matches you.
 
+[Live Link](https://beat-match-mern.herokuapp.com/#/)
+
 # Background and Overview
 Beat Match is a web application where users can pick a genre and fill out a short form about their personality to create the perfect playlist for them using Spotify's API. Users can save, play, share with friends, and export to the playlist to Spotify. Additionally, users can follow their friends on Beat Match to see what playlist's they have been making.
 
