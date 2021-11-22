@@ -2,7 +2,7 @@
 Find the beat that matches you.
 
 # Background and Overview
-Beat Match is a web application where users can pick a genre and fill out a short form about their personality to create the perfect playlist for them using Spotify's API. Users can save, play, share with friends, and export to the playlist to Spotify. Additionally, can follow their friends on Beat Match to see what playlist's they have been making.
+Beat Match is a web application where users can pick a genre and fill out a short form about their personality to create the perfect playlist for them using Spotify's API. Users can save, play, share with friends, and export to the playlist to Spotify. Additionally, users can follow their friends on Beat Match to see what playlist's they have been making.
 
 
 ## Features
@@ -13,7 +13,7 @@ Beat Match is a web application where users can pick a genre and fill out a shor
 
 <img src="images/Login.png" width=500/>
 
-* Errors show on incorrect submission
+* Errors on login/signup show on incorrect submission
 
 <img src="images/SignupErrors.png" width=500/>
 
