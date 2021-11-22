@@ -19,7 +19,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   fetchUser: (username) => dispatch(fetchUser(username)),
   followUser: (username, followData) => dispatch(followUser(username, followData)),
-  unfollowUser: (username, followData) => dispatch(unfollowUser(username, followData))
+  unfollowUser: (username, followData) => dispatch(unfollowUser(username, followData)),
+  fetchPlaylistByUser: (userId) => dispatch(fetchPlaylistByUser(userId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -9,9 +9,6 @@ class PlaylistIndex extends React.Component{
 
     }
 
-    componentDidMount(){
-        this.props.fetchPlaylistByUser(this.props.user._id)
-    }
     render(){
         const { playlists, user, currentUser } = this.props
         // this needs to be refactored so that it checks whether the current user
@@ -21,7 +18,7 @@ class PlaylistIndex extends React.Component{
         debugger
     
         
-        if (Object.keys(playlists).length !== 0) {
+        if (Object.keys(playlists).length > 0) {
             // visiblePlaylists = playlists.filter(playlist => playlist.isPublic)
             let mapPlaylists
             if (playlists.length > 5){

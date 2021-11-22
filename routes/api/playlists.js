@@ -27,7 +27,6 @@ router.post('/playlist', (req, res) => {
             Playlist.find({ genre: req.body.genre })
                 .then(playlists => res.json(playlists[Math.floor((Math.random() * playlists.length-1))]))
                 .catch(err => console.log(err))
-
         }
     })
     .catch(err => 
