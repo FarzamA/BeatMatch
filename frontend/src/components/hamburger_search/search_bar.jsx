@@ -47,7 +47,6 @@ class SearchBar extends React.Component {
     }
 
     handleKeyDown(e) {
-        console.log(e.key);
         let next;
         if (e.key === "ArrowDown") {
             if (e.target.id === "user-search") {

@@ -38,7 +38,6 @@ class Search extends React.Component {
 
     transformSearch() {
         if (this.state.searchClicked) {
-            console.log("search:transformsearch")
             this.setState({searchClicked: false}, this.props.deactivateSearchModal)
         } else {
             this.setState({searchClicked: true}, this.activateSearch)
