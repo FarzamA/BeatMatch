@@ -44,10 +44,11 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const newPlaylist = new Playlist({
         user_id: req.body.user_id,
-        name: req.body.name,
-        songs: [...req.body.songs],
-        answers: [...req.body.answers],
-        spotify_embed_link: req.body.spotify_embed_link
+        name: req.body.playlist.name,
+        songs: [...req.body.playlist.songs],
+        answers: [...req.body.playlist.answers],
+        genre: req.body.playlist.genre,
+        spotify_embed_link: req.body.playlist.spotify_embed_link
     })
 
     newPlaylist.save().then(playlist => res.json(playlist))

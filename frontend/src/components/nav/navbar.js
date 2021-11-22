@@ -44,7 +44,7 @@ class NavBar extends React.Component {
 
       return (
         <div className="navbar">
-            <img className="logo" src="https://beatmatch-seeds.s3.amazonaws.com/BeatMatchLogo.png"/>
+            <img className="logo" src="https://beatmatch-seeds.s3.amazonaws.com/BeatMatchFavicon.png"/>
             {centralComponent}
             { this.getLinks() }
         </div>

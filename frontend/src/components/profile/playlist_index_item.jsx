@@ -15,8 +15,6 @@ const PlaylistIndexItem = (props) => {
           allowtransparency="true"
           allow="encrypted-media"
         ></iframe>
-        <p>PLACEHOLDER FOR PLAYLIST PREVIEW IMAGES</p>
-        <p>{playlist.title}</p>
       </NavLink>
     </li>
   );

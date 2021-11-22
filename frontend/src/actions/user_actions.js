@@ -4,9 +4,10 @@ export const RECEIVE_USER = "RECEIVE_USER";
 export const RECEIVE_USER_FOLLOW = "RECEIVE_USER_FOLLOW";
 export const REMOVE_USER_FOLLOW = "REMOVE_USER_FOLLOW";
 
-export const receiveUser = user => ({
+export const receiveUser = ({user, playlists}) => ({
     type: RECEIVE_USER,
-    user
+    user,
+    playlists
 });
 
 export const receiveUserFollow = userFollow => ({
