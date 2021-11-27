@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
@@ -31,8 +31,6 @@ class MainPage extends React.Component {
 
   componentDidMount(){
     document.addEventListener('scroll', this.checkScrollPosition);
-    const navbar = document.querySelector('.navbar');
-    // navbar.style.backgroundColor = 'white';
   }
 
   componentWillUnmount(){
@@ -46,8 +44,13 @@ class MainPage extends React.Component {
   render() {
     return (
       <div className="main-page">
-        <div className="main-page-content">Beat Match</div>
-        <div className="arrow" draggable>
+        <div className="main-page-content">
+          Beat Match
+          <div className="main-page-about-link">
+            <Link to={'/about'}><div>About Us</div></Link>
+          </div>
+        </div>
+        <div className="arrow">
           <FontAwesomeIcon icon={faChevronDown} />
         </div>
       </div>

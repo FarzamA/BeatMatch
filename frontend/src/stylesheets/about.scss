@@ -1,0 +1,70 @@
+.about-page {
+    font-family: 'Didact Gothic', sans-serif;
+    margin-top: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .about-page-heading {
+        font-family: 'Permanent Marker', cursive;
+        font-size: 58px;
+        margin-bottom: 15px;
+    }
+
+    .team-memeber-container {
+        width: 50%;
+        min-width: 925px;
+        display: flex;
+        margin: 40px;
+        padding-right: 70px;
+
+        .team-member-left {
+            width: 60vw;
+            margin-right: 30px;
+            display: flex;
+            justify-content: center;
+
+            .team-member-image {
+                border-radius: 50%;
+                width: 250px;
+                height: 250px;
+                margin: 20px;
+            }
+
+            .team-member-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                .team-member-name {
+                    font-size: 28px;
+                    margin-bottom: 5px;
+                }
+
+                .team-member-role {
+                    margin-bottom: 10px;
+                }
+
+                .team-member-links {
+                    display: flex;
+                    .team-member-social-link {
+                        margin: 5px;
+
+                        i {
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .team-member-right {
+            width: 40vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
