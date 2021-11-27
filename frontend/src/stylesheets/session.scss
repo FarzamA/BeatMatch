@@ -2,6 +2,7 @@
 
 .login-form-container, .signup-form-container {
     margin-top: 120px;
+    min-height: 86vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
