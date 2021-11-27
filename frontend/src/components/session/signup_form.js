@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class SignupForm extends React.Component {
   constructor(props) {
@@ -18,7 +18,13 @@ class SignupForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.signedIn === true) {
-      this.props.history.push('/profile');
+      let user = {
+        email: this.state.email,
+        password: this.state.password
+      };
+
+      this.props.login(user)
+        .then(this.props.history.push('/'));
     }
 
     this.setState({errors: nextProps.errors})
@@ -45,9 +51,6 @@ class SignupForm extends React.Component {
   render() {
     return (
       <div className="signup-form-container">
-        <div className="session-form-home-button">
-          <Link to="/">Beat Match</Link>
-        </div>
         <form onSubmit={this.handleSubmit}>
           <div className="session-form">
             <div className="session-form-heading">Sign Up</div>

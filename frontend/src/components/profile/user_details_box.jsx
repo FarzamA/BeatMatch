@@ -70,12 +70,12 @@ class UserDetailsBox extends React.Component {
                     </div>
                     {followButton}
                 </div>
-                <ul className="user-details-ul">
+                {/* <ul className="user-details-ul">
                     <li className="user-detail-item"></li>
                     <li className="user-detail-item"></li>
                     <li className="user-detail-item"></li>
                     <li className="user-detail-item"></li>
-                </ul>
+                </ul> */}
             </div>
         )
 

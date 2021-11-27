@@ -5,14 +5,21 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: white;
+    background-color: $body-bg-color;
+    color: $text-color;
 
     .main-page-content {
         font-family: 'Permanent Marker', cursive;
         font-size: 144px;
-        color: $body-bg-color;
         top: 30vh;
         position: absolute;
+
+        .main-page-about-link{
+            display: flex;
+            justify-content: flex-end;
+            font-size: 20px;
+            font-family: 'Didact Gothic', sans-serif;
+        }
     }
     
     .arrow {
@@ -22,7 +29,6 @@
         svg {
             width: 40px;
             height: 40px;
-            color: $body-bg-color;
             animation: bounce 1.5s infinite;
         }
     }
@@ -45,4 +51,3 @@
         height: 40px;
     }
 }
-

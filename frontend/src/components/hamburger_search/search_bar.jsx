@@ -49,6 +49,7 @@ class SearchBar extends React.Component {
     handleKeyDown(e) {
         let next;
         if (e.key === "ArrowDown") {
+            e.preventDefault();
             if (e.target.id === "user-search") {
                 if (this.liCount > 0) {
                     next = document.getElementById("results-1");
@@ -65,6 +66,7 @@ class SearchBar extends React.Component {
                 next.focus();
             }
         } else if (e.key === "ArrowUp") {
+            e.preventDefault();
             if (e.target.id === "user-search") {
                 if (this.liCount > 0) {
                     next = document.getElementById(`results-${this.liCount}`);
