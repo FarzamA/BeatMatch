@@ -1,0 +1,19 @@
+.footer {
+    font-family: 'Didact Gothic', sans-serif;
+    font-size: 14px;
+    width: 100vw;
+    height: 100px;
+    margin-top: 40px;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .footer-repo-link {
+        font-size: 22px;
+    }
+
+    div {
+        margin: 8px;
+    }
+}

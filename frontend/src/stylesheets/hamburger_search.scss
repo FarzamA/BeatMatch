@@ -1,5 +1,5 @@
 .hamburger-search-container {
-    position: fixed;
+    position: absolute;
     top: 40px;
     right: 140px;
     display: flex;
@@ -60,7 +60,7 @@
     transition: 0.4s;
     border-radius: 10px;
     padding: 55px 20px 55px 20px;
-    height: 280px;
+    height: 300px;
 
     .burger-links {
         width: 100%;
@@ -78,6 +78,7 @@
             justify-content: center;
             align-items: center;
             padding: 10px 10px 10px 10px;
+            margin: 5px;
             background-color: black;
             border: 1px solid black;
             border-radius: 10px;

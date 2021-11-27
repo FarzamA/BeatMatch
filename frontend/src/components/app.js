@@ -8,8 +8,9 @@ import SignupFormContainer from './session/signup_form_container';
 import QuestionsFormContainer from './questions_form/questions_form_container';
 import UserProfileContainer from './profile/user_profile_container';
 import HomeProfileContainer from './profile/home_profile_container';
-import '../stylesheets/base.scss';
 import HamburgerSearch from './hamburger_search/hamburger_search';
+import Footer from './footer/footer';
+import '../stylesheets/base.scss';
 
 
 const App = () => {
@@ -30,9 +31,11 @@ const App = () => {
           <ProtectedRoute path="/users/:username" component={UserProfileContainer} />
           <ProtectedRoute exact path="/profile" component={HomeProfileContainer} />
       </Switch>
+      <footer>
+        {location.pathname === '/profile' || location.pathname === '/about' || location.pathname === '/login' || location.pathname === '/signup' || location.pathname.includes('/users') ? <Footer /> : null }
+      </footer>
     </div>
-  );
-  
+  );  
 };
 
 export default App;

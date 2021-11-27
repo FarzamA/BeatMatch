@@ -47,7 +47,7 @@ class MainPage extends React.Component {
         <div className="main-page-content">
           Beat Match
           <div className="main-page-about-link">
-            <Link to={'/about'}><div>About Us</div></Link>
+            <Link to={'/about'}><div>Meet the Team</div></Link>
           </div>
         </div>
         <div className="arrow">
