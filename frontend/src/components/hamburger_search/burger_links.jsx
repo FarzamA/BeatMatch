@@ -44,7 +44,6 @@ class BurgerLinks extends React.Component {
     }
 
     render() {
-
         const { burgerClicked } = this.props;
 
         return (
@@ -53,7 +52,6 @@ class BurgerLinks extends React.Component {
             </div>
         )
     }
-
 };
 
 export default BurgerLinks;

@@ -16,21 +16,20 @@
         width: 50%;
         min-width: 925px;
         display: flex;
-        margin: 40px;
+        margin: 50px;
         padding-right: 70px;
 
         .team-member-left {
             width: 60vw;
             margin-right: 30px;
             display: flex;
-            justify-content: center;
             align-items: center;
 
             .team-member-image {
                 border-radius: 50%;
                 width: 250px;
                 height: 250px;
-                margin: 20px;
+                margin: 20px 40px;
             }
 
             .team-member-info {
