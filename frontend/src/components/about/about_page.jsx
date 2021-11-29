@@ -6,7 +6,7 @@ const AboutPage = () => {
             <div className="about-page-heading">Meet the Team</div>
             <div className="team-memeber-container">
                 <div className="team-member-left">
-                    <img className="team-member-image" src="https://media-exp1.licdn.com/dms/image/C4D03AQGG8ANTd64SFg/profile-displayphoto-shrink_200_200/0/1610340912316?e=1643241600&v=beta&t=jI8A16VLSYKLeFbujbGCipPIHo2HqS3NKeehtVLxAwI" alt="team-member-pic" />
+                    <img className="team-member-image" src="https://beatmatch-seeds.s3.amazonaws.com/zeki.jfif" alt="team-member-pic" />
                     <div className="team-member-info">
                         <div className="team-member-name">Zeki Kural</div>
                         <div className="team-member-role">Project Lead/Flex Developer</div>
@@ -24,7 +24,7 @@ const AboutPage = () => {
             </div>
             <div className="team-memeber-container">
                 <div className="team-member-left">
-                    <img className="team-member-image" src="https://media-exp1.licdn.com/dms/image/C4E03AQEWIzaP2AbMFA/profile-displayphoto-shrink_200_200/0/1636078202014?e=1643241600&v=beta&t=RfNeSXF-ZZlHDkHtUv-7q7vwHaUtAd3ZwfJzOHCUyE8" alt="team-member-pic" />
+                    <img className="team-member-image" src="https://beatmatch-seeds.s3.amazonaws.com/farzam.jfif" alt="team-member-pic" />
                     <div className="team-member-info">
                         <div className="team-member-name">Farzam Ahmad</div>
                         <div className="team-member-role">Backend Lead</div>
@@ -42,7 +42,7 @@ const AboutPage = () => {
             </div>
             <div className="team-memeber-container">
                 <div className="team-member-left">
-                    <img className="team-member-image" src="https://media-exp1.licdn.com/dms/image/C4E03AQHvgHmpCMe_qg/profile-displayphoto-shrink_200_200/0/1603906043720?e=1643241600&v=beta&t=pyr6LuokaKWf4cVGW5ADeb0Ld06Rj0TugVVXpoDALhM" alt="team-member-pic" />
+                    <img className="team-member-image" src="https://beatmatch-seeds.s3.amazonaws.com/elliot.jfif" alt="team-member-pic" />
                     <div className="team-member-info">
                         <div className="team-member-name">Elliot Wilson</div>
                         <div className="team-member-role">Flex Developer</div>
@@ -60,7 +60,7 @@ const AboutPage = () => {
             </div>
             <div className="team-memeber-container">
                 <div className="team-member-left">
-                    <img className="team-member-image" src="https://media-exp1.licdn.com/dms/image/C4E03AQFk6V7K-scYmw/profile-displayphoto-shrink_200_200/0/1615309964554?e=1643241600&v=beta&t=MYfX9tafXiM_9pqe5lO0T2QPxLremUoTy55R5KGpGPQ" alt="team-member-pic" />
+                    <img className="team-member-image" src="https://beatmatch-seeds.s3.amazonaws.com/alberto.jfif" alt="team-member-pic" />
                     <div className="team-member-info">
                         <div className="team-member-name">Alberto Young</div>
                         <div className="team-member-role">Frontend Lead</div>
