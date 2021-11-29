@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <div>
-      <Link className="app-logo-link" to="/"><img className="app-logo" src="https://beatmatch-seeds.s3.amazonaws.com/BeatMatchFavicon.png" alt="app-logo" /></Link>
+      <Link className="app-logo-link" to="/"><p className="navbar-text">BM</p></Link>
       <header>
         {location.pathname === '/login' || location.pathname === '/signup' ? null : <HamburgerSearch/>}
       </header>
