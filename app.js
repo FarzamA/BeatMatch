@@ -9,6 +9,7 @@ const playlists = require("./routes/api/playlists");
 const songs = require('./routes/api/songs');
 const follows = require('./routes/api/follows');
 const answers = require('./routes/api/answers');
+const posts = require('./routes/api/posts');
 const seedDb = require('./seeds');
 
 require("./config/passport")(passport);
@@ -97,6 +98,8 @@ app.use('/api/answers', answers);
 app.use('/api/playlists', playlists);
 app.use('/api/questions', questions);
 app.use('/api/follows', follows);
+app.use('/api/posts', posts);
+
 
 const port = process.env.PORT || 5000;
 
