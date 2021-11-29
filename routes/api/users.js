@@ -184,8 +184,6 @@ router.delete('/follow/:username', (req, res) => {
         .then(user => {
           const idx2 = user.following.findIndex((follow) => follow.username === req.params.username);
           user.following.splice(idx2, 1);
-          console.log(creator._id);
-          console.log(user._id);
 
           Post.deleteMany({ creator: creator._id, target: user._id }).exec();
 
@@ -193,11 +191,9 @@ router.delete('/follow/:username', (req, res) => {
 
         })
         user.save();
-        // res.json({
-        //   username: req.body.username,
-        //   user_id: req.body.user_id,
-        //   // profilePicUrl: user.profilePicUrl
-        // });
+        res.json({
+          username: req.body.username,
+        });
       } else {
         res.status(400).json({ alreadyUnFollow: "You don't follow this user"})
       }
