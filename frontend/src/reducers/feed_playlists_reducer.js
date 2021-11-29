@@ -3,7 +3,7 @@ import { RECEIVE_FEED_PLAYLISTS } from '../actions/feed_playlist_actions';
 const _nullState = [];
 
 const feedPlaylistsReducer = (state = _nullState, action) => {
-    Object.feeze(state);
+    Object.freeze(state);
 
     switch(action.type) {
         case RECEIVE_FEED_PLAYLISTS:
