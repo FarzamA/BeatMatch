@@ -13,7 +13,7 @@ class PlaylistIndex extends React.Component{
         const { playlists, user, currentUser, deleteUserPlaylist } = this.props
         // this needs to be refactored so that it checks whether the current user
         // is in the Followed Users of the current profile view
-        // righ now, it defaults to ONLY showing public playlists
+        // right now, it defaults to ONLY showing public playlists
         let visiblePlaylists, playlistsDisplay;
     
         if (playlists.length > 0) {

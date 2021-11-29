@@ -77,13 +77,15 @@ class SearchBar extends React.Component {
                 if (next > 0) {
                     next = document.getElementById(`results-${next}`);
                 } else {
-                    // next = document.getElementById(`results-${this.liCount}`);
                     next = document.getElementById("user-search");
                 }
                 next.focus();
             }
         } else if (e.key === "Escape") {
             this.props.closeSearch();
+        } else if (e.key === "Enter") {
+            this.props.closeSearch();
+            this.props.history.push(`/users/${e.target.innerText}`);
         }
     }
 

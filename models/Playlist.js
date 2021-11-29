@@ -30,6 +30,7 @@ const PlaylistSchema = new Schema({
         type: String,
         required: true
     }
+    // public: Boolean
 },{
     timestamps: true
 });
