@@ -5,16 +5,21 @@ const db = require("../../config/keys").mongoURI;
 // const passport = require('passport');
 
 const Playlist = require('../../models/Playlist');
+const Post = require('../../models/Post');
 
 // Get all playlists by a specific user
 router.get('/user/:user_id', (req, res) => {
+    debugger
     Playlist.find({ user: req.params.user_id })
-        .then(playlists => res.json(playlists))
+        .then(playlists => {
+            res.json(playlists)
+        })
         .catch(err => 
             res.status(404).json({ noPlaylistsFound: 'No playlists found from that user' }))
 });
 
 router.post('/playlist', (req, res) => {
+
     // Send all of your answers to request.body
     Playlist.find({
         answers: req.body.answers,
@@ -34,6 +39,7 @@ router.post('/playlist', (req, res) => {
 })
 // Get a single playlist based on id
 router.get('/:id', (req, res) => {
+    debugger
     Playlist.findById(req.params.id)
         .then(playlist => res.json(playlist))
         .catch(err => 
@@ -51,7 +57,22 @@ router.post('/', (req, res) => {
         spotify_embed_link: req.body.playlist.spotify_embed_link
     })
 
-    newPlaylist.save().then(playlist => res.json(playlist))
+    newPlaylist.save().then(playlist => {
+        User.findById(req.body.user_id)
+        .then(user => {
+            let arr = user.followers;
+            arr.forEach(follower => {
+                Post.create({
+                    creator: req.body.user_id,
+                    target: follower,
+                    spotify_embed_link: req.body.playlist.spotify_embed_link
+                })
+            });
+        })
+
+        // debugger
+        return res.json(playlist)
+    })
 });
 
 router.delete('/:id', (req, res) => { 
