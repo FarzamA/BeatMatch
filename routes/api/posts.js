@@ -3,9 +3,6 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const db = require("../../config/keys").mongoURI;
 
-const Follow = require('../../models/Follow');
-const User = require('../../models/User');
-const Playlist = require('../../models/Playlist');
 const Post = require('../../models/Post');
 
 router.get('/:offset', (req, res) => {
