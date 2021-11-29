@@ -1,6 +1,8 @@
 const express = require("express");
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
+const Playlist = require('../../models/Playlist');
+const Post = require('../../models/Post');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
@@ -142,9 +144,22 @@ router.post('/follow/:username', (req, res) => {
               profilePicUrl: user.profilePicUrl
             };
 
+            // creator
             user_1.followers.push(follower);
 
+            // target
             user.following.push(followed);
+
+            Playlist.find({ user_id: user_1._id })
+              .then(playlists => {
+                playlists.forEach(playlist => {
+                  Post.create({
+                    creator: user_1._id,
+                    target: user._id,
+                    spotify_embed_link: playlist.spotify_embed_link
+                  })
+                })
+              });
 
             user_1.save();
             user.save();
@@ -156,8 +171,11 @@ router.post('/follow/:username', (req, res) => {
 });
 
 router.delete('/follow/:username', (req, res) => {
+  // body - target
+  // params - creator
   User.findOne({ username: req.params.username })
     .then(user => {
+      let creator = user;
       const idx = user.followers.findIndex((follower) => follower.username === req.body.username)
       if (idx >= 0) {
         user.followers.splice(idx, 1);
@@ -166,14 +184,20 @@ router.delete('/follow/:username', (req, res) => {
         .then(user => {
           const idx2 = user.following.findIndex((follow) => follow.username === req.params.username);
           user.following.splice(idx2, 1);
+          console.log(creator._id);
+          console.log(user._id);
+
+          Post.deleteMany({ creator: creator._id, target: user._id }).exec();
+
           user.save();
+
         })
         user.save();
-        res.json({
-          username: req.body.username,
-          user_id: req.body.user_id,
-          // profilePicUrl: user.profilePicUrl
-        });
+        // res.json({
+        //   username: req.body.username,
+        //   user_id: req.body.user_id,
+        //   // profilePicUrl: user.profilePicUrl
+        // });
       } else {
         res.status(400).json({ alreadyUnFollow: "You don't follow this user"})
       }
