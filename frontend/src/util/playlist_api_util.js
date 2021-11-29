@@ -13,9 +13,15 @@ export const fetchPlaylistByUser = (userId) =>
     url: `/api/playlists/user/${userId}`,
   });
 
-export const postPlaylist = (playlist) => 
+export const postPlaylist = (playlist) =>
   axios({
-    method: 'post',
+    method: "POST",
     url: `/api/playlists/`,
-    data: playlist
+    data: playlist,
+  });
+
+export const deletePlaylist = (playlistId) =>
+  axios({
+    method: "DELETE",
+    url: `/api/playlists/${playlistId}`,
   });

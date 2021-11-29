@@ -55,8 +55,9 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => { 
+    const playlistId = req.params.id
     Playlist.deleteOne({ _id: req.params.id }).then( playlist => 
-        res.json(playlist)).catch( error => 
+        res.json(playlistId)).catch( error => 
             console.log(error));
 })
 module.exports = router;
