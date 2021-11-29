@@ -5,12 +5,15 @@ const db = require("../../config/keys").mongoURI;
 
 const Post = require('../../models/Post');
 
-router.get('/:offset', (req, res) => {
-    const offset = parseInt(req.params.offset);
-    Post.find({ target: req.body.user_id }).sort( [['_id', -1]] ).skip(offset).limit(10)
-        .then(posts => {
-            res.json(posts)
-        })
+router.get('/:username', (req, res) => {
+    const offset = parseInt(req.body.offset);
+
+    User.findOne({ username: req.params.username }).then(user => {
+        Post.find({ target: user._id }).sort( [['_id', -1]] ).skip(offset).limit(10)
+            .then(posts => {
+                res.json(posts)
+            })
+    })
 });
 
 module.exports = router;
