@@ -29,7 +29,8 @@ const PlaylistSchema = new Schema({
     spotify_embed_link: {
         type: String,
         required: true
-    }
+    },
+    public: Boolean
 },{
     timestamps: true
 });
