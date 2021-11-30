@@ -8,7 +8,7 @@ const FeedIndexItem = (props) => {
         <li className="feed-index-item">
             <iframe
                 src={feedPlaylist.spotify_embed_link}
-                width="300"
+                width="400"
                 height="380"
                 frameBorder="0"
                 allowtransparency="true"
