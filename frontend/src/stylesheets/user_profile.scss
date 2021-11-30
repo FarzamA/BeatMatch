@@ -24,7 +24,7 @@
             .playlist-options {
                 display: flex;
                 justify-content: space-around;
-                margin: 10px 0px 10px 0px;
+                margin: 15px 0px 15px 0px;
                 .delete {
                     background-color: white;
                     color:#0f0e0f;
@@ -35,16 +35,44 @@
                 .delete:hover {
                         cursor: pointer;
                     }
+                .spotify-export-container {
+                    position: relative;
+                }
                 .spotify-export {
                     background-color: rgb(30,215,96);
                     color:white;
                     padding: 10px;
                     border-radius: 5px;
                     margin-left: 10px;
+                    display: relative;
                 }
+                
                 .spotify-export:hover {
                         cursor: pointer;
-                    }
+                }
+
+                .spotify-modal {
+                        display: none;
+                        position: absolute;
+                        height:300px;
+                        width: 300px;
+                        padding: 20px;
+                        line-height: 1.5;
+                        background-color: rgb(24,24,27);
+                        border: 1px solid #34333b;
+                        top: 50px;
+                        left: 10px;
+                        svg {
+                            font-size: 60px;
+                        }
+                }
+                .spotify-modal.clicked {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        align-items: center;
+                }
+                    
             }
         }
     }
