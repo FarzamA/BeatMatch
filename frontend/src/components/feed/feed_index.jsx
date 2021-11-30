@@ -1,5 +1,7 @@
 import React from "react";
 
+import FeedIndexItem from './feed_index_item';
+
 class FeedIndex extends React.Component {
     constructor(props) {
         super(props);
@@ -18,9 +20,17 @@ class FeedIndex extends React.Component {
 
     render() {
 
+        const { feedPlaylists } = this.props;
+
+        if (!feedPlaylists) return (<div className="placeholder"></div>);
+
         return (
-            <div>
-                ayyyyy
+            <div className="feed-index-container">
+                <ul className="feed-index">
+                    {feedPlaylists.map((feedPlaylist, idx) => 
+                        <FeedIndexItem key={idx} feedPlaylist={feedPlaylist} />
+                    )}
+                </ul>
             </div>
         )
     }
