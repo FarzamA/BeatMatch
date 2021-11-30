@@ -6,7 +6,6 @@ const db = require("../../config/keys").mongoURI;
 const Post = require('../../models/Post');
 
 router.get('/:username', (req, res) => {
-    console.log(req.query.offset)
     const offset = parseInt(req.query.offset);
 
     User.findOne({ username: req.params.username }).then(user => {
