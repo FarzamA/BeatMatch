@@ -236,7 +236,7 @@ class QuestionsForm extends React.Component {
         const { questions } = this.props;
         const genres = [ "metal", "disney", "hip-hop", "k-pop", "new-release", "pop", "r-n-b", "latino", "world-music", "edm", "jazz", "country", "anime", "rock", "indie", "study", "work-out" ];
         const question = questions[pageNum - 1];
-        const previewPlaylistButton = <button className="questions-submit-button button-grow" onClick={this.generatePlaylist}>Preview Playlist</button>;
+        const previewPlaylistButton = <button className="questions-submit-button button-grow" onClick={this.generatePlaylist}>Generate Playlist</button>;
         const playlistPreview = this.state.generatedPlaylist ? (
             <div className="playlist-preview-container">
                 <div className="playlist-preview-heading">Check out your brand new playlist!</div>
