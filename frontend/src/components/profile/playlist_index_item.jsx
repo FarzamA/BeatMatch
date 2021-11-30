@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import SpotifyModal from "../spotify_modal/spotify_modal";
 
 const PlaylistIndexItem = (props) => {
   const { playlist, deleteUserPlaylist } = props;
@@ -11,13 +12,13 @@ const PlaylistIndexItem = (props) => {
         <div className="delete" onClick={() => 
           deleteUserPlaylist(playlist._id)
           }>Delete Playlist</div>
-        <div className="spotify-export">Export to Spotify</div>
+        <SpotifyModal/>
       </div>
     )
   } else {
     playlistOptions = (
       <div className="playlist-options">
-        <div className="spotify-export">Export to Spotify</div>
+        <SpotifyModal/>
       </div>
     )
   }
