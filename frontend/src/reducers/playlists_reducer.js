@@ -25,6 +25,6 @@ const playlistsReducer = (state = _nullState, action) => {
         default:
             return state;
     }
-}
+};
 
 export default playlistsReducer;

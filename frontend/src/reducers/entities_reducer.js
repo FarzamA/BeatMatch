@@ -5,6 +5,7 @@ import followingReducer from './following_reducer'
 import questionsReducer from './questions_reducer';
 import searchResultsReducer from './search_results_reducer';
 import playlistsReducer from './playlists_reducer';
+import feedPlaylistsReducer from './feed_playlists_reducer';
 
 
 const entitiesReducer = combineReducers({
@@ -13,7 +14,8 @@ const entitiesReducer = combineReducers({
     following: followingReducer,
     questions: questionsReducer,
     searchResults: searchResultsReducer,
-    playlists: playlistsReducer
+    playlists: playlistsReducer,
+    feedPlaylists: feedPlaylistsReducer
 });
 
 export default entitiesReducer;
