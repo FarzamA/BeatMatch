@@ -155,9 +155,12 @@ router.post('/follow/:username', (req, res) => {
                 playlists.forEach(playlist => {
                   Post.create({
                     creator: user_1._id,
+                    creator_name: user_1.username,
+                    creator_profilePicUrl: user_1.profilePicUrl,
                     target: user._id,
-                    spotify_embed_link: playlist.spotify_embed_link
-                  })
+                    spotify_embed_link: playlist.spotify_embed_link,
+                    creation_date: playlist.createdAt
+                  });
                 })
               });
 

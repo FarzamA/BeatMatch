@@ -17,7 +17,6 @@ const UserSchema = new Schema({
     profilePicUrl: {
       required: false,
       type: String
-      // default: 'https://fixedin-seeds.s3.amazonaws.com/defaultUser.png'
     },
     // followers: {
     //   type: Number,
