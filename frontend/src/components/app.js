@@ -10,6 +10,7 @@ import UserProfileContainer from './profile/user_profile_container';
 import HomeProfileContainer from './profile/home_profile_container';
 import HamburgerSearch from './hamburger_search/hamburger_search';
 import FeedIndexContainer from './feed/feed_index_container';
+import FollowIndexContainer from './follows/follow_index_container';
 import Footer from './footer/footer';
 import '../stylesheets/base.scss';
 
@@ -31,6 +32,8 @@ const App = () => {
           <ProtectedRoute exact path="/questions" component={QuestionsFormContainer} />
           <ProtectedRoute path="/users/:username" component={UserProfileContainer} />
           <ProtectedRoute exact path="/profile" component={HomeProfileContainer} />
+          <ProtectedRoute path="/:username/followers" component={FollowIndexContainer} />
+          <ProtectedRoute path="/:username/following" component={FollowIndexContainer} />
           <ProtectedRoute exact path="/feed" component={FeedIndexContainer} />
       </Switch>
       <footer>
