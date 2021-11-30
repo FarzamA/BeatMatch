@@ -5,23 +5,47 @@ import FollowIndexItem from './follow_index_item';
 class FollowIndex extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            username: this.props.username,
+            followers: this.props.followers,
+            following: this.props.following
+        }
+    }
+
+    componentDidMount() {
+        this.props.fetchUser(this.props.match.params.username)
+            .then(data => {
+                this.setState({
+                    username: data.user.username,
+                    followers: data.user.followers,
+                    following: data.user.following
+                })
+            })
     }
 
     render() {
-        const { followers, following } = this.props;
+        const { followers, following, username } = this.state;
         const followerValues = Object.values(followers);
         console.log('props', this.props);
+        let list;
+
+        if (this.props.location.pathname === `/${username}/followers`) {
+            list = (<div>
+                {followerValues.map((follow, idx) => 
+                    <FollowIndexItem key={idx} follow={follow} />)}
+            </div>)
+        } else if(this.props.location.pathname === `/${username}/following`) {
+            list = (<div>
+                {following.map((follow, idx) => 
+                    <FollowIndexItem key={idx} follow={follow} />)}
+            </div>)
+        }
 
         return(
             <div className='follow-index-container'>
                 <ul className='follow-index'>
-                    {
-                        this.props.location.pathname === '/followers' ?
-                            followerValues.map((follow, idx) => 
-                                <FollowIndexItem key={idx} follow={follow} />)
-                            : following.map((follow, idx) => 
-                                <FollowIndexItem key={idx} follow={follow} />)
-                    }
+                    { list }
                 </ul>
             </div>
         )

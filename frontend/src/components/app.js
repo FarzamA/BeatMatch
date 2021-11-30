@@ -32,8 +32,8 @@ const App = () => {
           <ProtectedRoute exact path="/questions" component={QuestionsFormContainer} />
           <ProtectedRoute path="/users/:username" component={UserProfileContainer} />
           <ProtectedRoute exact path="/profile" component={HomeProfileContainer} />
-          <ProtectedRoute exact path="/followers" component={FollowIndexContainer} />
-          <ProtectedRoute exact path="/following" component={FollowIndexContainer} />
+          <ProtectedRoute path="/:username/followers" component={FollowIndexContainer} />
+          <ProtectedRoute path="/:username/following" component={FollowIndexContainer} />
           <ProtectedRoute exact path="/feed" component={FeedIndexContainer} />
       </Switch>
       <footer>

@@ -66,8 +66,8 @@ class UserDetailsBox extends React.Component {
                     <div className="followers-options">
                         {/* text should change depending on whether you're following */}
                         {/* should pluralize */}
-                        <Link to='/followers'><p>{followers.length} {followersText}</p></Link>
-                        <Link to='/following'><p>{following.length} Following</p></Link>
+                        <Link to={`/${user.username}/followers`}><p>{followers.length} {followersText}</p></Link>
+                        <Link to={`/${user.username}/following`}><p>{following.length} Following</p></Link>
                     </div>
                     {followButton}
                 </div>
