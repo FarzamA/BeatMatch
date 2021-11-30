@@ -6,6 +6,10 @@
     font-size: x-large;
     font-weight: bold;
 
+    h1 {
+        margin-top: 110px;
+    }
+
     .follow-index {
         min-width: fit-content;
         max-width: fit-content;
@@ -15,25 +19,32 @@
         box-shadow: 0px 0px 30px #0f0e0f;
         border-radius: 10px;
         background-color: rgba(255, 255, 255, 0.02);
-        margin-top: 120px;
+        margin-top: 30px;
         padding: 0px 130px;
         
             div {
 
                 li {
-                    border-bottom: 1px solid #3205a4;
+                    
                     margin-bottom: 50px;
                     margin-top: 50px;
 
                     a {
                         display: flex;
                         margin: 10px 10px 10px 10px;
+                        border-bottom: 1px solid #34333b;
         
                         p {
                             margin-left: 30px;
                         }
         
+                        &:hover {
+                            transform: scale(1.5);
+                            transition: 0.5s;
+                            color: #3205a4;
+                        }
                     }
+
                 }
             }
 

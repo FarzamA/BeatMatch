@@ -36,18 +36,18 @@ class FollowIndex extends React.Component {
                 {followerValues.map((follow, idx) => 
                     <FollowIndexItem key={idx} follow={follow} />)}
             </div>);
-            // header = <h1>Followers:</h1>
+            header = (<h1>Followers:</h1>);
         } else if(this.props.location.pathname === `/${username}/following`) {
             list = (<div>
                 {following.map((follow, idx) => 
                     <FollowIndexItem key={idx} follow={follow} />)}
             </div>);
-            // header = <h1>Following:</h1>
+            header = (<h1>Following:</h1>);
         }
 
         return(
             <div className='follow-index-container'>
-                {/* { header } */}
+                { header }
                 <ul className='follow-index'>
                     { list }
                 </ul>
