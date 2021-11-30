@@ -1,6 +1,8 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeadphonesAlt } from '@fortawesome/free-solid-svg-icons';
+import { FacebookShareButton,TwitterShareButton,LinkedinShareButton } from "react-share";
+import { faFacebook,faTwitter,faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 class UserDetailsBox extends React.Component {
 
@@ -55,7 +57,6 @@ class UserDetailsBox extends React.Component {
         }
 
         const followersText = followers.length === 1 ? "Follower" : "Followers";
-
         return (
             
             <div className="user-details-box">
@@ -69,6 +70,17 @@ class UserDetailsBox extends React.Component {
                         <p>{following.length} Following</p>
                     </div>
                     {followButton}
+                    <div className="share-buttons">
+                        <FacebookShareButton url={`https://beat-match-mern.herokuapp.com/users/${user.username}`} quote={`Checkout ${user.username}'s playlists on BeatMatch!`}>
+                            <FontAwesomeIcon icon={faFacebook}/>
+                        </FacebookShareButton>
+                        <TwitterShareButton url={`https://beat-match-mern.herokuapp.com/users/${user.username}\n\n`} hashtags={["Spotify","Music"]} title={` Checkout ${user.username}'s playlists on BeatMatch!\n\n`}>
+                            <FontAwesomeIcon icon={faTwitter}/>
+                        </TwitterShareButton>
+                        <LinkedinShareButton url={`https://beat-match-mern.herokuapp.com/users/${user.username}`} summary={`Checkout ${user.username}'s playlists on BeatMatch!`}>
+                            <FontAwesomeIcon icon={faLinkedin}/>
+                        </LinkedinShareButton>
+                    </div>
                 </div>
                 {/* <ul className="user-details-ul">
                     <li className="user-detail-item"></li>
