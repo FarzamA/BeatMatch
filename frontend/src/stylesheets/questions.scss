@@ -150,6 +150,13 @@
             transform: translateY(-3px);
         }
     }
+
+    .playlist-preview-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .first-answer {

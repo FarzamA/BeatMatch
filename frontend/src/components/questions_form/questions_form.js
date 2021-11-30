@@ -12,11 +12,13 @@ class QuestionsForm extends React.Component {
             textColors: ['#b81d45', '#ff6783', '#ff6783', '#ff60b8', '#4cc141', '#d6dd21', '#672d91', '#0d4215', '#fffa69', '#ed3747', '#1a71eb', '#531754'],
             questions: this.props.questions,
             answers: new Array(this.props.questions.length),
-            targetCategories: this.props.targetCategories
+            targetCategories: this.props.targetCategories,
+            generatedPlaylist: null
         };
 
         this.handleInput = this.handleInput.bind(this);
         this.generatePlaylist = this.generatePlaylist.bind(this);
+        this.savePlaylist = this.savePlaylist.bind(this);
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseLeave = this.handleMouseLeave.bind(this);
         this.setGenre = this.setGenre.bind(this);
@@ -210,13 +212,20 @@ class QuestionsForm extends React.Component {
             answers: answersArray,
             genre: selectedGenre
         }
+
         this.props.fetchPlaylist(responseObj)
             .then(playlist => {
-                playlist.user_id = this.props.currentUser.id;
-                this.props.postPlaylist(playlist);
-            }).then(() => this.props.history.push({
-            pathname: '/profile'
-        }));
+                this.setState({ generatedPlaylist: playlist });
+            });
+    }
+
+    savePlaylist(){
+        const playlist = this.state.generatedPlaylist;
+        playlist.user_id = this.props.currentUser.id;
+        this.props.postPlaylist(playlist)
+            .then(() => this.props.history.push({
+                pathname: '/profile'
+            }));
     }
     
     render(){
@@ -227,7 +236,24 @@ class QuestionsForm extends React.Component {
         const { questions } = this.props;
         const genres = [ "metal", "disney", "hip-hop", "k-pop", "new-release", "pop", "r-n-b", "latino", "world-music", "edm", "jazz", "country", "anime", "rock", "indie", "study", "work-out" ];
         const question = questions[pageNum - 1];
-        const submitButton = <button className="questions-submit-button button-grow" onClick={this.generatePlaylist}>Create Playlist</button>;
+        const previewPlaylistButton = <button className="questions-submit-button button-grow" onClick={this.generatePlaylist}>Preview Playlist</button>;
+        const playlistPreview = this.state.generatedPlaylist ? (
+            <div className="playlist-preview-container">
+                <div className="playlist-preview-heading">Check out your brand new playlist!</div>
+                <iframe
+                    src={this.state.generatedPlaylist.playlist.spotify_embed_link}
+                    width="300"
+                    height="380"
+                    frameBorder="0"
+                    allowtransparency="true"
+                    allow="encrypted-media"
+                ></iframe>
+                <div>Like what you're hearing?</div>
+                <button onClick={this.savePlaylist}>Save to Profile</button>
+            </div>
+        ) : (
+            <div>Loading...</div>
+        );
         const selectGenreQuestion = (
             <div className="question-content">
                 <div className="genre-question-text">Select a genre</div>
@@ -282,10 +308,21 @@ class QuestionsForm extends React.Component {
                     </div>
                 ) : <></>;
         }
+
+        if(this.state.generatedPlaylist){
+            return (
+                <div>
+                    <div className="question-container">
+                        <div>{playlistPreview}</div>
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div>
                 <div className="question-container">
-                    {pageNum > this.props.questions.length ? submitButton : questionsContent}
+                    {pageNum > this.props.questions.length ? previewPlaylistButton : questionsContent}
                 </div>
             </div>
         );
