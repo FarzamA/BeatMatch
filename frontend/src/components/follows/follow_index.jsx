@@ -29,21 +29,25 @@ class FollowIndex extends React.Component {
         const followerValues = Object.values(followers);
         console.log('props', this.props);
         let list;
+        let header;
 
         if (this.props.location.pathname === `/${username}/followers`) {
             list = (<div>
                 {followerValues.map((follow, idx) => 
                     <FollowIndexItem key={idx} follow={follow} />)}
-            </div>)
+            </div>);
+            // header = <h1>Followers:</h1>
         } else if(this.props.location.pathname === `/${username}/following`) {
             list = (<div>
                 {following.map((follow, idx) => 
                     <FollowIndexItem key={idx} follow={follow} />)}
-            </div>)
+            </div>);
+            // header = <h1>Following:</h1>
         }
 
         return(
             <div className='follow-index-container'>
+                {/* { header } */}
                 <ul className='follow-index'>
                     { list }
                 </ul>
