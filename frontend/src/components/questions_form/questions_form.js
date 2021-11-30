@@ -248,8 +248,8 @@ class QuestionsForm extends React.Component {
                     allowtransparency="true"
                     allow="encrypted-media"
                 ></iframe>
-                <div>Like what you're hearing?</div>
-                <button onClick={this.savePlaylist}>Save to Profile</button>
+                <div className="save-playlist-prompt">Like what you're hearing?</div>
+                <button className="save-playlist-button" onClick={this.savePlaylist}>Save to Profile</button>
             </div>
         ) : (
             <div>Loading...</div>
