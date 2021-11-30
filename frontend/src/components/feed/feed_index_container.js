@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { fetchFeedPlaylists } from '../../actions/feed_playlist_actions';
+import { fetchInitialFeedPlaylists, fetchAddlFeedPlaylists } from '../../actions/feed_playlist_actions';
 import FeedIndex from './feed_index';
 
 const mSTP = state => ({
@@ -8,7 +8,8 @@ const mSTP = state => ({
 });
 
 const mDTP = dispatch => ({
-    fetchFeedPlaylists: (username, offset) => dispatch(fetchFeedPlaylists(username, offset))
+    fetchInitialFeedPlaylists: (username, offset) => dispatch(fetchInitialFeedPlaylists(username, offset)),
+    fetchAddlFeedPlaylists: (username, offset) => dispatch(fetchAddlFeedPlaylists(username, offset))
 });
 
 export default connect(mSTP, mDTP)(FeedIndex);
