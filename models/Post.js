@@ -6,6 +6,14 @@ const PostSchema = new Schema({
         type: mongoose.ObjectId, 
         ref: 'User'
     },
+    creator_name: {
+        type: String,
+        required: true
+    },
+    creator_profilePicUrl: {
+        required: false,
+        type: String
+    },
     target: {
         type: mongoose.ObjectId, 
         ref: 'User'
@@ -14,6 +22,10 @@ const PostSchema = new Schema({
         type: String,
         required: true
     },
+    creation_date: {
+        type: Date,
+        required: true
+    }
 },{
     timestamps: true
 });
