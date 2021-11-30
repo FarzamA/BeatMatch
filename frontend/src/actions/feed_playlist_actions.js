@@ -7,8 +7,8 @@ export const receiveFeedPlaylists = playlists => ({
     playlists
 });
 
-export const fetchFeedPlaylists = (username, offset) => (
+export const fetchFeedPlaylists = (username, offset) => (dispatch) => (
     FeedAPIUtil.fetchFeedPlaylists(username, offset)
-        .then(res => dispatchEvent(receiveFeedPlaylists(res.data)))
+        .then(res => dispatch(receiveFeedPlaylists(res.data)))
         .catch(err => console.log(err))
 );
