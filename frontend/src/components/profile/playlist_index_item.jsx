@@ -3,6 +3,25 @@ import { NavLink } from "react-router-dom";
 
 const PlaylistIndexItem = (props) => {
   const { playlist, deleteUserPlaylist } = props;
+  let playlistOptions;
+
+  if (window.location.hash === "#/profile"){
+    playlistOptions = (
+      <div className="playlist-options">
+        <div className="delete" onClick={() => 
+          deleteUserPlaylist(playlist._id)
+          }>Delete Playlist</div>
+        <div className="spotify-export">Export to Spotify</div>
+      </div>
+    )
+  } else {
+    playlistOptions = (
+      <div className="playlist-options">
+        <div className="spotify-export">Export to Spotify</div>
+      </div>
+    )
+  }
+
   return (
     <li className="playlist-index-item">
       <NavLink to={`/playlists/${playlist.id}`}>
@@ -15,10 +34,7 @@ const PlaylistIndexItem = (props) => {
           allow="encrypted-media"
         ></iframe>
       </NavLink>
-      <div className="delete" onClick={() => {
-        return deleteUserPlaylist(playlist._id)
-        }}>Delete Playlist</div>
-      <div className="spotify-export">Export to Spotify</div>
+      {playlistOptions}
     </li>
   );
 };

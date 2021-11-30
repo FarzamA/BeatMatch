@@ -9,7 +9,6 @@ const Post = require('../../models/Post');
 
 // Get all playlists by a specific user
 router.get('/user/:user_id', (req, res) => {
-    debugger
     Playlist.find({ user: req.params.user_id })
         .then(playlists => {
             res.json(playlists)
@@ -39,7 +38,6 @@ router.post('/playlist', (req, res) => {
 })
 // Get a single playlist based on id
 router.get('/:id', (req, res) => {
-    debugger
     Playlist.findById(req.params.id)
         .then(playlist => res.json(playlist))
         .catch(err => 
@@ -70,7 +68,6 @@ router.post('/', (req, res) => {
             });
         })
 
-        // debugger
         return res.json(playlist)
     })
 });
