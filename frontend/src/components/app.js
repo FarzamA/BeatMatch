@@ -19,8 +19,8 @@ const App = () => {
 
   return (
     <div>
-      <Link className="app-logo-link" to="/"><p className="navbar-text">BM</p></Link>
       <header>
+        <Link className="app-logo-link" to="/"><p className="navbar-text">BM</p></Link>
         {location.pathname === '/login' || location.pathname === '/signup' ? null : <HamburgerSearch/>}
       </header>
       <Switch>

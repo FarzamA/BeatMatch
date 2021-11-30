@@ -11,6 +11,7 @@ class BurgerLinks extends React.Component {
 
     bindFuncs() {
         this.logoutUser = this.logoutUser.bind(this);
+        this.loginDemo = this.loginDemo.bind(this);
         this.getLinks = this.getLinks.bind(this);
     }
 
@@ -20,16 +21,21 @@ class BurgerLinks extends React.Component {
         this.props.logout();
     }
 
+    loginDemo(e) {
+        e.preventDefault();
+        this.props.loginDemo();
+    }
+
 
     getLinks() {
         if (this.props.loggedIn) {
             return (
                 <div className="burger-links">
                     <Link to='/profile'><p>Profile</p></Link>
-                    <Link to='/feed'><p>Feed</p></Link>
                     <Link to="/questions"><p>Make New Playlist</p></Link>
-                    <div onClick={this.logoutUser}><p>Logout</p></div>
+                    <Link to='/feed'><p>Feed</p></Link>
                     <Link to="/about"><p>About Us</p></Link>
+                    <div onClick={this.logoutUser}><p>Logout</p></div>
                 </div>
             );
       } else {
@@ -37,8 +43,8 @@ class BurgerLinks extends React.Component {
                 <div className="burger-links">
                     <Link to={'/signup'}><p>Signup</p></Link>
                     <Link to={'/login'}><p>Login</p></Link>
+                    <div onClick={this.loginDemo}><p>Login as DEMO</p></div>
                     <Link to="/about"><p>About Us</p></Link>
-                    <Link to="/questions"><p>Make New Playlist</p></Link>
                 </div>
             );
       } 
