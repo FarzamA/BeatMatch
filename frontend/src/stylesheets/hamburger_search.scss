@@ -11,7 +11,7 @@
 .search-icon {
     position: relative;
     font-size: 27px;
-    color: #333;
+    color: white;
 
     &.clicked {
         color: white;
@@ -23,7 +23,7 @@
     position: relative;
     width: 35px;
     height: 5px;
-    background-color: #333;
+    background-color: white;
     margin: 6px 0;
     transition: 0.4s;
     z-index: 20;
@@ -69,7 +69,6 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-
         font-size: 22px;
 
         > * {
@@ -90,9 +89,7 @@
             cursor: pointer;
             border: 1px solid white;
         }
-
     }
-
 }
 
 

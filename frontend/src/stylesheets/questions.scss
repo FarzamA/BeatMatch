@@ -109,8 +109,6 @@
 
                     &:hover{
                         cursor: pointer;
-                        transform: translateY(-3px);
-                        box-shadow: 0px 5px 5px #6e6e6e5e;
                     }
                 }
             }
@@ -146,9 +144,54 @@
 
         &:hover {
             cursor: pointer;
-            box-shadow: 0px 5px 5px #6e6e6e5e;
-            transform: translateY(-3px);
         }
+    }
+
+    .playlist-preview-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .playlist-preview-heading{
+            font-size: 48px;
+            margin-top: 60px;
+            animation: 2s slidein;
+        }
+
+        iframe {
+            margin-top: 50px;
+            animation: 3s slidein;
+        }
+
+        .save-playlist-prompt {
+            font-size: 20px;
+            padding: 30px 0 20px 0;
+            animation: 4s slidein;
+        }
+
+        .save-playlist-button {
+            font-size: 18px;
+            width: 250px;
+            height: 40px;
+            border: none;
+            border-radius: 40px;
+            animation: 4s slidein;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@keyframes slidein {
+    0% {
+        transform: translateY(100vh);
+    }
+    
+    100% {
+        transform: translateY(0px);
     }
 }
 
