@@ -18,6 +18,10 @@
     }
 }
 
+.hamburger:hover, .search-icon:hover {
+    cursor: pointer;
+}
+
 
 .burger-bar1, .burger-bar2, .burger-bar3 {
     position: relative;
@@ -60,7 +64,7 @@
     transition: 0.4s;
     border-radius: 10px;
     padding: 55px 20px 55px 20px;
-    height: 300px;
+    height: 340px;
 
     .burger-links {
         width: 100%;
