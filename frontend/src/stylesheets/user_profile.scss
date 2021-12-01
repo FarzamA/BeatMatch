@@ -26,6 +26,37 @@
     padding: 0px 130px;
     min-height: 86vh;
 
+    // this is for scrollbars on Firefox
+    scrollbar-width: auto;
+    scrollbar-color: rgba(40, 40, 40, 0) rgba(40, 40, 40, 0.516);
+
+    div {
+        padding-right: 10px;
+    }
+        // scrollbars for chrome
+        ::-webkit-scrollbar {
+            width: 15px;
+            // border-radius: 10px;
+            margin-right: 5px;
+            padding-right: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            // border: 1px solid yellowgreen;
+            border-radius: 10px;
+            // background-color: rgba(65, 65, 65, 0.3)
+            // color:black;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgb(140,140,140);
+            // background: linear-gradient(-45deg, rgb(95,95,88), rgb(58, 58, 58));
+            // background-size: 1000% 1000%;
+            // animation: gradient 15s ease infinite;
+            // border: 3px solid rgba(40, 40, 40, 0);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgb(125,125,125);
+        }
 
     .playlist-index {
         display: flex;
@@ -40,7 +71,11 @@
         border-radius: 10px;
         width: 100%;
         box-shadow: 0px 0px 30px #0f0e0f;
+        height: 1000px;
+        overflow-y: scroll;
 
+
+        
         // background: linear-gradient(-45deg, #eec452, #e73c7e, #5823d5, #d5239a);
         // background-size: 400% 400%;
         // animation: gradient 15s ease infinite;
@@ -72,7 +107,7 @@
                 .spotify-export-container {
                     position: relative;
                 }
-                
+
                 .spotify-export {
                     background-color: rgb(30,215,96);
                     color:white;
