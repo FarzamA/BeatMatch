@@ -18,6 +18,10 @@ const PostSchema = new Schema({
         type: mongoose.ObjectId, 
         ref: 'User'
     },
+    playlist_id: {
+        type: mongoose.ObjectId, 
+        ref: 'Playlist'
+    },
     spotify_embed_link: {
         type: String,
         required: true
