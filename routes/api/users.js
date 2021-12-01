@@ -242,7 +242,7 @@ router.patch('/:username', (req, res) => {
 
 router.get('/search/:query', (req, res) => {
 
-  let queryRegExp = new RegExp(`\^${req.params.query}\.\*`);
+  let queryRegExp = new RegExp(`\^${req.params.query}\.\*`, "i");
 
   User.find(
     // currently not using, since indexing isn't compatible with regex partial results
