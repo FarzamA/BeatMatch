@@ -160,6 +160,7 @@ router.post('/follow/:username', (req, res) => {
                     creator_name: user_1.username,
                     creator_profilePicUrl: user_1.profilePicUrl,
                     target: user._id,
+                    playlist_id: playlist._id,
                     spotify_embed_link: playlist.spotify_embed_link,
                     creation_date: playlist.createdAt
                   });
