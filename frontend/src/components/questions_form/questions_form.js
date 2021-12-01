@@ -142,7 +142,16 @@ class QuestionsForm extends React.Component {
         const { questions } = this.props;
         const genres = [ "metal", "disney", "hip-hop", "k-pop", "new-release", "pop", "r-n-b", "latino", "world-music", "edm", "jazz", "country", "anime", "rock", "indie", "study", "work-out" ];
         const question = questions[pageNum - 1];
-        const previewPlaylistButton = <button className="questions-submit-button button-grow" onClick={this.generatePlaylist}>Generate Playlist</button>;
+        const previewPlaylistButton = (
+            <div className="question-content">
+                <div className="question-text">Almost there...</div>
+                <div className="answers-container">
+                    <div className="answer-option-container">
+                        <button className="questions-submit-button button-grow" onClick={this.generatePlaylist}>Generate Playlist</button>
+                    </div>
+                </div>
+            </div>
+        );
         const playlistPreview = this.state.generatedPlaylist ? (
             <div className="playlist-preview-container">
                 <div className="playlist-preview-heading">Check out your brand new playlist!</div>
@@ -192,9 +201,10 @@ class QuestionsForm extends React.Component {
                         <div className="answers-container">
                             {question.answerOptions.map((answerOption, i) => {
                                 return (
-                                    <div className="answer-option-container" onClick={(e) => this.handleInput(e, pageNum - 1, answerOption.answerValue)} key={`answer-${i}`}>
+                                    <div className="answer-option-container" key={`answer-${i}`}>
                                         <div 
                                             className="answer-option" 
+                                            onClick={(e) => this.handleInput(e, pageNum - 1, answerOption.answerValue)} 
                                             onMouseEnter={(e) => this.handleMouseEnter(e)}
                                             onMouseLeave={(e) => this.handleMouseLeave(e)}
                                         >
