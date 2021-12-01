@@ -49,7 +49,7 @@ const AboutPage = () => {
                         <div className="team-member-links">
                             <a className="team-member-social-link" target="_blank" href="https://www.linkedin.com/in/elliot-wilson-4897a81b9/"><i className="fab fa-linkedin-in"></i></a>
                             <a className="team-member-social-link" target="_blank" href="https://github.com/elliot-wilson"><i className="fab fa-github"></i></a>
-                            <a className="team-member-social-link" target="_blank" href="https://angel.co"><i className="fab fa-angellist"></i></a>
+                            <a className="team-member-social-link" target="_blank" href="https://angel.co/u/elliot-wilson-dev"><i className="fab fa-angellist"></i></a>
                             <a className="team-member-social-link" target="_blank" href="https://www.linkedin.com/in/elliot-wilson-4897a81b9/"><i className="fas fa-user-tie"></i></a>
                         </div>
                     </div>
