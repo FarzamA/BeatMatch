@@ -8,6 +8,7 @@ class FeedIndex extends React.Component {
 
         this.state = {
             offset: 0,
+            didSearch: false,
             morePosts: true
         };
 
@@ -41,7 +42,8 @@ class FeedIndex extends React.Component {
         let username = this.props.currentUser.username;
         let offset = this.state.offset;
 
-        this.props.fetchInitialFeedPlaylists(username, offset);
+        this.props.fetchInitialFeedPlaylists(username, offset)
+            .then(this.setState({didSearch: true}));
     }
 
     incrementOffset() {
@@ -53,6 +55,17 @@ class FeedIndex extends React.Component {
         const { feedPlaylists } = this.props;
 
         if (!feedPlaylists) return (<div className="placeholder"></div>);
+
+        let endMessage;
+        if (this.state.didSearch && feedPlaylists.length === 0) {
+            endMessage = (
+                <div className="end-message"><p>Your feed is empty! Try following more people.</p></div>
+            )
+        } else if (!this.state.morePosts) {
+            endMessage = (
+                <div className="end-message"><p>You've reached the end of your feed!</p></div>
+            )
+        }
 
         return (
             <ul className="feed-index">
@@ -72,6 +85,7 @@ class FeedIndex extends React.Component {
                     }
                 }
                 )}
+                {endMessage}
             </ul>
         )
     }
