@@ -30,6 +30,7 @@ class MainPage extends React.Component {
   }
 
   componentDidMount(){
+    window.scrollTo(0,0);
     document.addEventListener('scroll', this.checkScrollPosition);
   }
 
