@@ -16,12 +16,14 @@
         font-size: 144px;
         top: 30vh;
         position: absolute;
+        text-shadow: 12px 9px 4px rgba(0, 0, 0, 1);
 
         .main-page-about-link{
             display: flex;
             justify-content: flex-end;
             font-size: 20px;
             font-family: 'Didact Gothic', sans-serif;
+            text-shadow: 6px 5px 4px rgba(0, 0, 0, 0);
         }
     }
     
