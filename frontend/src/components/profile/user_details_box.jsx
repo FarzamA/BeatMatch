@@ -13,6 +13,12 @@ class UserDetailsBox extends React.Component {
         this.processFollow = this.processFollow.bind(this);
     }
 
+    componentDidMount() {
+        const { user, currentUser } = this.props;
+
+        if (!user) this.props.fetchUser(currentUser.username);
+    }
+
 
     processFollow() {
 
@@ -41,6 +47,8 @@ class UserDetailsBox extends React.Component {
                 currentUser,
                 followers,
                 following } = this.props;
+
+        if (!user) return (<div className="placeholder"></div>)
         
         let profilePhoto;
         // this shows either a user photo or a pair of headphones
