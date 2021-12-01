@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const FeedIndexItem = (props) => {
 
-    const { feedPlaylist } = props;
+    const { feedPlaylist, currentUser } = props;
 
     const date = new Date(feedPlaylist.creation_date);
 
@@ -24,20 +24,25 @@ const FeedIndexItem = (props) => {
         realTime = Math.floor(timeAgo / 31536000000) +'y ago';
     }
 
-    // console.log(realTime);
+    let creatorName;
+    if (feedPlaylist.creator_name === currentUser.username) {
+        creatorName = "you";
+    } else {
+        creatorName = feedPlaylist.creator_name;
+    }
 
     return (
         <li className="feed-index-item">
             <p>
                 Created by&nbsp;
-                <Link to={`/users/${feedPlaylist.creator_name}`}>{feedPlaylist.creator_name}</Link>
+                <Link to={`/users/${feedPlaylist.creator_name}`}>{creatorName}</Link>
                 {/* &nbsp; on {date.toLocaleDateString()} at {date.toLocaleTimeString()} */}
                 {/* &nbsp; {realTime} */}
             </p>
             <iframe
                 src={feedPlaylist.spotify_embed_link}
-                width="500"
-                height="680"
+                width="400"
+                height="500"
                 frameBorder="0"
                 allowtransparency="true"
                 allow="encrypted-media"
