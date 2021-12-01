@@ -62,6 +62,7 @@ router.post('/', (req, res) => {
             const creator = user;
             let arr = user.followers;
             arr.forEach(follower => {
+                // populate all the people that follow you with your new playlist
                 const post1 = new Post({
                     creator: req.body.user_id,
                     creator_name: user.username,

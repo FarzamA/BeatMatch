@@ -1,23 +1,26 @@
 .feed-index {
     // background-color: rgba(255, 255, 255, 0.02);
-    border: 1px solid #34333b;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    // border: 1px solid #34333b;
+    // border-radius: 10px;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
     // background: linear-gradient(-45deg, #eec452, #e73c7e, #5823d5, #d5239a);
     // background-size: 400% 400%;
     // animation: gradient 15s ease infinite;
 }
 
 .feed-index-item {
+    border: 1px solid #34333b;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     height: 750px;
     padding: 0 40px 40px 40px;
     border-bottom: 1px solid #34333b;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 30px #0f0e0f;
 
     p {
         font-size: 20px;
