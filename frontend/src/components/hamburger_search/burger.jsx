@@ -41,7 +41,7 @@ class Burger extends React.Component {
 
     render() {
 
-        const { loggedIn, logout, loginDemo } = this.props;
+        const { loggedIn, logout, loginDemo, deactivateBurgerModal } = this.props;
 //         debugger
         let burgerClicked;
         if (this.state.burgerClicked) {
@@ -60,6 +60,7 @@ class Burger extends React.Component {
                     logout={logout}
                     loginDemo={loginDemo}
                     burgerClicked={burgerClicked}
+                    transformBurger={this.transformBurger}
                 />
             </div>
         )

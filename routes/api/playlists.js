@@ -68,6 +68,7 @@ router.post('/', (req, res) => {
                     creator_name: user.username,
                     creator_profilePicUrl: user.profilePicUrl,
                     target: follower.user_id,
+                    playlist_id: playlist._id,
                     spotify_embed_link: playlist.spotify_embed_link,
                     creation_date: playlist.createdAt
                 });
@@ -80,6 +81,7 @@ router.post('/', (req, res) => {
                 creator_name: creator.username,
                 creator_profilePicUrl: creator.profilePicUrl,
                 target: creator._id,
+                playlist_id: playlist._id,
                 spotify_embed_link: playlist.spotify_embed_link,
                 creation_date: playlist.createdAt
             });
@@ -92,9 +94,12 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => { 
-    const playlistId = req.params.id
-    Playlist.deleteOne({ _id: req.params.id }).then( playlist => 
-        res.json(playlistId)).catch( error => 
-            console.log(error));
+    const playlistId = req.params.id;
+    // Playlist.findOne({ _id: playlistId }).then(playlist => {
+        Post.deleteMany({ playlist_id: playlistId }).exec();
+    // });
+
+    Playlist.deleteOne({ _id: req.params.id }).then(playlist => res.json(playlistId))
+        .catch(error => console.log(error));
 })
 module.exports = router;

@@ -160,6 +160,7 @@ router.post('/follow/:username', (req, res) => {
                     creator_name: user_1.username,
                     creator_profilePicUrl: user_1.profilePicUrl,
                     target: user._id,
+                    playlist_id: playlist._id,
                     spotify_embed_link: playlist.spotify_embed_link,
                     creation_date: playlist.createdAt
                   });
@@ -241,7 +242,7 @@ router.patch('/:username', (req, res) => {
 
 router.get('/search/:query', (req, res) => {
 
-  let queryRegExp = new RegExp(`\^${req.params.query}\.\*`);
+  let queryRegExp = new RegExp(`\^${req.params.query}\.\*`, "i");
 
   User.find(
     // currently not using, since indexing isn't compatible with regex partial results
