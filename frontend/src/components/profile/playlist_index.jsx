@@ -29,6 +29,7 @@ class PlaylistIndex extends React.Component{
             }
             playlistsDisplay = (
                 <ul className="playlist-index">
+                    {/* not able to call .reverse on original mapPlaylist so created a shallow copy and called it on that instead */}
                     {actualMapPlaylists.reverse().map(playlist =>
                         <PlaylistIndexItem key={playlist._id} playlist={playlist} deleteUserPlaylist={deleteUserPlaylist} />)}
                 </ul>
