@@ -26,25 +26,27 @@ class BurgerLinks extends React.Component {
         this.props.loginDemo();
     }
 
-
     getLinks() {
+
+        const { transformBurger } = this.props;
+
         if (this.props.loggedIn) {
             return (
                 <div className="burger-links">
-                    <Link to='/profile'><p>Profile</p></Link>
-                    <Link to="/questions"><p>Make New Playlist</p></Link>
-                    <Link to='/feed'><p>Feed</p></Link>
-                    <Link to="/about"><p>About Us</p></Link>
+                    <Link to='/profile' onClick={transformBurger}><p>Profile</p></Link>
+                    <Link to="/questions" onClick={transformBurger}><p>Make New Playlist</p></Link>
+                    <Link to='/feed' onClick={transformBurger}><p>Feed</p></Link>
+                    <Link to="/about" onClick={transformBurger}><p>About Us</p></Link>
                     <div onClick={this.logoutUser}><p>Logout</p></div>
                 </div>
             );
       } else {
             return (
                 <div className="burger-links">
-                    <Link to={'/signup'}><p>Signup</p></Link>
-                    <Link to={'/login'}><p>Login</p></Link>
+                    <Link to={'/signup'} onClick={transformBurger}><p>Signup</p></Link>
+                    <Link to={'/login'} onClick={transformBurger}><p>Login</p></Link>
                     <div onClick={this.loginDemo}><p>Login as DEMO</p></div>
-                    <Link to="/about"><p>About Us</p></Link>
+                    <Link to="/about" onClick={transformBurger}><p>About Us</p></Link>
                 </div>
             );
       } 
