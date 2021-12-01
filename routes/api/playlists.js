@@ -6,6 +6,7 @@ const db = require("../../config/keys").mongoURI;
 
 const Playlist = require('../../models/Playlist');
 const Post = require('../../models/Post');
+const User = require('../../models/User')
 
 // Get all playlists by a specific user
 router.get('/user/:user_id', (req, res) => {
@@ -58,14 +59,32 @@ router.post('/', (req, res) => {
     newPlaylist.save().then(playlist => {
         User.findById(req.body.user_id)
         .then(user => {
+            const creator = user;
             let arr = user.followers;
             arr.forEach(follower => {
-                Post.create({
+                // populate all the people that follow you with your new playlist
+                const post1 = new Post({
                     creator: req.body.user_id,
-                    target: follower,
-                    spotify_embed_link: req.body.playlist.spotify_embed_link
-                })
+                    creator_name: user.username,
+                    creator_profilePicUrl: user.profilePicUrl,
+                    target: follower.user_id,
+                    spotify_embed_link: playlist.spotify_embed_link,
+                    creation_date: playlist.createdAt
+                });
+                post1.save().then().catch(err => console.log(err));
             });
+
+            // to populate your playlists in your own feed
+            const post2 = new Post({
+                creator: req.body.user_id,
+                creator_name: creator.username,
+                creator_profilePicUrl: creator.profilePicUrl,
+                target: creator._id,
+                spotify_embed_link: playlist.spotify_embed_link,
+                creation_date: playlist.createdAt
+            });
+
+            post2.save().then().catch(err => console.log(err));
         })
 
         return res.json(playlist)
