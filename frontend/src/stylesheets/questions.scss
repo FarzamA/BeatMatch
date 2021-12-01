@@ -40,16 +40,19 @@
                 height: 100%;
                 width: 100%;
 
+                
+
                 .answer-option {
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     width: 50%;
                     height: 100%;
+                    
 
-                    &:hover{
-                        cursor: pointer;
-                    }
+                }
+                &:hover{
+                    cursor: pointer;
                 }
 
                 .genre-option-button {
