@@ -20,13 +20,14 @@
             font-size: 48px;
             height: 15%;
             width: 100%;
+            margin-top: 80px;
             display: flex;
             justify-content: center;
             align-items: flex-end;
         }
 
         .answers-container {
-            font-size: 24px;
+            font-size: 32px;
             height: 80%;
             width: 100%;
             display: flex;
@@ -44,8 +45,8 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    width: 50%;
-                    height: 50%;
+                    width: 75%;
+                    height: 40%;
                     
                     &:hover{
                         cursor: pointer;
@@ -62,50 +63,23 @@
 
                 @keyframes mouseenter {
                     0% {
-                        font-size: 24px;
+                        font-size: 32px;
                     }
 
                     100% {
-                        font-size: 36px;
+                        font-size: 52px;
                     }
                 }
 
-                @keyframes disappear {
+                @keyframes mouseleave {
                     0% {
-                        font-size: 36px;
+                        font-size: 52px;
                     }
 
                     100% {
-                        font-size: 24px;
+                        font-size: 32px;
                     }
                 }
-
-                // .genre-option-button {
-                //     display: flex;
-                //     justify-content: center;
-                //     align-items: center;
-                //     font-size: 18px;
-                //     width: 250px;
-                //     height: 40px;
-                //     border: none;
-                //     border-radius: 40px;
-                //     background-color: white;
-
-                //     &:hover{
-                //         cursor: pointer;
-                //         animation: genrebuttonhover 1s forwards;
-                //     }
-                // }
-
-                // @keyframes genrebuttonhover {
-                //     0% {
-                //         background-color: white;
-                //     }
-
-                //     100% {
-                //         background-color: blue;
-                //     }
-                // }
             }
         }
 
