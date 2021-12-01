@@ -1,10 +1,13 @@
 .feed-index {
-    background-color: rgba(255, 255, 255, 0.02);
+    // background-color: rgba(255, 255, 255, 0.02);
     border: 1px solid #34333b;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    // background: linear-gradient(-45deg, #eec452, #e73c7e, #5823d5, #d5239a);
+    // background-size: 400% 400%;
+    // animation: gradient 15s ease infinite;
 }
 
 .feed-index-item {
@@ -20,16 +23,25 @@
         font-size: 20px;
         padding: 20px;
 
-        a:hover {
-            cursor: pointer;
-            text-decoration: 2px solid lightgray underline;
+        a {
+            // background: -webkit-linear-gradient(rgb(28, 210, 255), rgb(152, 1, 240));
+            // -webkit-background-clip: text;
+            // -webkit-text-fill-color: transparent;
+            // background: #4c05ff;
+            // -webkit-background-clip: text;
+            // -webkit-text-fill-color: transparent;
+
+            &:hover {
+                cursor: pointer;
+                text-decoration: 2px solid lightgray underline;
+            }
         }
     }
 }
 
 .feed-page-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .end-message {

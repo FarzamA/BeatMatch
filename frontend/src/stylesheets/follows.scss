@@ -9,6 +9,9 @@
     h1 {
         font-size: 40px;
         margin-top: 110px;
+        // background: -webkit-linear-gradient(rgb(28, 210, 255), rgb(152, 1, 240));
+        // -webkit-background-clip: text;
+        // -webkit-text-fill-color: transparent;
     }
 
     .follow-index {
@@ -42,6 +45,9 @@
                         transition: 0.5s;
                         color: #3205a4;
                         border-color: #3205a4;
+                        // background: -webkit-linear-gradient(rgb(28, 210, 255), rgb(152, 1, 240));
+                        // -webkit-background-clip: text;
+                        // -webkit-text-fill-color: transparent;
                     }
                 }
             }
