@@ -14,7 +14,7 @@ const AboutPage = () => {
                             <a className="team-member-social-link" target="_blank" href="https://www.linkedin.com/in/zeki-kural-45b172133/"><i className="fab fa-linkedin-in"></i></a>
                             <a className="team-member-social-link" target="_blank" href="https://github.com/zkural1"><i className="fab fa-github"></i></a>
                             <a className="team-member-social-link" target="_blank" href="https://angel.co/u/zeki-can-kural"><i className="fab fa-angellist"></i></a>
-                            <a className="team-member-social-link" target="_blank" href="https://www.linkedin.com/in/zeki-kural-45b172133/"><i className="fas fa-user-tie"></i></a>
+                            <a className="team-member-social-link" target="_blank" href="https://zekikural.dev/"><i className="fas fa-user-tie"></i></a>
                         </div>
                     </div>
                 </div>
