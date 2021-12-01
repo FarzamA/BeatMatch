@@ -52,9 +52,9 @@ class FeedIndex extends React.Component {
 
     render() {
 
-        const { feedPlaylists } = this.props;
+        const { feedPlaylists, currentUser } = this.props;
 
-        if (!feedPlaylists) return (<div className="placeholder"></div>);
+        if (feedPlaylists.length === 0) return (<div className="placeholder"></div>);
 
         let endMessage;
         if (this.state.didSearch && feedPlaylists.length === 0) {
@@ -73,13 +73,21 @@ class FeedIndex extends React.Component {
                     if (idx === feedPlaylists.length - 1) {
                         return (
                             <div ref={this.lastPlaylistRef} >
-                                <FeedIndexItem key={idx} feedPlaylist={feedPlaylist} />
+                                <FeedIndexItem
+                                    key={idx}
+                                    feedPlaylist={feedPlaylist}
+                                    currentUser={currentUser}
+                                />
                             </div>
                         )
                     } else {
                         return (
                             <div>
-                                <FeedIndexItem key={idx} feedPlaylist={feedPlaylist} />
+                                <FeedIndexItem
+                                    key={idx}
+                                    feedPlaylist={feedPlaylist}
+                                    currentUser={currentUser}
+                                />
                             </div>
                         )
                     }
