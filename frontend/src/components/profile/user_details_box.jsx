@@ -80,13 +80,13 @@ class UserDetailsBox extends React.Component {
                     </div>
                     {followButton}
                     <div className="share-buttons">
-                        <FacebookShareButton url={`https://beat-match-mern.herokuapp.com/users/${user.username}`} quote={`Checkout ${user.username}'s playlists on BeatMatch!`}>
+                        <FacebookShareButton id="facebook-share" url={`https://beat-match-mern.herokuapp.com/users/${user.username}`} quote={`Checkout ${user.username}'s playlists on BeatMatch!`}>
                             <FontAwesomeIcon icon={faFacebook}/>
                         </FacebookShareButton>
-                        <TwitterShareButton url={`https://beat-match-mern.herokuapp.com/users/${user.username}\n\n`} hashtags={["Spotify","Music"]} title={` Checkout ${user.username}'s playlists on BeatMatch!\n\n`}>
+                        <TwitterShareButton id="twitter-share" url={`https://beat-match-mern.herokuapp.com/users/${user.username}\n\n`} hashtags={["Spotify","Music"]} title={` Checkout ${user.username}'s playlists on BeatMatch!\n\n`}>
                             <FontAwesomeIcon icon={faTwitter}/>
                         </TwitterShareButton>
-                        <LinkedinShareButton url={`https://beat-match-mern.herokuapp.com/users/${user.username}`} summary={`Checkout ${user.username}'s playlists on BeatMatch!`}>
+                        <LinkedinShareButton id="linkedin-share" url={`https://beat-match-mern.herokuapp.com/users/${user.username}`} summary={`Checkout ${user.username}'s playlists on BeatMatch!`}>
                             <FontAwesomeIcon icon={faLinkedin}/>
                         </LinkedinShareButton>
                     </div>
