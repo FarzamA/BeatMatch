@@ -92,9 +92,12 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => { 
-    const playlistId = req.params.id
-    Playlist.deleteOne({ _id: req.params.id }).then( playlist => 
-        res.json(playlistId)).catch( error => 
-            console.log(error));
+    const playlistId = req.params.id;
+    Playlist.findOne({ _id: playlistId }).then(playlist => {
+        Post.deleteMany({ spotify_embed_link: playlist.spotify_embed_link }).exec()
+    });
+
+    Playlist.deleteOne({ _id: req.params.id }).then(playlist => res.json(playlistId))
+        .catch(error => console.log(error));
 })
 module.exports = router;
