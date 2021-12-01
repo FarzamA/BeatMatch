@@ -63,7 +63,10 @@ class FeedIndex extends React.Component {
             )
         } else if (!this.state.morePosts) {
             endMessage = (
-                <div className="end-message"><p>You've reached the end of your feed!</p></div>
+                <div className="end-message">
+                    <p>You've reached the end of your feed!</p>
+                    <p className="back-to-top" onClick={() => window.scrollTo(0,0)}>Back to top</p>
+                </div>
             )
         }
 
