@@ -18,6 +18,10 @@
     }
 }
 
+.hamburger-container {
+    z-index: 100;
+}
+
 .hamburger:hover, .search-icon:hover {
     cursor: pointer;
 }

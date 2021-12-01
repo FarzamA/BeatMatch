@@ -49,7 +49,7 @@ class Burger extends React.Component {
         }
 
         return (
-            <div>
+            <div className="hamburger-container">
                 <div className="hamburger" onClick={this.transformBurger}>
                     <div className={`burger-bar1 burger ${burgerClicked}`}></div>
                     <div className={`burger-bar2 burger ${burgerClicked}`}></div>
