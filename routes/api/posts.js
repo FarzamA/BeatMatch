@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const db = require("../../config/keys").mongoURI;
 
 const Post = require('../../models/Post');
+const User = require('../../models/User');
 
 router.get('/:username', (req, res) => {
     const offset = parseInt(req.query.offset);
