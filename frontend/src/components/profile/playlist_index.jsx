@@ -20,8 +20,8 @@ class PlaylistIndex extends React.Component{
             // visiblePlaylists = playlists.filter(playlist => playlist.isPublic)
             let mapPlaylists;
             let actualMapPlaylists;
-            if (playlists.length > 10){
-                mapPlaylists = playlists.slice(0,10);
+            if (playlists.length > 50){
+                mapPlaylists = playlists.slice(0,50);
                 actualMapPlaylists = [...mapPlaylists];
             }else {
                 mapPlaylists = playlists;
