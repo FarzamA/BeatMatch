@@ -1,42 +1,131 @@
 # Beat Match
-Find the beat that matches you.
 
-[Live Link](https://beat-match-mern.herokuapp.com/#/)
+Find the beat that matches you!
+
+<img src="https://beatmatch-images.s3.us-east-1.amazonaws.com/homepage.png"/>
+
+# Live Site
+
+Check out our [live site](https://beat-match-mern.herokuapp.com/#/)!
 
 # Background and Overview
-Beat Match is a web application where users can pick a genre and fill out a short form about their personality to create the perfect playlist for them using Spotify's API. Users can save, play, share with friends, and export to the playlist to Spotify. Additionally, users can follow their friends on Beat Match to see what playlist's they have been making.
+Beat Match is a web application that recommends the perfect Spotify playlist for YOU. We use an interactive questionnaire and the Spotify API to generate a playlist that matches your preferred genre and a variety of other musical attributes (e.g. "danceability", "loudness", etc.). You can save these playlists to your profile, view your friends' playlists on your newsfeed, and share your playlists on other social media.
+
+Beat Match is built using the MERN stack: MongoDB, Express.js, React / Redux, and Node.js. Its features include an infinitely scrolling newsfeed (using the Intersection Observer API), modern styling using CSS / SCSS, a searchbar, and creative use of the Spotify Web API.
+
+# Technologies
+
+Our application employs a number of technologies and frameworks.
+
+* MongoDB
+* Mongoose
+* Express.js
+* React
+* Redux
+* Node.js
+* HTML5
+* CSS3
+* SCSS
+* Axios
+* Intersection Observer API
+* JSON Web Tokens
+* Spotify Web API
 
 
-## Features
+# Features
 
-### User Authentication
+## Playlist Generation
 
-* Users can login with a demo user or with their own credentials
+* Once you're logged in, we ask you a series of questions to see what playlist is right for you.
 
-<img src="images/Login.png" width=500/>
+<img src="https://beatmatch-images.s3.us-east-1.amazonaws.com/genreselection.png"/>
 
-* Errors on login/signup show on incorrect submission
+<img src="https://beatmatch-images.s3.us-east-1.amazonaws.com/question.png"/>
 
-<img src="images/SignupErrors.png" width=500/>
+* We convert your responses into parameters defined by the Spotify WEB API ("instrumentalness", "energy", e.g.) to find a playlist that matches your preferences.
 
-### Playlist Generation
+```javascript
 
-* Users can select a genre before beginning
+router.post('/playlist', (req, res) => {
 
-<img src="images/GenreSelection.png" width=500/>
+    // Find all playlists that match your answers
+    Playlist.find({
+        answers: req.body.answers,
+        genre: req.body.genre
+    }).then(playlists => {
+        // Choose a random playlist from the perfect matches, or a less-than-perfect match if we have to
+        if (playlists.length > 0){
+            return res.json(playlists[Math.floor((Math.random() * playlists.length-1))])
+        } else{
+            Playlist.find({ genre: req.body.genre })
+                .then(playlists => res.json(playlists[Math.floor((Math.random() * playlists.length-1))]))
+                .catch(err => console.log(err))
+        }
+    })
+}
 
-* Users will be prompted with a set of questions that each relate to the playlists attributes
+```
 
-<img src="images/OptionSelect.png" width=500/>
+## Newsfeed
 
-### Search and Follow
-* Users can search for other users
-* Users can follow each other 
+* When you follow users, their playlists (as well as your own) appear in your Feed.
 
-<img src="images/Follow.gif" width=500/>
+<img src="https://beatmatch-images.s3.us-east-1.amazonaws.com/newsfeed2.png"/>
 
-## Members
-* [Zeki Kural](https://github.com/zkural1) Project Lead/Flex Developer
-* [Farzam Ahmad](https://github.com/FarzamA) Backend Lead
-* [Alberto Young](https://github.com/alyoung1991) Frontend Lead
-* [Elliot Wilson](https://github.com/elliot-wilson) Flex Developer
+* The Feed features an infinite scroll through you and your friends' playlists. The component state stores information about whether there are more posts left to fetch from the database.
+
+```javascript
+
+class FeedIndex extends React.Component {
+    constructor(props) {
+        super(props);
+        
+        // State stores information about whether an initial search has been performed,
+        // whether there are remaining posts left to fetch,
+        // and what offset to use the DB query
+        this.state = {
+            offset: 0,
+            didSearch: false,
+            morePlaylists: true
+        };
+
+        this.observer = React.createRef();
+    }
+
+    // This function defines the infinite scroll
+    lastPlaylistRef(node) {
+            this.observer.current = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting && this.state.morePosts) {
+                    props.fetchAddlFeedPlaylists(props.currentUser.username, this.state.offset + 5)
+                    .then((res) => {
+                        // If there aren't enough playlists, set state to prevent additional queries
+                        if (res.playlists.length < 5) {
+                            this.setState({morePlaylists: false})
+                        }
+                    });
+                    // Adjust the offset for future queries
+                    this.incrementOffset();
+                }
+            });
+
+            if (node) this.observer.current.observe(node);
+    }
+}
+
+```
+
+## Social Media Integration
+
+* You can share your profile to various social media.
+
+<img src="https://beatmatch-images.s3.us-east-1.amazonaws.com/socialmedia.png"/>
+
+# Team Members
+* [Zeki Kural](https://github.com/zkural1) - Project Lead/Flex Developer
+* [Farzam Ahmad](https://github.com/FarzamA) - Backend Lead
+* [Alberto Young](https://github.com/alyoung1991) - Frontend Lead
+* [Elliot Wilson](https://github.com/elliot-wilson) - Flex Developer
+
+# What's Next
+
+We're in the process of having our app reviewed by Spotify. Once we get Spotify's approval, users will be able to export their playlists from Beat Match to their own Spotify profiles.
