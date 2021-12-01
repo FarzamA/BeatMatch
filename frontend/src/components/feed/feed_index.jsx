@@ -55,26 +55,24 @@ class FeedIndex extends React.Component {
         if (!feedPlaylists) return (<div className="placeholder"></div>);
 
         return (
-            <div className="feed-index-container">
-                <ul className="feed-index">
-                    {feedPlaylists.map((feedPlaylist, idx) => {
-                        if (idx === feedPlaylists.length - 1) {
-                            return (
-                                <div ref={this.lastPlaylistRef} >
-                                    <FeedIndexItem key={idx} feedPlaylist={feedPlaylist} />
-                                </div>
-                            )
-                        } else {
-                            return (
-                                <div>
-                                    <FeedIndexItem key={idx} feedPlaylist={feedPlaylist} />
-                                </div>
-                            )
-                        }
+            <ul className="feed-index">
+                {feedPlaylists.map((feedPlaylist, idx) => {
+                    if (idx === feedPlaylists.length - 1) {
+                        return (
+                            <div ref={this.lastPlaylistRef} >
+                                <FeedIndexItem key={idx} feedPlaylist={feedPlaylist} />
+                            </div>
+                        )
+                    } else {
+                        return (
+                            <div>
+                                <FeedIndexItem key={idx} feedPlaylist={feedPlaylist} />
+                            </div>
+                        )
                     }
-                    )}
-                </ul>
-            </div>
+                }
+                )}
+            </ul>
         )
     }
 }

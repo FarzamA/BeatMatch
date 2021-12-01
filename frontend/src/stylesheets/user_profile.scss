@@ -1,19 +1,23 @@
-.user-profile {
+.user-profile, .feed-page-container {
     width: 100vw;
     display: flex;
+    justify-content: space-between;
     margin-top: 120px;
     padding: 0px 130px;
     min-height: 86vh;
 
     .playlist-index {
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
         flex-grow: 3;
+        margin-left: 20%;
         margin-right: 30px;
         padding: 20px;
         background-color: rgba(255, 255, 255, 0.02);
         border: 1px solid #34333b;
         border-radius: 10px;
+        width: 100%;
 
         .playlist-index-item {
             display: flex;
@@ -25,6 +29,7 @@
                 display: flex;
                 justify-content: space-around;
                 margin: 15px 0px 15px 0px;
+
                 .delete {
                     background-color: white;
                     color:#0f0e0f;

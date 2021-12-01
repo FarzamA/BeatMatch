@@ -1,3 +1,33 @@
-.feed-index-container {
-    margin: 10% 25% 25% 10%;
+.feed-index {
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid #34333b;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.feed-index-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 750px;
+    padding: 0 40px 40px 40px;
+    border-bottom: 1px solid #34333b;
+
+    p {
+        font-size: 20px;
+        padding: 20px;
+
+        a:hover {
+            cursor: pointer;
+            text-decoration: 2px solid lightgray underline;
+        }
+    }
+}
+
+.feed-page-container {
+    display: flex;
+    justify-content: space-between;
 }

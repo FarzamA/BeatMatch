@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const FeedIndexItem = (props) => {
 
@@ -8,7 +9,11 @@ const FeedIndexItem = (props) => {
 
     return (
         <li className="feed-index-item">
-            <p>{feedPlaylist.creator_name} created this playlist on {date.toLocaleDateString()} at {date.toLocaleTimeString()}</p>
+            <p>
+                created by &nbsp;
+                <Link to={`/users/${feedPlaylist.creator_name}`}>{feedPlaylist.creator_name}</Link>
+                &nbsp; on {date.toLocaleDateString()} at {date.toLocaleTimeString()}
+            </p>
             <iframe
                 src={feedPlaylist.spotify_embed_link}
                 width="500"
