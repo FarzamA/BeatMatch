@@ -8,7 +8,7 @@ const FeedIndexItem = (props) => {
     const date = new Date(feedPlaylist.creation_date);
 
     let timeAgo = Date.now() - Date.parse(date);
-    console.log(timeAgo);
+    // console.log(timeAgo);
 
     let realTime; 
 
@@ -24,7 +24,7 @@ const FeedIndexItem = (props) => {
         realTime = Math.floor(timeAgo / 31536000000) +'y ago';
     }
 
-    console.log(realTime);
+    // console.log(realTime);
 
     return (
         <li className="feed-index-item">
@@ -32,7 +32,7 @@ const FeedIndexItem = (props) => {
                 Created by&nbsp;
                 <Link to={`/users/${feedPlaylist.creator_name}`}>{feedPlaylist.creator_name}</Link>
                 {/* &nbsp; on {date.toLocaleDateString()} at {date.toLocaleTimeString()} */}
-                &nbsp; {realTime}
+                {/* &nbsp; {realTime} */}
             </p>
             <iframe
                 src={feedPlaylist.spotify_embed_link}
@@ -42,6 +42,7 @@ const FeedIndexItem = (props) => {
                 allowtransparency="true"
                 allow="encrypted-media"
             ></iframe>
+            <p>{realTime}</p>
         </li>
     )
 };
