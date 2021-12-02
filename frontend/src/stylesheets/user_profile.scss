@@ -109,27 +109,38 @@
                         transform: scale(1.05);
                 }
 
-                .spotify-modal {
-                        display: none;
-                        position: absolute;
-                        height:300px;
-                        width: 300px;
-                        padding: 20px;
-                        line-height: 1.5;
-                        background-color: rgb(24,24,27);
-                        border: 1px solid #34333b;
-                        top: 50px;
-                        left: 10px;
-                        svg {
-                            font-size: 60px;
-                        }
-                }
-                .spotify-modal.clicked {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-around;
-                        align-items: center;
-                        text-align: center;
+                .modal-bg {
+                    display: none;
+                    position: fixed;
+                    width: 127vw;
+                    top: 0;
+                    left: 0;
+                    height: 145vh;
+                    background: #1515159e;
+                    z-index: 999;
+
+                    .spotify-modal {
+                            // display: none;
+                            position: absolute;
+                            height:300px;
+                            width: 300px;
+                            padding: 20px;
+                            line-height: 1.5;
+                            background-color: rgb(24,24,27);
+                            border: 1px solid #34333b;
+                            top: 20vh;
+                            left: 45vw;
+                            svg {
+                                font-size: 60px;
+                            }
+                    }
+                    .spotify-modal.clicked {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-around;
+                            align-items: center;
+                            text-align: center;
+                    }
                 }
                     
             }
