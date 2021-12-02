@@ -14,28 +14,12 @@ class FeedIndex extends React.Component {
 
         this.observer = React.createRef();
 
-        this.lastPlaylistRef = node => {
-            this.observer.current = new IntersectionObserver(entries => {
-                if (entries[0].isIntersecting && this.state.morePosts) {
-                    props.fetchAddlFeedPlaylists(props.currentUser.username, this.state.offset + 5)
-                    .then((res) => {
-                        if (res.playlists.length < 5) {
-                            this.setState({morePosts: false})
-                        }
-                    });
-                    this.incrementOffset();
-                }
-            });
-
-            console.log(node);
-            if (node) this.observer.current.observe(node);
-        }
-
         this.bindFuncs();
     }
 
     bindFuncs() {
         this.incrementOffset = this.incrementOffset.bind(this);
+        this.lastPlaylistRef = this.lastPlaylistRef.bind(this);
     }
 
     componentDidMount() {
@@ -45,6 +29,24 @@ class FeedIndex extends React.Component {
         this.props.fetchInitialFeedPlaylists(username, offset)
             .then(this.setState({didSearch: true}));
     }
+
+    lastPlaylistRef(node) {
+
+            this.observer.current = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting && this.state.morePosts) {
+                    this.props.fetchAddlFeedPlaylists(this.props.currentUser.username, this.state.offset + 5)
+                    .then((res) => {
+                        if (res.playlists.length < 5) {
+                            this.setState({morePosts: false})
+                        }
+                    });
+                    this.incrementOffset();
+                }
+            });
+
+            if (node) this.observer.current.observe(node);
+    }
+
 
     incrementOffset() {
         this.setState({ offset: (this.state.offset + 5) });
@@ -63,7 +65,10 @@ class FeedIndex extends React.Component {
             )
         } else if (!this.state.morePosts) {
             endMessage = (
-                <div className="end-message"><p>You've reached the end of your feed!</p></div>
+                <div className="end-message">
+                    <p>You've reached the end of your feed!</p>
+                    <p className="back-to-top" onClick={() => window.scrollTo(0,0)}>Back to top</p>
+                </div>
             )
         }
 

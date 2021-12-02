@@ -21,7 +21,7 @@ async function seedDB() {
 
         let questionData = [
             {
-                question: 'New Artists or Top 100',
+                question: 'New Artists or Top 100?',
                 targetCategory: 'popularity',
                 answerOptions: [
                     {
@@ -35,11 +35,11 @@ async function seedDB() {
                 ]
             },
             {
-                question: 'Chill bar or Nightclub?',
+                question: 'Chill bar or nightclub?',
                 targetCategory: 'danceability',
                 answerOptions: [
                     {
-                        answerText: 'Chill Bar',
+                        answerText: 'Chill bar',
                         answerValue: 0
                     },
                     {
@@ -49,7 +49,7 @@ async function seedDB() {
                 ]
             },
             {
-                question: 'In the morning, hit the snooze button or hit the gym?',
+                question: 'Snooze button or hit the gym?',
                 targetCategory: 'energy',
                 answerOptions: [
                     {
@@ -63,21 +63,21 @@ async function seedDB() {
                 ]
             },
             {
-                question: 'Broadway or Concert?',
+                question: 'Talkative or strong-but-silent?',
                 targetCategory: 'instrumentalness',
                 answerOptions: [
                     {
-                        answerText: 'Broadway',
+                        answerText: 'Talkative',
                         answerValue: 0
                     },
                     {
-                        answerText: 'Concert',
+                        answerText: 'Strong-but-silent',
                         answerValue: 1
                     },
                 ]
             },
             {
-                question: 'Short stories or Novels?',
+                question: 'Short stories or novels?',
                 targetCategory: 'duration',
                 answerOptions: [
                     {

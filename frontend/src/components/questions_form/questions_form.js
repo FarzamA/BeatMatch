@@ -8,8 +8,7 @@ class QuestionsForm extends React.Component {
             prevBgColor: '#131316',
             prevTextColor: 'white',
             selectedGenre: '',
-            bgColors: ['#ff60b8', '#1a71eb', '#fffa69', '#ed3747', '#ed3747', '#b81d45', '#b81d45', '#d6dd21', '#7dcdef', '#7dcdef', '#7dcdef', '#4cc141'],
-            textColors: ['#b81d45', '#ff6783', '#ff6783', '#ff60b8', '#4cc141', '#d6dd21', '#672d91', '#0d4215', '#fffa69', '#ed3747', '#1a71eb', '#531754'],
+            bgColors: ['#ff60b8', '#1a71eb', '#fffa69', '#ed3747', '#b398f1', '#ff8e3f', '#4ddbba', '#d6dd21', '#7dcdef', '#ff6d74', '#6bffc8', '#4cc141', '#ff9cf3', '#fffa69', '#ed3747', '#1a71eb', '#ffa230'],
             questions: this.props.questions,
             answers: new Array(this.props.questions.length),
             targetCategories: this.props.targetCategories,
@@ -46,12 +45,7 @@ class QuestionsForm extends React.Component {
 
     handleInput(e, answerIndex, answerValue){
         if (this.props.modalIsActive) return null;
-        const body = document.querySelector('body');
         const answers = document.querySelectorAll('.answer-option-container');
-        const dots = document.querySelectorAll('.question-number-dot');
-        const randomIndex = Math.floor(Math.random() * this.state.bgColors.length);
-        const bgColor = this.state.bgColors[randomIndex];
-        const textColor = this.state.textColors[randomIndex];
 
         answers.forEach(answer => {
             if(e.target.innerText == answer.innerText){
@@ -61,29 +55,6 @@ class QuestionsForm extends React.Component {
             }
         });
 
-        // css variables
-        body.style.setProperty('--prev-bg-color', this.state.prevBgColor);
-        body.style.setProperty('--prev-text-color', this.state.prevTextColor);
-        body.style.setProperty('--bg-color', bgColor);
-        body.style.setProperty('--text-color', textColor);
-
-        body.classList.remove('first-answer');
-        if(body.classList.contains('following-answer-1')){
-            body.classList.remove('following-answer-1');
-            body.classList.add('following-answer-2');
-        }else if(body.classList.contains('following-answer-2')){
-            body.classList.remove('following-answer-2');
-            body.classList.add('following-answer-1');
-        }else{
-            body.classList.add('following-answer-1');
-        }
-        body.style.backgroundColor = bgColor;
-        dots.forEach(dot => {
-            dot.style.backgroundColor = textColor;
-        });
-        
-        const prevBgColor = bgColor;
-        const prevTextColor = textColor;
         let answerTargetCategoryMap = this.state.targetCategories;
         answerTargetCategoryMap[this.props.questions[answerIndex].targetCategory] = answerValue;
 
@@ -94,96 +65,31 @@ class QuestionsForm extends React.Component {
             });
             this.setState({ 
                 targetCategories: answerTargetCategoryMap,
-                pageNum: this.state.pageNum <= this.props.questions.length ? this.state.pageNum + 1 : this.state.pageNum,
-                prevBgColor: prevBgColor,
-                prevTextColor: prevTextColor
+                pageNum: this.state.pageNum <= this.props.questions.length ? this.state.pageNum + 1 : this.state.pageNum
             });
         }, 1500);
     }
 
-    handleMouseEnter(){
+    handleMouseEnter(e){
         if (this.props.modalIsActive) return null;
-        const body = document.querySelector('body');
-        const dots = document.querySelectorAll('.question-number-dot');
-        const burger = document.querySelectorAll('.burger');
-        const searchIcon = document.querySelector('.search-icon');
-        const randomIndex = Math.floor(Math.random() * this.state.bgColors.length);
-        const bgColor = this.state.bgColors[randomIndex];
-        const textColor = this.state.textColors[randomIndex];
-
-        // css variables
-        body.style.setProperty('--prev-bg-color', this.state.prevBgColor);
-        body.style.setProperty('--prev-text-color', this.state.prevTextColor);
-        body.style.setProperty('--bg-color', bgColor);
-        body.style.setProperty('--text-color', textColor);
-
-        body.classList.remove('first-answer');
-        if(body.classList.contains('following-answer-1')){
-            body.classList.remove('following-answer-1');
-            body.classList.add('following-answer-2');
-        }else if(body.classList.contains('following-answer-2')){
-            body.classList.remove('following-answer-2');
-            body.classList.add('following-answer-1');
-        }else{
-            body.classList.add('following-answer-1');
-        }
-        body.style.backgroundColor = bgColor;
-        dots.forEach(dot => {
-            dot.style.backgroundColor = textColor;
-        });
-        burger.forEach(burgerBar => {
-            burgerBar.style.backgroundColor = textColor;
-        });
-        searchIcon.style.color = textColor;
-        
-        const prevBgColor = bgColor;
-        const prevTextColor = textColor;
-        this.setState({
-            prevBgColor: prevBgColor,
-            prevTextColor: prevTextColor
-        });
+        e.currentTarget.classList.remove('answer-option-mouse-leave');
+        e.currentTarget.classList.add('answer-option-mouse-enter');
     }
 
-    handleMouseLeave(){
+    handleMouseLeave(e){
         if (this.props.modalIsActive) return null;
-        const body = document.querySelector('body');
-        const dots = document.querySelectorAll('.question-number-dot');
-        const burger = document.querySelectorAll('.burger');
-        const searchIcon = document.querySelector('.search-icon');
-        const bgColor = '#131316';
-        const textColor = 'white';
+        e.currentTarget.classList.remove('answer-option-mouse-enter');
+        e.currentTarget.classList.add('answer-option-mouse-leave');
+    }
 
-        // css variables
-        body.style.setProperty('--prev-bg-color', this.state.prevBgColor);
-        body.style.setProperty('--prev-text-color', this.state.prevTextColor);
-        body.style.setProperty('--bg-color', bgColor);
-        body.style.setProperty('--text-color', textColor);
+    handleGenreButtonMouseEnter(e, i){
+        const targetGenreButton = e.currentTarget;
+        targetGenreButton.style.setProperty('--bg-color', this.state.bgColors[i]);
+        if (this.props.modalIsActive) return null;
+    }
 
-        body.classList.remove('first-answer');
-        if(body.classList.contains('following-answer-1')){
-            body.classList.remove('following-answer-1');
-            body.classList.add('following-answer-2');
-        }else if(body.classList.contains('following-answer-2')){
-            body.classList.remove('following-answer-2');
-            body.classList.add('following-answer-1');
-        }else{
-            body.classList.add('following-answer-1');
-        }
-        body.style.backgroundColor = bgColor;
-        dots.forEach(dot => {
-            dot.style.backgroundColor = textColor;
-        });
-        burger.forEach(burgerBar => {
-            burgerBar.style.backgroundColor = textColor;
-        });
-        searchIcon.style.color = textColor;
-        
-        const prevBgColor = bgColor;
-        const prevTextColor = textColor;
-        this.setState({
-            prevBgColor: prevBgColor,
-            prevTextColor: prevTextColor
-        });
+    handleGenreButtonMouseLeave(e){
+        if (this.props.modalIsActive) return null;
     }
 
     generatePlaylist(){
@@ -236,7 +142,16 @@ class QuestionsForm extends React.Component {
         const { questions } = this.props;
         const genres = [ "metal", "disney", "hip-hop", "k-pop", "new-release", "pop", "r-n-b", "latino", "world-music", "edm", "jazz", "country", "anime", "rock", "indie", "study", "work-out" ];
         const question = questions[pageNum - 1];
-        const previewPlaylistButton = <button className="questions-submit-button button-grow" onClick={this.generatePlaylist}>Generate Playlist</button>;
+        const previewPlaylistButton = (
+            <div className="question-content">
+                <div className="question-text">Almost there...</div>
+                <div className="answers-container">
+                    <div className="answer-option-container">
+                        <button className="questions-submit-button button-grow" onClick={this.generatePlaylist}>Generate Playlist</button>
+                    </div>
+                </div>
+            </div>
+        );
         const playlistPreview = this.state.generatedPlaylist ? (
             <div className="playlist-preview-container">
                 <div className="playlist-preview-heading">Check out your brand new playlist!</div>
@@ -250,6 +165,7 @@ class QuestionsForm extends React.Component {
                 ></iframe>
                 <div className="save-playlist-prompt">Like what you're hearing?</div>
                 <button className="save-playlist-button" onClick={this.savePlaylist}>Save to Profile</button>
+                <button className="try-again-button" onClick={() => location.reload()}>Discard & Try Again</button>
             </div>
         ) : (
             <div>Loading...</div>
@@ -264,8 +180,8 @@ class QuestionsForm extends React.Component {
                                 <div 
                                     className="genre-option-button"
                                     onClick={() => this.setGenre(genre)}
-                                    onMouseEnter={this.handleMouseEnter}
-                                    onMouseLeave={this.handleMouseLeave}
+                                    onMouseEnter={(e) => this.handleGenreButtonMouseEnter(e, i)}
+                                    onMouseLeave={(e) => this.handleGenreButtonMouseLeave(e)}
                                 >
                                     {genre}
                                 </div>
@@ -285,11 +201,12 @@ class QuestionsForm extends React.Component {
                         <div className="answers-container">
                             {question.answerOptions.map((answerOption, i) => {
                                 return (
-                                    <div className="answer-option-container" onClick={(e) => this.handleInput(e, pageNum - 1, answerOption.answerValue)} key={`answer-${i}`}>
+                                    <div className="answer-option-container" key={`answer-${i}`}>
                                         <div 
                                             className="answer-option" 
-                                            onMouseEnter={this.handleMouseEnter}
-                                            onMouseLeave={this.handleMouseLeave}
+                                            onClick={(e) => this.handleInput(e, pageNum - 1, answerOption.answerValue)} 
+                                            onMouseEnter={(e) => this.handleMouseEnter(e)}
+                                            onMouseLeave={(e) => this.handleMouseLeave(e)}
                                         >
                                             {answerOption.answerText}
                                         </div>

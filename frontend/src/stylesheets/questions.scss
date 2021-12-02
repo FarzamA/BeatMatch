@@ -20,13 +20,14 @@
             font-size: 48px;
             height: 15%;
             width: 100%;
+            margin-top: 80px;
             display: flex;
             justify-content: center;
             align-items: flex-end;
         }
 
         .answers-container {
-            font-size: 24px;
+            font-size: 32px;
             height: 80%;
             width: 100%;
             display: flex;
@@ -40,34 +41,43 @@
                 height: 100%;
                 width: 100%;
 
-                
-
                 .answer-option {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    width: 50%;
-                    height: 100%;
+                    width: 75%;
+                    height: 40%;
                     
-
-                }
-                &:hover{
-                    cursor: pointer;
-                }
-
-                .genre-option-button {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 18px;
-                    width: 250px;
-                    height: 40px;
-                    border: none;
-                    border-radius: 40px;
-                    background-color: white;
-
                     &:hover{
                         cursor: pointer;
+                    }
+                }
+
+                .answer-option-mouse-enter {
+                    animation: mouseenter 1.5s forwards;
+                }
+
+                .answer-option-mouse-leave {
+                    animation: mouseleave 1.5s forwards;
+                }
+
+                @keyframes mouseenter {
+                    0% {
+                        font-size: 32px;
+                    }
+
+                    100% {
+                        font-size: 52px;
+                    }
+                }
+
+                @keyframes mouseleave {
+                    0% {
+                        font-size: 52px;
+                    }
+
+                    100% {
+                        font-size: 32px;
                     }
                 }
             }
@@ -114,6 +124,17 @@
 
                     &:hover{
                         cursor: pointer;
+                        animation: genrebuttonhover 0.4s forwards;
+                    }
+                }
+
+                @keyframes genrebuttonhover {
+                    0% {
+                        background-color: white;
+                    }
+
+                    100% {
+                        background-color: var(--bg-color);
                     }
                 }
             }
@@ -181,6 +202,20 @@
             height: 40px;
             border: none;
             border-radius: 40px;
+            margin: 5px;
+            animation: 4s slidein;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .try-again-button {
+            font-size: 18px;
+            width: 250px;
+            height: 40px;
+            border: none;
+            border-radius: 40px;
             animation: 4s slidein;
 
             &:hover {
@@ -200,58 +235,6 @@
     }
 }
 
-.first-answer {
-    animation: firstchangecolor 0.6s;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    
-}
-
-@keyframes firstchangecolor {
-    0% {
-        background-color: $body-bg-color;
-        color: white;
-    }
-    100% {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-    }
-}
-
-.following-answer-1 {
-    animation: followingchangecolor1 0.6s;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-@keyframes followingchangecolor1 {
-    0% {
-        background-color: var(--prev-bg-color);
-        color: var(--prev-text-color);
-    }
-    100% {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-    }
-}
-
-.following-answer-2 {
-    animation: followingchangecolor2 0.6s;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-@keyframes followingchangecolor2 {
-    0% {
-        background-color: var(--prev-bg-color);
-        color: var(--prev-text-color);
-    }
-    100% {
-        background-color: var(--bg-color);
-        color: var(--text-color);
-    }
-}
-
 .choosen-answer {
     animation: appear 1.5s;
 }
@@ -263,7 +246,7 @@
 
     100% {
         font-size: 36px;
-        transform: translateY(-30px);
+        transform: translateY(-50px);
     }
 }
 

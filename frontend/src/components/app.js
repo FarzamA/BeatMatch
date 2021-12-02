@@ -37,7 +37,7 @@ const App = () => {
           <ProtectedRoute path="/:username/following" component={FollowIndexContainer} />
       </Switch>
       <footer>
-        {location.pathname === '/profile' || location.pathname === '/about' || location.pathname === '/login' || location.pathname === '/signup' || location.pathname.includes('/users') ? <Footer /> : null }
+        {location.pathname === '/' || location.pathname === '/questions' || location.pathname === '/feed' ? null : <Footer/> }
       </footer>
     </div>
   );  
