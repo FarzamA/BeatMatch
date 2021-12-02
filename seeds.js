@@ -16,7 +16,7 @@ async function seedDB() {
         console.log('connected to the server');
 
         const collection = client.db('myFirstDatabase').collection('questions');
-        // client.db('myFirstDatabase').collection('posts').drop();
+        // client.db('myFirstDatabase').collection('questions').drop();
         collection.drop();
 
         let questionData = [
@@ -107,7 +107,7 @@ async function seedDB() {
             
         ];
 
-        collection.insertMany(questionData).then(res => client.close()).catch(err => console.log(err));
+        collection.insertMany(questionData).then().catch(err => console.log(err));
 
         console.log('Database seeded!');
 
