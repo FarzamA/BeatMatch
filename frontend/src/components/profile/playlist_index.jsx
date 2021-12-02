@@ -47,6 +47,9 @@ class PlaylistIndex extends React.Component{
     render(){
         const { playlists, user, currentUser, deleteUserPlaylist } = this.props;
         
+        console.log(this.state.didSearch);
+
+        if (!(playlists instanceof Array)) return (<div className="placeholder"></div>)
 
         let playlistsDisplay;
         if (playlists.length > 0) {
@@ -82,7 +85,7 @@ class PlaylistIndex extends React.Component{
         } else if (user.username === currentUser.username) {
             playlistsDisplay = (
                 <div className="playlist-index">
-                    <p className="missing-playlist-list">Looks like you need some playlists. Follow this <Link to="/">Link</Link> to make one.</p>
+                    <p className="missing-playlist-list">Looks like you need some playlists. Follow this <Link to="/">link</Link> to make one.</p>
                 </div>
             )
         } else {

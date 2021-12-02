@@ -55,7 +55,7 @@ class FeedIndex extends React.Component {
 
         const { feedPlaylists, currentUser } = this.props;
 
-        if (feedPlaylists.length === 0) return (<div className="placeholder"></div>);
+        if (!(this.props.feedPlaylists instanceof Array)) return (<div className="placeholder"></div>)
 
         let endMessage;
         if (this.state.didSearch && feedPlaylists.length === 0) {
