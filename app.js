@@ -34,7 +34,7 @@ let gfs;
 mongoose
   .connect(db, { useNewUrlParser: true })
   .then(() =>{
-      seedDb();
+      // seedDb();
       console.log("Connected to MongoDB successfully")
     })
   .catch((err) => console.log(err));
