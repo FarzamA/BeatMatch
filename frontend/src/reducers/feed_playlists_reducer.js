@@ -1,6 +1,6 @@
 import { RECEIVE_INITIAL_FEED_PLAYLISTS, RECEIVE_ADDL_FEED_PLAYLISTS } from '../actions/feed_playlist_actions';
 
-const _nullState = [];
+const _nullState = {};
 
 const feedPlaylistsReducer = (state = _nullState, action) => {
     Object.freeze(state);
