@@ -165,7 +165,7 @@ class QuestionsForm extends React.Component {
                 ></iframe>
                 <div className="save-playlist-prompt">Like what you're hearing?</div>
                 <button className="save-playlist-button" onClick={this.savePlaylist}>Save to Profile</button>
-                <button className="try-again-button" onClick={() => location.reload()}>Try Again</button>
+                <button className="try-again-button" onClick={() => location.reload()}>Discard & Try Again</button>
             </div>
         ) : (
             <div>Loading...</div>
