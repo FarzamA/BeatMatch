@@ -10,7 +10,9 @@ const User = require('../../models/User')
 
 // Get all playlists by a specific user
 router.get('/user/:user_id', (req, res) => {
-    Playlist.find({ user: req.params.user_id })
+    const offset = parseInt(req.query.offset);
+
+    Playlist.find({ user: req.params.user_id }).skip(offset).limit(5)
         .then(playlists => {
             res.json(playlists)
         })
