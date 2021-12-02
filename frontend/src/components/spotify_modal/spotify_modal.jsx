@@ -24,8 +24,7 @@ class SpotifyModal extends React.Component {
   handleOutsideSpotifyModal(e) {
     const modal = document.querySelector('.spotify-modal');
     const modalBg = document.querySelector('.modal-bg');
-    const domNode = ReactDOM.findDOMNode(modal);
-    console.log(e.target);
+    // const domNode = ReactDOM.findDOMNode(modal);
     if (e.target === modalBg) {
       modalBg.style.display = 'none';
       this.setState({ spotifyModalClicked: false });
