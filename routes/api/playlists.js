@@ -9,15 +9,17 @@ const Post = require('../../models/Post');
 const User = require('../../models/User')
 
 // Get all playlists by a specific user
-router.get('/user/:user_id', (req, res) => {
+router.get('/user/:username', (req, res) => {
     const offset = parseInt(req.query.offset);
-
-    Playlist.find({ user: req.params.user_id }).skip(offset).limit(5)
-        .then(playlists => {
-            res.json(playlists)
-        })
-        .catch(err => 
-            res.status(404).json({ noPlaylistsFound: 'No playlists found from that user' }))
+    User.findOne({username:req.params.username})
+    .then(user => (
+        Playlist.find({ user_id: user._id }).skip(offset).limit(5)
+            .then(playlists => {
+                res.json(playlists)
+            })
+            .catch(err => 
+                res.status(404).json({ noPlaylistsFound: 'No playlists found from that user' }))
+    ))
 });
 
 router.post('/playlist', (req, res) => {

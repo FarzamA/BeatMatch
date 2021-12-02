@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { fetchUser, followUser, unfollowUser } from '../../actions/user_actions';
+import { fetchPlaylistByUser, fetchAddlPlaylistsByUser } from '../../actions/playlist_actions';
 import Profile from './profile';
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,7 +21,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchUser: (username) => dispatch(fetchUser(username)),
   followUser: (username, followData) => dispatch(followUser(username, followData)),
   unfollowUser: (username, followData) => dispatch(unfollowUser(username, followData)),
-  fetchPlaylistByUser: (userId) => dispatch(fetchPlaylistByUser(userId))
+  fetchPlaylistByUser: (userId, offset) => dispatch(fetchPlaylistByUser(userId,offset)),
+  fetchAddlPlaylistsByUser: (userId, offset) => dispatch(fetchAddlPlaylistsByUser(userId,offset))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

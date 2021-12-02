@@ -7,33 +7,102 @@ class PlaylistIndex extends React.Component{
     constructor(props){
         super(props);
 
+        this.state = {
+            offset: 0,
+            didSearch: false,
+            morePlaylists: true
+        };
+        this.observer = React.createRef();
+        this.incrementOffset = this.incrementOffset.bind(this);
+        this.lastPlaylistRef = this.lastPlaylistRef.bind(this);
+    }
+
+    componentDidMount() {
+        let offset = this.state.offset;
+
+        this.props.fetchPlaylistByUser(this.props.user.username, offset)
+            .then(this.setState({didSearch: true}));
+    }
+
+    lastPlaylistRef(node) {
+        debugger
+        this.observer.current = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting && this.state.morePlaylists) {
+                this.props.fetchAddlPlaylistsByUser(this.props.user.username, this.state.offset + 5)
+                .then((res) => {
+                    debugger
+                    if (res.playlists.length < 5) {
+                        this.setState({morePlaylists: false})
+                    }
+                }).catch(err => console.log(err))
+                this.incrementOffset();
+            }
+        });
+
+        if (node) this.observer.current.observe(node);
+    }
+
+    incrementOffset() {
+        this.setState({ offset: (this.state.offset + 5) });
     }
 
     render(){
         const { playlists, user, currentUser, deleteUserPlaylist } = this.props;
-        // this needs to be refactored so that it checks whether the current user
-        // is in the Followed Users of the current profile view
-        // right now, it defaults to ONLY showing public playlists
-        let visiblePlaylists, playlistsDisplay;
-    
+
+        let playlistsDisplay;
+        debugger
+
         if (playlists.length > 0) {
-            // visiblePlaylists = playlists.filter(playlist => playlist.isPublic)
-            let mapPlaylists;
-            let actualMapPlaylists;
-            if (playlists.length > 50){
-                mapPlaylists = playlists.slice(0,50);
-                actualMapPlaylists = [...mapPlaylists];
-            }else {
-                mapPlaylists = playlists;
-                actualMapPlaylists = [...mapPlaylists];
-            }
+            
             playlistsDisplay = (
                 <ul className="playlist-index">
-                    {/* not able to call .reverse on original mapPlaylist so created a shallow copy and called it on that instead */}
-                    {actualMapPlaylists.reverse().map(playlist =>
-                        <PlaylistIndexItem key={playlist._id} playlist={playlist} deleteUserPlaylist={deleteUserPlaylist} />)}
-                </ul>
+                {playlists.map((playlist, idx) => {
+                    if (idx === playlists.length - 1) {
+                        return (
+                            <div ref={this.lastPlaylistRef} >
+                                <PlaylistIndexItem
+                                    key={idx}
+                                    playlist={playlist}
+                                    deleteUserPlaylist={deleteUserPlaylist}
+                                />
+                            </div>
+                        )
+                    } else {
+                        return (
+                            <div>
+                                <PlaylistIndexItem
+                                    key={idx}
+                                    playlist={playlist}
+                                    deleteUserPlaylist={deleteUserPlaylist}
+                                />
+                            </div>
+                        )
+                    }
+                }
+                )}
+            </ul>
             )
+            
+            
+            
+            
+            // visiblePlaylists = playlists.filter(playlist => playlist.isPublic)
+            // let mapPlaylists;
+            // let actualMapPlaylists;
+            // if (playlists.length > 50){
+            //     mapPlaylists = playlists.slice(0,50);
+            //     actualMapPlaylists = [...mapPlaylists];
+            // }else {
+            //     mapPlaylists = playlists;
+            //     actualMapPlaylists = [...mapPlaylists];
+            // }
+            // playlistsDisplay = (
+            //     <ul className="playlist-index">
+            //         {/* not able to call .reverse on original mapPlaylist so created a shallow copy and called it on that instead */}
+            //         {actualMapPlaylists.reverse().map(playlist =>
+            //             <PlaylistIndexItem key={playlist._id} playlist={playlist} deleteUserPlaylist={deleteUserPlaylist} />)}
+            //     </ul>
+            // )
         } else if (user.username === currentUser.username) {
             playlistsDisplay = (
                 <div className="playlist-index">
