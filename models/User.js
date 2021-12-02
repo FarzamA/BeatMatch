@@ -18,16 +18,7 @@ const UserSchema = new Schema({
       required: false,
       type: String
     },
-    // followers: {
-    //   type: Number,
-    //   required: true,
-    //   default: 0
-    // },
-    // following: {
-    //   type: Number,
-    //   required: true,
-    //   default: 0
-    // }
+
     followers: [
       // keep in mind each follow has it's own _id
       {

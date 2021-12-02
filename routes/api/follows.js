@@ -10,18 +10,6 @@ const User = require('../../models/User');
 router.get('/following/:user_id', (req, res) => {
     Follow.find({ follower_id: req.params.user_id })
         .then(following => {
-            // let followedUsers = {};
-            // // following.forEach(follow => {
-            // //     db.user.find({ _id: follow.following_id})
-            // //         .then(result => res.json(result))
-            //     async User.findOne({ _id: follow.following_id })
-            //         .then(user => {     
-            //             // console.log(user);
-            //             followedUsers[user._id] = user;
-            //             // console.log(followedUsers, 'followedUsers');
-            //         })
-            // });
-
             // returns hash of followed user
             res.json({...following});
         })
@@ -33,12 +21,6 @@ router.get('/following/:user_id', (req, res) => {
 router.get('/followers/:user_id', (req, res) => {
     Follow.find({ following_id: req.params.user_id })
         .then(followers => {
-            // let followerUsers = {}
-            // followers.forEach(follow => {
-            //     User.findById(follow.followers_id)
-            //         .then(user => followerUsers[user._id] = user)
-            // });
-
             res.json({...followers});
         })
         .catch(err => 
@@ -56,25 +38,18 @@ router.post('/:user_id', (req, res) =>{
                     user.following += 1;
                     const currentUser = user;
                     user.save();
-                    // res.json({ currentUserFollowingCount: user.following });
         
                     // Increment follow count of followed user 
                     User.findById(req.params.user_id)
                     .then(user => {
                         user.followers += 1;
                         user.save();
-                        // res.json({
-                        //     followedUserFollowerCount: user.followers,
-                        //     currentUserFollowingCount: currentUser.following,
-                        //     follow: resFollow
-                        // })
                         const newFollow = new Follow({
                             follower_id: currentUser._id,
                             follower_name: currentUser.name,
                             following_id: user._id,
                             following_name: user.name
                         });
-                        // let resFollow;
                         newFollow.save().then(follow => res.json({ follow: follow })).catch(err => console.log(err));
                     })
                     .catch(err => console.log(err));

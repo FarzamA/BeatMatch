@@ -25,12 +25,10 @@ class PlaylistIndex extends React.Component{
     }
 
     lastPlaylistRef(node) {
-        debugger
         this.observer.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && this.state.morePlaylists) {
                 this.props.fetchAddlPlaylistsByUser(this.props.user.username, this.state.offset + 5)
                 .then((res) => {
-                    debugger
                     if (res.playlists.length < 5) {
                         this.setState({morePlaylists: false})
                     }
@@ -50,8 +48,6 @@ class PlaylistIndex extends React.Component{
         const { playlists, user, currentUser, deleteUserPlaylist } = this.props;
 
         let playlistsDisplay;
-        debugger
-
         if (playlists.length > 0) {
             
             playlistsDisplay = (
@@ -82,27 +78,6 @@ class PlaylistIndex extends React.Component{
                 )}
             </ul>
             )
-            
-            
-            
-            
-            // visiblePlaylists = playlists.filter(playlist => playlist.isPublic)
-            // let mapPlaylists;
-            // let actualMapPlaylists;
-            // if (playlists.length > 50){
-            //     mapPlaylists = playlists.slice(0,50);
-            //     actualMapPlaylists = [...mapPlaylists];
-            // }else {
-            //     mapPlaylists = playlists;
-            //     actualMapPlaylists = [...mapPlaylists];
-            // }
-            // playlistsDisplay = (
-            //     <ul className="playlist-index">
-            //         {/* not able to call .reverse on original mapPlaylist so created a shallow copy and called it on that instead */}
-            //         {actualMapPlaylists.reverse().map(playlist =>
-            //             <PlaylistIndexItem key={playlist._id} playlist={playlist} deleteUserPlaylist={deleteUserPlaylist} />)}
-            //     </ul>
-            // )
         } else if (user.username === currentUser.username) {
             playlistsDisplay = (
                 <div className="playlist-index">

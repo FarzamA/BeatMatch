@@ -21,18 +21,9 @@
         font-size: 20px;
         padding: 20px;
 
-        a {
-            // background: -webkit-linear-gradient(rgb(28, 210, 255), rgb(152, 1, 240));
-            // -webkit-background-clip: text;
-            // -webkit-text-fill-color: transparent;
-            // background: #4c05ff;
-            // -webkit-background-clip: text;
-            // -webkit-text-fill-color: transparent;
-
-            &:hover {
+        a:hover {
                 cursor: pointer;
                 text-decoration: 2px solid lightgray underline;
-            }
         }
     }
 }

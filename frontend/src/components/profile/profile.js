@@ -32,9 +32,6 @@ class Profile extends React.Component {
             currentUser,
             user,
             playlists,
-            followUser,
-            unfollowUser,
-            followers,
             following,fetchPlaylistByUser,
         deleteUserPlaylist, fetchAddlPlaylistsByUser } = this.props;
 

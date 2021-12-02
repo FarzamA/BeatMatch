@@ -42,7 +42,6 @@ class Burger extends React.Component {
     render() {
 
         const { loggedIn, logout, loginDemo, deactivateBurgerModal } = this.props;
-//         debugger
         let burgerClicked;
         if (this.state.burgerClicked) {
             burgerClicked = "clicked"

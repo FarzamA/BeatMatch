@@ -40,7 +40,6 @@ export const fetchAddlPlaylistsByUser = (userId, offset) => (dispatch) => (
 );
 
 export const deleteUserPlaylist = (userId) => dispatch => {
-
     return PlaylistAPIUtil.deletePlaylist(userId)
         .then(res => dispatch(deletePlaylist(res.data)))
         .catch(err => console.log(err))

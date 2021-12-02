@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import {fetchPlaylist, fetchPlaylistByUser, deleteUserPlaylist, fetchAddlPlaylistsByUser} from '../../actions/playlist_actions'
-import { fetchUser, followUser, unfollowUser } from '../../actions/user_actions';
+import { fetchPlaylistByUser, deleteUserPlaylist, fetchAddlPlaylistsByUser } from '../../actions/playlist_actions'
+import { fetchUser } from '../../actions/user_actions';
 import Profile from './profile';
 
 const mapStateToProps = (state) => ({
