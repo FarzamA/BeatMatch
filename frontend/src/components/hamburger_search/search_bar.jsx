@@ -105,7 +105,7 @@ class SearchBar extends React.Component {
                         {results.map((result, i) => {
                             liCount += 1;
                                 return (
-                                    <Link onKeyDown={this.handleKeyDown} id={`results-${liCount}`} key={`results-${liCount}`} to={`/users/${result}`}>
+                                    <Link onClick={this.props.closeSearch} onKeyDown={this.handleKeyDown} id={`results-${liCount}`} key={`results-${liCount}`} to={`/users/${result}`}>
                                         <li>
                                             <FontAwesomeIcon icon={faUserAlt}/>
                                             {result}
@@ -140,6 +140,7 @@ class SearchBar extends React.Component {
                         type="text"
                         key="user-search"
                         placeholder="Search Users"
+                        onClick={this.handleChange}
                         onChange={this.handleChange}
                         onKeyDown={this.handleKeyDown}
                         value={this.state.query}
