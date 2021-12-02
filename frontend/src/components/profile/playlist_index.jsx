@@ -46,13 +46,14 @@ class PlaylistIndex extends React.Component{
 
     render(){
         const { playlists, user, currentUser, deleteUserPlaylist } = this.props;
+        
 
         let playlistsDisplay;
         if (playlists.length > 0) {
-            
+            const realPlaylists = [...playlists];
             playlistsDisplay = (
                 <ul className="playlist-index">
-                {playlists.map((playlist, idx) => {
+                {realPlaylists.reverse().map((playlist, idx) => {
                     if (idx === playlists.length - 1) {
                         return (
                             <div ref={this.lastPlaylistRef} >
