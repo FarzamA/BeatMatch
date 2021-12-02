@@ -9,9 +9,9 @@ Find the beat that matches you!
 Check out our [live site](https://beat-match-mern.herokuapp.com/#/)!
 
 # Background and Overview
-Beat Match is a web application that recommends the perfect Spotify playlist for YOU. We use an interactive questionnaire and the Spotify API to generate a playlist that matches your preferred genre and a variety of other musical attributes (e.g. "danceability", "loudness", etc.). You can save these playlists to your profile, view your friends' playlists on your newsfeed, and share your playlists on other social media.
+Beat Match is a web application that recommends the perfect Spotify playlist for YOU. We use an interactive questionnaire and the Spotify Web API to generate a playlist that matches your preferred genre and your current mood. You can save these playlists to your profile, view your friends' playlists on your newsfeed, and share your playlists to other social media.
 
-Beat Match is built using the MERN stack: MongoDB, Express.js, React / Redux, and Node.js. Its features include an infinitely scrolling newsfeed (using the Intersection Observer API), modern styling using CSS / SCSS, a searchbar, and creative use of the Spotify Web API.
+Beat Match is built using the MERN stack: MongoDB, Express.js, React / Redux, and Node.js. The application includes an infinite scroll newsfeed (using the Intersection Observer API), modern styling using CSS / SCSS, a searchbar, and creative use of the Spotify Web API.
 
 # Technologies
 
@@ -36,7 +36,7 @@ Our application employs a number of technologies and frameworks.
 
 ## Playlist Generation
 
-* Once you're logged in, we ask you a series of questions to see what playlist is right for you.
+* Once you're logged in, we ask you a series of cheeky questions to see what playlist is right for you.
 
 <img src="https://beatmatch-images.s3.us-east-1.amazonaws.com/genreselection.png"/>
 
@@ -53,7 +53,7 @@ router.post('/playlist', (req, res) => {
         answers: req.body.answers,
         genre: req.body.genre
     }).then(playlists => {
-        // Choose a random playlist from the perfect matches, or a less-than-perfect match if we have to
+        // Choose a random playlist from the perfect matches, or a less-than-perfect match if there's no perfect match
         if (playlists.length > 0){
             return res.json(playlists[Math.floor((Math.random() * playlists.length-1))])
         } else{
@@ -68,7 +68,7 @@ router.post('/playlist', (req, res) => {
 
 ## Newsfeed
 
-* When you follow users, their playlists (as well as your own) appear in your Feed.
+* When you follow other users, their playlists (as well as your own) appear in your Feed.
 
 <img src="https://beatmatch-images.s3.us-east-1.amazonaws.com/newsfeed2.png"/>
 
@@ -80,9 +80,9 @@ class FeedIndex extends React.Component {
     constructor(props) {
         super(props);
         
-        // State stores information about whether an initial search has been performed,
+        // Component state stores information about whether an initial search has been performed,
         // whether there are remaining posts left to fetch,
-        // and what offset to use the DB query
+        // and what offset to use in the DB query
         this.state = {
             offset: 0,
             didSearch: false,
@@ -98,7 +98,7 @@ class FeedIndex extends React.Component {
                 if (entries[0].isIntersecting && this.state.morePosts) {
                     props.fetchAddlFeedPlaylists(props.currentUser.username, this.state.offset + 5)
                     .then((res) => {
-                        // If there aren't enough playlists, set state to prevent additional queries
+                        // If there aren't enough playlists, change state to prevent additional queries
                         if (res.playlists.length < 5) {
                             this.setState({morePlaylists: false})
                         }
@@ -116,7 +116,7 @@ class FeedIndex extends React.Component {
 
 ## Social Media Integration
 
-* You can share your profile to various social media.
+* You can also share your profile to various social media sites.
 
 <img src="https://beatmatch-images.s3.us-east-1.amazonaws.com/socialmedia.png"/>
 
