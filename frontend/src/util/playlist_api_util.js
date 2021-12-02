@@ -7,10 +7,10 @@ export const fetchPlaylist = (payload) =>
     data: payload,
   });
 
-export const fetchPlaylistByUser = (userId) =>
+export const fetchPlaylistByUser = (username, offset) =>
   axios({
     method: "GET",
-    url: `/api/playlists/user/${userId}`,
+    url: `/api/playlists/user/${username}?offset=${offset}`,
   });
 
 export const postPlaylist = (playlist) =>

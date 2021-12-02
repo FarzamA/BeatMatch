@@ -31,7 +31,6 @@ class FeedIndex extends React.Component {
     }
 
     lastPlaylistRef(node) {
-
             this.observer.current = new IntersectionObserver(entries => {
                 if (entries[0].isIntersecting && this.state.morePosts) {
                     this.props.fetchAddlFeedPlaylists(this.props.currentUser.username, this.state.offset + 5)

@@ -133,46 +133,6 @@ class SearchBar extends React.Component {
 
         const { results, searchClicked } = this.props;
 
-        // let resultsDisplay;
-        // if (this.state.resultsReceived) {
-
-        //     if (results.length > 0) {
-
-        //         resultsDisplay = (
-        //             <ul className="search-results">
-        //                 {results.map((result, i) => {
-        //                     if (i === 0) {
-        //                         return (
-        //                             <Link ref={this.ulRef} to={`/users/${result}`}>
-        //                                 <li>
-        //                                     <FontAwesomeIcon icon={faUserAlt}/>
-        //                                     {result}
-        //                                 </li>
-        //                             </Link>
-        //                         )                            
-        //                     } else {
-        //                         return (
-        //                             <Link to={`/users/${result}`}>
-        //                                 <li>
-        //                                     <FontAwesomeIcon icon={faUserAlt}/>
-        //                                     {result}
-        //                                 </li>
-        //                             </Link>
-        //                         )
-        //                     }
-        //                 })}
-        //             </ul>
-        //         )
-        //     } else {
-        //         resultsDisplay = (
-        //             <ul className="search-results">
-        //                 <li>No results found</li>
-        //             </ul>
-        //         )
-        //     }
-
-        // }
-
         return (
             <div className={`searchbar-container ${searchClicked}`}>
                 <form id="user-search-form" className="searchbar">
@@ -185,7 +145,6 @@ class SearchBar extends React.Component {
                         value={this.state.query}
                         id="user-search"
                     />
-                    {/* <FontAwesomeIcon onClick={this.props.transformSearch} icon={faSearch}/> */}
                 </form>
                 {this.generateResults()}
             </div>
