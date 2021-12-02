@@ -52,10 +52,10 @@ class SpotifyModal extends React.Component {
         <div className={`spotify-modal ${spotifyModalClicked}`}>
           <FontAwesomeIcon icon={faSpotify} />
           <div className="spotify-modal-text">
-            Hello! Spotify is currently reviewing BeatMatch in order to allow
-            its users to export playlists created by Beatmatch. We are very
-            excited and expect the feature to be available in the next couple of
-            weeks. Thank you for your patience.
+            Hello! Spotify is currently in the process of reviewing Beat Match. As soon as
+            the review finishes, you'll be able to export playlists directly from Beat Match
+            to your Spotify profile. We are very excited and expect this feature
+            to be available in the next few weeks. Thank you for your patience.
           </div>
         </div>
       </div>
