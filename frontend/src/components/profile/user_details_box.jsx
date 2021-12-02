@@ -74,7 +74,6 @@ class UserDetailsBox extends React.Component {
                     <p className="header">{user.username}</p>
                     <div className="followers-options">
                         {/* text should change depending on whether you're following */}
-                        {/* should pluralize */}
                         <Link to={`/${user.username}/followers`}><p>{followers.length} {followersText}</p></Link>
                         <Link to={`/${user.username}/following`}><p>{following.length} Following</p></Link>
                     </div>
@@ -91,12 +90,6 @@ class UserDetailsBox extends React.Component {
                         </LinkedinShareButton>
                     </div>
                 </div>
-                {/* <ul className="user-details-ul">
-                    <li className="user-detail-item"></li>
-                    <li className="user-detail-item"></li>
-                    <li className="user-detail-item"></li>
-                    <li className="user-detail-item"></li>
-                </ul> */}
             </div>
         )
 
