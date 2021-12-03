@@ -27,7 +27,6 @@ class FollowIndex extends React.Component {
     render() {
         const { followers, following, username } = this.state;
         const followerValues = Object.values(followers);
-        console.log('props', this.props);
         let list;
         let header;
 
