@@ -47,8 +47,6 @@ class PlaylistIndex extends React.Component{
     render(){
         const { playlists, user, currentUser, deleteUserPlaylist } = this.props;
         
-        console.log(this.state.didSearch);
-
         if (!(playlists instanceof Array)) return (<div className="placeholder"></div>)
 
         let playlistsDisplay;

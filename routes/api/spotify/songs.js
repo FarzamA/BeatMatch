@@ -22,7 +22,6 @@ const getToken = async () => {
     },
   });
   const token = response.data.access_token;
-  console.log(token);
   return token;
 };
 
@@ -56,7 +55,6 @@ router.post("/", async (req, res) => {
   const { maxKey } = req.body;
   const { maxValue } = req.body;
   try {
-    console.log(req);
     const spotifyToken = await getToken();
     const song = await getSongs(
       spotifyToken,

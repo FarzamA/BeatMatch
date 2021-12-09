@@ -8,7 +8,6 @@ const FeedIndexItem = (props) => {
     const date = new Date(feedPlaylist.creation_date);
 
     let timeAgo = Date.now() - Date.parse(date);
-    // console.log(timeAgo);
 
     let realTime; 
 

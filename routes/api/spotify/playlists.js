@@ -51,12 +51,10 @@ const getAccessToken = async (code) => {
     json: true,
   });
   const token = tokenResponse.data.access_token;
-  // console.log(token);
   return token;
 };
 
 const createPlaylist = async (token, name) => {
-  // console.log("in playlist2");
   const response = await axios({
     url: "https://api.spotify.com/v1/users/6g1bk9tzjh4vnoe0lf3a2rxrj/playlists",
     method: "post",
@@ -69,12 +67,10 @@ const createPlaylist = async (token, name) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  // console.log("in playlist2");
   const playlist = {
     name,
     id: response.data.id,
   };
-  // console.log(response.data);
   return playlist;
 };
 const getSongs = async (token, genre, answers) => {
@@ -107,7 +103,6 @@ const getSongs = async (token, genre, answers) => {
 };
 
 const addSongs = async (token, playlistId, songs) => {
-  // console.log("in songs");
   const response = await axios({
     url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
     method: "post",
@@ -120,14 +115,12 @@ const addSongs = async (token, playlistId, songs) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  // console.log("in add songs");
   return response.data;
 };
 
 router.get("/callback", async (req, res) => {
   const code = req.query.code || null;
   let state = req.query.state || null;
-  // console.log("in callback");
   try {
     const genres = [
       // "metal",
@@ -174,7 +167,6 @@ router.get("/callback", async (req, res) => {
         let name = `${songs.names[0]} and Other Curated Favorites`;
         let playlist = await createPlaylist(spotifyToken, name);
 
-        // console.log(songs);
         let addedSongs = await addSongs(spotifyToken, playlist.id, songs.uris);
 
         let newPlaylist = new Playlist({
@@ -186,18 +178,12 @@ router.get("/callback", async (req, res) => {
           spotify_embed_link: `https://open.spotify.com/embed/playlist/${playlist.id}`,
         });
         await newPlaylist.save();
-        console.log(genre);
-        console.log(newPlaylist)
       })
     ).catch((err) => {
-      // console.log(err);
       return err;
     });
-    console.log("---------------")
     res.send({ seeded: "seeded" });
-    // res.send({ req });
   } catch (err) {
-    // console.log(err);
     res.statusMessage = "Could not get songs";
     res.status(400).end();
   }
